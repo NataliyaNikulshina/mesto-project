@@ -1,0 +1,7 @@
+.profile{
+    color: #FFF;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 168.75px repeat(3, max-content);
+    grid-template-rows: repeat(2, min-content);
+}

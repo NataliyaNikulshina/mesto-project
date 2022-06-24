@@ -1,0 +1,6 @@
+.footer{
+    width: calc(100% - 2 * 200px);
+    color: #545454;
+    margin: 66px auto 60px;
+    
+}
