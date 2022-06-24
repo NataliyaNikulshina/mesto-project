@@ -1,6 +1,6 @@
-.profile__add-button{
+.profile__avatar{
     width: 100%;
-    grid-column: 4;
     grid-row: 1/span 2;
+    border-radius: 50%;
     align-self: center;
 }
