@@ -3,5 +3,9 @@
     grid-column: 4;
     grid-row: 1/span 2;
     align-self: center;
-    
+    transition: opacity 0.3s ease;
 }
+
+.profile__add-button:hover {
+    opacity: 0.6;
+  }
