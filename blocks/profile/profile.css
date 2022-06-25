@@ -2,6 +2,7 @@
     color: #FFF;
     width: 100%;
     display: grid;
-    grid-template-columns: 168.75px max-content 1fr 150px;
-    grid-template-rows: repeat(2, min-content);
+    grid-template-columns: 150px max-content 1fr 150px;
+    grid-template-rows: min-content 1fr;
+    
 }
