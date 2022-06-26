@@ -8,10 +8,17 @@
     margin-right: 18px;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 799px) {
     .profile__nickname{
         font-size: 27px;
         line-height: 1.22;
         text-align: center;
+        grid-column: 1;
+        grid-row: 2;
+        margin-top: 0;
+        align-self: center;
+        justify-self: end;
+        margin-right: 0;
+        margin-left: 18px;
     }
 }

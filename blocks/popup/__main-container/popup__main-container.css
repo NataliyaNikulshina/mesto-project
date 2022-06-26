@@ -2,3 +2,10 @@
     width: calc(100% - 36px*2);
     margin: 34px auto 37px;
 }
+
+@media screen and (max-width: 520px) {
+    .popup__main-container {
+        width: calc(100% - 22px*2);
+        margin: 25px auto;
+    }
+  }

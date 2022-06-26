@@ -8,3 +8,10 @@
     flex-direction: column;
     gap: 30px;
 }
+
+@media screen and (max-width: 520px) {
+    .popup__user-info {
+        padding-top: 70px;
+    padding-bottom: 46px;
+    }
+  }
