@@ -16,11 +16,28 @@
     <main class="content">
         <section class="profile">
             <img src="./images/avatar.jpg" class="profile__avatar" alt="Твой аватар">
-            <h1 class="profile__nickname">Жак-Ив Кусто</h1>
-            <p class="profile__about-me">Исследователь океана</p>
-            <img src="./images/Edit Button.svg" class="profile__edit-button" alt="Кнопка редактирования профиля">
-            <img src="./images/Add Button.svg" class="profile__add-button" alt="Кнопка добавления фотографий">
+            <div class="profile__user-info">
+                <h1 class="profile__nickname">Жак-Ив Кусто</h1>
+                <p class="profile__about-me">Исследователь океана</p>
+                <img src="./images/Edit-Button.svg" class="profile__edit-button" alt="Кнопка редактирования профиля">
+            </div>
+            <div class="profile__add-button"></div>
         </section>
+
+        <section class="popup "> <!-- Довить класс "popup_opened" для открытия всплывающего окна-->
+            <form class="popup__container">
+                <span class="popup__button-close"></span>
+                <div class="popup__main-container">
+                    <h2 class="popup__heading">Редактировать профиль</h2>
+                    <fieldset class="popup__user-info">
+                        <input type="text" class="popup__item popup__item_name" placeholder="Жак-Ив Кусто" required>
+                        <input type="text" class="popup__item popup__item_about-me" placeholder="Исследователь океана" required>
+                    </fieldset>
+                    <input type="submit" value="Сохранить" class="popup__button-save">
+                </div>
+            </form>
+        </section>
+
         <section class="elements">
             <article class="element">
                 <img class="element__image" src="./images/elements/dagestan.jpg" alt="Дагестан">

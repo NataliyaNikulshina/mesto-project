@@ -1,0 +1,12 @@
+.profile__user-info{
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    grid-template-rows: min-content 1fr;
+    align-self: flex-start;
+}
+
+@media screen and (max-width:767px) {
+    .profile__user-info{
+        align-self: center;
+    }
+  }

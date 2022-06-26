@@ -4,3 +4,15 @@
     width: calc(100% - 2 * 200px);
     height: 74px;
 }
+
+@media screen and (max-width: 1024px) {
+    .header{
+        width: calc(100% - 2 * 50px);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .header{
+        width: 100%;
+    }
+}

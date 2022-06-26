@@ -1,0 +1,10 @@
+.popup__user-info{
+    margin: auto;
+    padding: 0;
+    border: 0;
+    padding-top: 45px;
+    padding-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}

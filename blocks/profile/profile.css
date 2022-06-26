@@ -1,8 +1,14 @@
 .profile{
     color: #FFF;
     width: 100%;
-    display: grid;
-    grid-template-columns: 150px max-content 1fr 150px;
-    grid-template-rows: min-content 1fr;
+    display: flex;
+    justify-content: space-between;
+
     
+}
+
+@media screen and (max-width: 767px) {
+    .profile{
+        flex-direction: column;
+    }
 }
