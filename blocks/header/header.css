@@ -1,6 +1,8 @@
 .header{
     border-bottom: 1px solid rgba(84, 84, 84, .7);
-    margin: 45px auto 40px;
+    margin: 0 auto;
+    padding-top: 45px;
+    padding-bottom: 40px;
     width: calc(100% - 2 * 200px);
     height: 74px;
 }
@@ -17,6 +19,7 @@
     .header{
         width: 100%;
         height: 56px;
-        margin: 28px auto 42px;
+        padding-top: 28px; 
+        padding-bottom: 42px;
     }
 }

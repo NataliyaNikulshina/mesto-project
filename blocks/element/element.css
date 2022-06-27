@@ -7,7 +7,5 @@
     display: grid;
     grid-template-columns: 1fr 39px;
     grid-template-rows: 1fr 1fr;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+    
 }

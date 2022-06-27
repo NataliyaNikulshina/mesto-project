@@ -1,7 +1,9 @@
 .footer{
     width: calc(100% - 2 * 200px);
     color: #545454;
-    margin: 66px auto 60px;
+    margin: 0 auto;
+    padding-top: 66px;
+    padding-bottom: 60px;
     
 }
 
@@ -14,6 +16,7 @@
 @media screen and (max-width: 799px) {
     .footer{
         width: calc(100% - 2 * 19px);
-        margin: 48px auto 36px;
+        padding-top: 48px;
+        padding-bottom: 36px;
     }
 }

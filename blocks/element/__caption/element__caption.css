@@ -6,4 +6,7 @@
     margin-top: 25px;
     align-self: start;
     margin-left: 21px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
