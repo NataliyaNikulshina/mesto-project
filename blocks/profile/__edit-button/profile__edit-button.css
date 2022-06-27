@@ -25,6 +25,8 @@
         grid-row: 2;
         margin-top: 0;
         width: 18px;
+        height: 18px;
+        background-size: contain;
         align-self: center;
         justify-self: center;
         margin-right: 0;

@@ -3,7 +3,7 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-
+    padding-top: 40px;
     
 }
 
@@ -11,5 +11,6 @@
     .profile{
         flex-direction: column;
         gap:36px;
+        padding-top: 42px;
     }
 }

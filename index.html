@@ -28,32 +28,32 @@
                 <article class="element">
                     <img class="element__image" src="./images/elements/dagestan.jpg" alt="Дагестан" />
                     <h2 class="element__caption">Дагестан</h2>
-                    <img class="element__like" src="./images/Like.svg" alt="Сердце, чтобы поставить лайк" />
+                    <button name="element__like" class="element__like"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/krym.jpg" alt="Крым" />
                     <h2 class="element__caption">Крым</h2>
-                    <img class="element__like" src="./images/Like.svg" alt="Сердце, чтобы поставить лайк" />
+                    <button name="element__like" class="element__like"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/karelia.jpg" alt="Карелия" />
                     <h2 class="element__caption">Карелия</h2>
-                    <img class="element__like" src="./images/Like.svg" alt="Сердце, чтобы поставить лайк" />
+                    <button name="element__like" class="element__like"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/kyrshskaya_kosa.jpg" alt="Куршская коса" />
                     <h2 class="element__caption">Куршская коса</h2>
-                    <img class="element__like" src="./images/Like.svg" alt="Сердце, чтобы поставить лайк" />
+                    <button name="element__like" class="element__like"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/mountain_ahyn.jpg" alt="Гора Ахун" />
                     <h2 class="element__caption">Гора Ахун</h2>
-                    <img class="element__like" src="./images/Like.svg" alt="Сердце, чтобы поставить лайк" />
+                    <button name="element__like" class="element__like"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/plato_matlas.jpg" alt="Плато Матлас" />
                     <h2 class="element__caption">Плато Матлас</h2>
-                    <img class="element__like" src="./images/Like.svg" alt="Сердце, чтобы поставить лайк" />
+                    <button name="element__like" class="element__like"></button>
                 </article>
             </section>
         </main>
@@ -61,7 +61,7 @@
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
 
-        <article class="popup ">
+        <div class="popup ">
             <!-- Довить класс "popup_opened" для открытия всплывающего окна-->
             <form class="popup__container">
                 <button name="close-button" class="popup__button-close"></button>
@@ -70,8 +70,8 @@
                         <input type="text" class="popup__item popup__item_name" placeholder="Жак-Ив Кусто" required />
                         <input type="text" class="popup__item popup__item_about-me" placeholder="Исследователь океана" required />
                     </fieldset>
-                    <button name="save-button" type="submit" value="Сохранить" class="popup__button-save">Сохранить</button>
+                    <button name="save-button" type="submit" class="popup__button-save">Сохранить</button>
             </form>
-        </article>
+        </div>
     </body>
 </html>

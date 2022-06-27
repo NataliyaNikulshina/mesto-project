@@ -6,6 +6,7 @@
     margin-top: 22px;
     align-self: start;
     margin-right: 18px;
+    max-width: 294px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -22,6 +23,7 @@
         align-self: center;
         justify-self: end;
         margin-right: 0;
-        margin-left: 18px;
+        margin-left: 25px;
+        max-width: 189px;
     }
 }

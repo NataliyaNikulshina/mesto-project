@@ -7,7 +7,7 @@
 
 @media screen and (max-width:799px) {
     .profile__user-info{
-        grid-template-columns: max-content 1fr;
+        grid-template-columns: max-content 28px;
         grid-template-rows: 146px min-content 1fr;
         align-self: center;
     }
