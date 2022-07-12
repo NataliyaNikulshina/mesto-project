@@ -12,13 +12,15 @@ function openedAddPopup(){
     addPopup.classList.add('popup_opened');
 }
 
+editButton.addEventListener('click', openedEditPopup);
+addButton.addEventListener('click', openedAddPopup);
+
+//закрытие форм
 function closedPopup(){
     editPopup.classList.remove('popup_opened');
 }
-
-editButton.addEventListener('click', openedEditPopup);
 closeButton.addEventListener('click', closedPopup);
-addButton.addEventListener('click', openedAddPopup);
+
 
 
 
@@ -38,16 +40,16 @@ function formSubmitHandler(evt){
 }
 formElement.addEventListener('submit', formSubmitHandler);
 closedPopup();
-console.log(nameInput.value);
-console.log(jobIntut.value);
+//console.log(nameInput.value);
+//console.log(jobIntut.value);
 }
-
 saveButton.addEventListener('click', editInfo);
 
 //лайк карточки
 let likeButton = document.querySelectorAll('.element__like');
+for (let i = 0; i < likeButton.length; i+=1){
 function likeActive(){
-    let likeElement = document.querySelector('.element__like');
-    likeElement.classList.toggle('element__like_active');
+    likeButton[i].classList.toggle('element__like_active');
 }
-likeButton.addEventListener('click', likeActive);
+likeButton[i].addEventListener('click', likeActive);
+}
