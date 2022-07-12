@@ -19,6 +19,7 @@ addButton.addEventListener('click', openedAddPopup);
 
 //закрытие форм
 function closedPopup(i){
+    debugger;
     popups[i].classList.remove('popup_opened');
     console.log(i + ' ' + i);
 }
@@ -26,7 +27,7 @@ function closedPopup(i){
 closeButton.forEach((btn, i) => {
     btn.addEventListener('click', closedPopup(i))
 })
-
+debugger;
 
 
 
