@@ -7,6 +7,10 @@
     top: 0;
     justify-content: center;
     align-items: center;
-    display: none;
+    /*display: none;*/
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .3s, opacity .3s linear;
 }
 
