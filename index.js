@@ -3,7 +3,7 @@ const editPopup = document.querySelector('.popup_type_edit');
 const addPopup = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button');
 const closeButton = document.querySelectorAll('.popup__button-close');
-const popup = document.querySelectorAll('.popup');
+const popups = document.querySelectorAll('.popup');
 
 //открыть формы
 function openedEditPopup(){
@@ -13,29 +13,20 @@ function openedEditPopup(){
 function openedAddPopup(){
     addPopup.classList.add('popup_opened');
 }
-<<<<<<< HEAD
 
 editButton.addEventListener('click', openedEditPopup);
 addButton.addEventListener('click', openedAddPopup);
 
 //закрытие форм
-function closedPopup(){
-    editPopup.classList.remove('popup_opened');
+function closedPopup(i){
+    popups[i].classList.remove('popup_opened');
+    console.log(i + ' ' + i);
 }
-closeButton.addEventListener('click', closedPopup);
 
-=======
-editButton.addEventListener('click', openedEditPopup);
-addButton.addEventListener('click', openedAddPopup);
->>>>>>> 7028f62dcc029184043f105484974675c5690f13
+closeButton.forEach((btn, i) => {
+    btn.addEventListener('click', closedPopup(i))
+})
 
-//закрыть формы
-for (let i = 0; i < closeButton.length; i+=1){
-function closedPopup(){
-    popup[i].classList.remove('popup_opened');
-}
-closeButton[i].addEventListener('click', closedPopup);
-}
 
 
 
