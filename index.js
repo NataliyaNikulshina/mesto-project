@@ -3,7 +3,7 @@ const editPopup = document.querySelector('.popup_type_edit');
 const addPopup = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button');
 const closeButton = document.querySelectorAll('.popup__button-close');
-const popups = document.querySelectorAll('.popup');
+
 
 //открыть формы
 function openedEditPopup(){
@@ -18,21 +18,18 @@ editButton.addEventListener('click', openedEditPopup);
 addButton.addEventListener('click', openedAddPopup);
 
 //закрытие форм
-function closedPopup(i){
-    debugger;
-    popups[i].classList.remove('popup_opened');
-    console.log(i + ' ' + i);
+function closedPopup(popup){
+    popup.classList.remove('popup_opened');
 }
 
-closeButton.forEach((btn, i) => {
-    btn.addEventListener('click', closedPopup(i))
-})
-debugger;
-
+closeButton.forEach((btn) => 
+    btn.addEventListener('click', (evt) => 
+closedPopup(evt.target.closest('.popup'))
+));
 
 
 //редактировать профиль 
-let saveButton = document.querySelector('.popup__button-save');
+const saveButton = document.querySelector('.popup__button-save');
 
 function editInfo(){
 const formElement = document.querySelector('.popup__container');
@@ -44,9 +41,10 @@ function formSubmitHandler(evt){
     let userAboutMe = document.querySelector('.profile__about-me');
     userName.textContent = nameInput.value;
     userAboutMe.textContent = jobIntut.value;
+    closedPopup(editPopup);
 }
 formElement.addEventListener('submit', formSubmitHandler);
-closedPopup();
+
 //console.log(nameInput.value);
 //console.log(jobIntut.value);
 }
@@ -55,7 +53,7 @@ saveButton.addEventListener('click', editInfo);
 
 
 //лайк карточки
-let likeButton = document.querySelectorAll('.element__like');
+const likeButton = document.querySelectorAll('.element__like');
 for (let i = 0; i < likeButton.length; i+=1){
 function likeActive(){
     likeButton[i].classList.toggle('element__like_active');
