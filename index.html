@@ -29,34 +29,50 @@
                     <img class="element__image" src="./images/elements/dagestan.jpg" alt="Дагестан" />
                     <h2 class="element__caption">Дагестан</h2>
                     <button name="element__like" class="element__like"></button>
+                    <button name="element__trash" class="element__trash"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/krym.jpg" alt="Крым" />
                     <h2 class="element__caption">Крым</h2>
                     <button name="element__like" class="element__like"></button>
+                    <button name="element__trash" class="element__trash"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/karelia.jpg" alt="Карелия" />
                     <h2 class="element__caption">Карелия</h2>
                     <button name="element__like" class="element__like"></button>
+                    <button name="element__trash" class="element__trash"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/kyrshskaya_kosa.jpg" alt="Куршская коса" />
                     <h2 class="element__caption">Куршская коса</h2>
                     <button name="element__like" class="element__like"></button>
+                    <button name="element__trash" class="element__trash"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/mountain_ahyn.jpg" alt="Гора Ахун" />
                     <h2 class="element__caption">Гора Ахун</h2>
                     <button name="element__like" class="element__like"></button>
+                    <button name="element__trash" class="element__trash"></button>
                 </article>
                 <article class="element">
                     <img class="element__image" src="./images/elements/plato_matlas.jpg" alt="Плато Матлас" />
                     <h2 class="element__caption">Плато Матлас</h2>
                     <button name="element__like" class="element__like"></button>
+                    <button name="element__trash" class="element__trash"></button>
                 </article>
             </section>
+
+            <template id="element-template">
+                <article class="element">
+                    <img class="element__image"/>
+                    <h2 class="element__caption"></h2>
+                    <button class="element__like"></button>
+                    <button class="element__trash"></button>
+                </article>
+            </template>
         </main>
+
         <footer class="footer">
             <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
         </footer>
@@ -78,10 +94,10 @@
                 <button name="close-button" class="popup__button-close"></button>
                     <h2 class="popup__heading">Новое место</h2>
                     <fieldset class="popup__user-info">
-                        <input type="text" class="popup__item popup__item_name" placeholder="Название" required/>
-                        <input type="text" class="popup__item popup__item_about-me" placeholder="Ссылка на картинку" required/>
+                        <input type="text" class="popup__item popup__item_caption" placeholder="Название" required/>
+                        <input type="text" class="popup__item popup__item_link" placeholder="Ссылка на картинку" required/>
                     </fieldset>
-                    <button name="save-button" type="submit" class="popup__button-save">Сохранить</button>
+                    <button name="save-button" type="submit" class="popup__button-save popup__button-save_cards">Сохранить</button>
             </form>
         </div>
 

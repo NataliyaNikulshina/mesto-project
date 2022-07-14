@@ -4,6 +4,7 @@ const imagePopup = document.querySelector('.popup_type_image');
 const addPopup = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button');
 const closeButton = document.querySelectorAll('.popup__button-close');
+const elementsContainer = document.querySelector('.elements');
 
 
 //открыть формы
@@ -57,3 +58,33 @@ function likeActive(){
 }
 likeButton[i].addEventListener('click', likeActive);
 }
+
+//добавление карточки
+function addElements(linkValue, captionValue){
+    const elementsTemplate = document.querySelector('#element-template').content;
+    const element = elementsTemplate.querySelector('.element').cloneNode(true);
+
+    element.querySelector('.element__image').src = linkValue;
+    element.querySelector('.element__caption').textContent = captionValue;
+
+    element.querySelector('.element__like').addEventListener('click', function(evt){
+        evt.target.classList.toggle('element__like_active');
+    });
+    elementsContainer.prepend(element);
+    
+}
+
+const saveElementsButton = document.querySelector('.popup__button-save_cards');
+
+saveElementsButton.addEventListener('click', function () {
+    const image = addPopup.querySelector('.popup__item_link');
+    const caption = addPopup.querySelector('.popup__item_caption');
+
+    addElements(image.value, caption.value);
+    closedPopup(addPopup);
+    image.value = '';
+    caption.value = '';
+
+});
+    
+//удаление карточки
