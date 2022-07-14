@@ -7,16 +7,12 @@ const closeButton = document.querySelectorAll('.popup__button-close');
 
 
 //открыть формы
-function openedEditPopup(){
-    editPopup.classList.add('popup_opened');
+function openedPopup(popup){
+    popup.classList.add('popup_opened');
 }
 
-function openedAddPopup(){
-    addPopup.classList.add('popup_opened');
-}
-
-editButton.addEventListener('click', openedEditPopup);
-addButton.addEventListener('click', openedAddPopup);
+editButton.addEventListener('click', () => openedPopup(editPopup));
+addButton.addEventListener('click', () => openedPopup(addPopup));
 
 //закрытие форм
 function closedPopup(popup){
