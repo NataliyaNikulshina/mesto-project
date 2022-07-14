@@ -98,3 +98,15 @@ trashButton.forEach((btn) =>
 btn.addEventListener('click', function(evt){
 closedElements(evt.target.closest('.element'))
 }));
+
+//открытие изображения карточки
+/*function openedImages(img){
+    element.remove();
+    console.log(img);
+}
+
+const elementImage = document.querySelector('.element__image');
+trashButton.forEach((btn) => 
+btn.addEventListener('click', function(evt){
+openedImages(evt.target.closest('.element__image'))
+}));*/
