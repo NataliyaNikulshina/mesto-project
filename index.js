@@ -9,6 +9,7 @@ const elementsContainer = document.querySelector('.elements');
 const saveElementsButton = document.querySelector('.popup__button-save_cards');
 const likeButton = document.querySelectorAll('.element__like');
 const trashButton = document.querySelectorAll('.element__trash');
+const elementImage = document.querySelectorAll('.element__image');
 
 
 //открыть формы
@@ -93,20 +94,25 @@ function closedElements(element){
     console.log(element);
 }
 
-const element = document.querySelector('.element');
+//const element = document.querySelector('.element');
 trashButton.forEach((btn) => 
 btn.addEventListener('click', function(evt){
 closedElements(evt.target.closest('.element'))
 }));
 
+
 //открытие изображения карточки
-/*function openedImages(img){
-    element.remove();
-    console.log(img);
+function openedImages(img){
+    const caption = img.parentElement.querySelector('.element__caption');
+    openedPopup(imagePopup);
+    //console.log(caption.textContent);
+    //console.log(img);
+    imagePopup.querySelector('.popup__image').src = img.src;
+    imagePopup.querySelector('.popup__caption').textContent = caption.textContent;
 }
 
-const elementImage = document.querySelector('.element__image');
-trashButton.forEach((btn) => 
-btn.addEventListener('click', function(evt){
+
+elementImage.forEach((img) => 
+img.addEventListener('click', function(evt){
 openedImages(evt.target.closest('.element__image'))
-}));*/
+}));

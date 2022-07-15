@@ -62,15 +62,6 @@
                     <button name="element__trash" class="element__trash"></button>
                 </article>
             </section>
-
-            <template id="element-template">
-                <article class="element">
-                    <img class="element__image"/>
-                    <h2 class="element__caption"></h2>
-                    <button class="element__like"></button>
-                    <button class="element__trash"></button>
-                </article>
-            </template>
         </main>
 
         <footer class="footer">
@@ -102,12 +93,23 @@
         </div>
 
         <div class="popup popup_type_image">
-            <form class="popup__container">
+            <div class="popup__container_type_image">
                 <button name="close-button" class="popup__button-close"></button>
+                <figure class="popup__figure">
                     <img class="popup__image"/>
-                    <p class="popup__heading">Новое место</p>
-            </form>
+                    <figcaption class="popup__caption"></figcaption>
+                </figure>
+            </div>
         </div>
+
+        <template id="element-template">
+            <article class="element">
+                <img class="element__image"/>
+                <h2 class="element__caption"></h2>
+                <button class="element__like"></button>
+                <button class="element__trash"></button>
+            </article>
+        </template>
 
         <script src="./index.js"></script>
      </body>
