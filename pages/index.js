@@ -6,33 +6,33 @@ const addButton = document.querySelector('.profile__add-button');
 const closeButton = document.querySelectorAll('.popup__button-close');
 const saveButton = document.querySelector('.popup__button-save');
 const elementsContainer = document.querySelector('.elements');
-const saveElementsButton = document.querySelector('.popup__button-save_cards');
+const saveElementsButton = document.querySelector('.popup__button-save_type_cards');
 
 
 const initialCards = [
     {
       name: 'Плато Матлас',
-      link: '../images/elements/plato_matlas.jpg'
+      link: 'images/elements/plato_matlas.jpg'
     },
     {
       name: 'Гора Ахун',
-      link: '../images/elements/mountain_ahyn.jpg'
+      link: 'images/elements/mountain_ahyn.jpg'
     },
     {
       name: 'Куршская коса',
-      link: '../images/elements/kyrshskaya_kosa.jpg'
+      link: 'images/elements/kyrshskaya_kosa.jpg'
     },
     {
       name: 'Карелия',
-      link: '../images/elements/karelia.jpg'
+      link: 'images/elements/karelia.jpg'
     },
     {
       name: 'Крым',
-      link: '../images/elements/krym.jpg'
+      link: 'images/elements/krym.jpg'
     },
     {
       name: 'Дагестан',
-      link: '../images/elements/dagestan.jpg'
+      link: 'images/elements/dagestan.jpg'
     }
   ]; 
 
@@ -47,8 +47,8 @@ function closedPopup(popup){
 
 function editInfo(){
     const formElement = document.querySelector('.popup__container');
-    const nameInput = document.querySelector('.popup__item_name');
-    const jobIntut = document.querySelector('.popup__item_about-me');
+    const nameInput = document.querySelector('.popup__item_type_name');
+    const jobIntut = document.querySelector('.popup__item_type_about-me');
     function formSubmitHandler(evt){
         evt.preventDefault();
         let userName = document.querySelector('.profile__nickname');
