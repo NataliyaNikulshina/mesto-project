@@ -5,13 +5,15 @@
     margin: 0 auto;
     border-bottom: 1px solid rgba(0,0,0, .2);
     padding-bottom: 13px;
-}
-
-.popup__item::placeholder {
+    font-family: 'Inter', 'Arial', sans-serif;
     font-weight: 400;
     font-size: 14px;
     line-height: 1.21;
     color: #000000;
+}
+
+.popup__item::placeholder {
+    color: #c4c4c4;
 }
 
 @media screen and (max-width: 520px) {
