@@ -14,8 +14,11 @@ const aboutMeInput = document.querySelector('.popup__item_type_about-me');
 const userName = document.querySelector('.profile__nickname');
 const userAboutMe = document.querySelector('.profile__about-me');
 const elementsTemplate = document.querySelector('#element-template').content;
-const image = addPopup.querySelector('.popup__item_link');
-const caption = addPopup.querySelector('.popup__item_caption');
+const image = addPopup.querySelector('.popup__item_type_link');
+const caption = addPopup.querySelector('.popup__item_type_caption');
+const imageInPopup = imagePopup.querySelector('.popup__image'); 
+const altImage = imagePopup.querySelector('.popup__caption');
+
 
 
 function openPopup(popup){
@@ -35,7 +38,7 @@ function handleProfileFormSubmit(evt){
 
 function handleAddCardsFormSubmit(evt){
     evt.preventDefault();
-    let cardNew = createElement(image.value, caption.value);
+    const cardNew = createElement(image.value, caption.value);
     addElement(cardNew);
     closePopup(addPopup);
     formAddCards.reset();
@@ -46,7 +49,7 @@ function handleElementLike(evt){
 }
 
 function handleElementDelete(evt){
-    closeElement(evt.target.closest('.element'))
+    removeElement(evt.target.closest('.element'))
 }
 
 function createElement(linkValue, captionValue){
@@ -70,26 +73,30 @@ function addElement(element){
     elementsContainer.prepend(element);
 }
 
-function closeElement(element){
+function removeElement(element){
     element.remove();
 }
 
 function openImage(img){
     openPopup(imagePopup);
-    const imageInPopup = imagePopup.querySelector('.popup__image');
     imageInPopup.src = img.src;
     imageInPopup.alt = img.alt;
-    imagePopup.querySelector('.popup__caption').textContent = img.alt;
+    altImage.textContent = img.alt;
 }
 
 //добавление 6 карточек на сайт сразу
 initialCards.forEach(function(card){
-    let cardInProfile = createElement(card.link, card.name);
+    const cardInProfile = createElement(card.link, card.name);
     addElement(cardInProfile);
     });  
 
 //открыть формы
-editButton.addEventListener('click', () => openPopup(editPopup));
+editButton.addEventListener('click', function() { 
+    openPopup(editPopup);
+    nameInput.value = userName.textContent;
+    aboutMeInput.value = userAboutMe.textContent;
+});
+
 addButton.addEventListener('click', () => openPopup(addPopup));
 
 //закрытие форм
