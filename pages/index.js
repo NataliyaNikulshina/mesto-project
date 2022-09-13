@@ -99,11 +99,26 @@ editButton.addEventListener('click', function() {
 
 addButton.addEventListener('click', () => openPopup(addPopup));
 
-//закрытие форм
+//закрытие форм по нажанию кнопки "Закрыть"
 closeButtons.forEach((btn) => 
     btn.addEventListener('click', (evt) => 
 closePopup(evt.target.closest('.popup'))
 ));
+
+//закрытие формы, нажимая на Esc
+document.addEventListener('keydown', function(evt){
+    if (evt.key === 'Escape') {
+       // console.log(document.querySelector('.popup_opened'));
+        closePopup(document.querySelector('.popup_opened'));}
+    });
+
+//закрытие формы по клику вне формы
+document.addEventListener('mouseup', function(evt){
+    if(evt.target.classList.contains('popup')){
+       // console.log(evt.target);
+       // console.log(evt.target.closest('.popup'));
+        closePopup(evt.target.closest('.popup'));}
+    });
 
 //редактировать профиль 
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
