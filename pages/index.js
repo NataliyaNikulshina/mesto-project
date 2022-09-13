@@ -1,5 +1,6 @@
 const editButton = document.querySelector('.profile__edit-button');
 const editPopup = document.querySelector('.popup_type_edit');
+const editAvatar = document.querySelector('.popup_type_avatar');
 const imagePopup = document.querySelector('.popup_type_image');
 const addPopup = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button');
@@ -9,6 +10,7 @@ const elementsContainer = document.querySelector('.elements');
 const saveButtonAddCard = document.querySelector('.popup__button-save_type_add-cards');
 const formEditProfile = document.querySelector('.popup__container_type_edit-profile');
 const formAddCards = document.querySelector('.popup__container_type_add-cards');
+const formEditAvatar = document.querySelector('.popup__container_type_edit-avatar');
 const nameInput = document.querySelector('.popup__item_type_name');
 const aboutMeInput = document.querySelector('.popup__item_type_about-me');
 const userName = document.querySelector('.profile__nickname');
@@ -16,6 +18,7 @@ const userAboutMe = document.querySelector('.profile__about-me');
 const elementsTemplate = document.querySelector('#element-template').content;
 const image = addPopup.querySelector('.popup__item_type_link');
 const caption = addPopup.querySelector('.popup__item_type_caption');
+const avatar = document.querySelector('.profile__avatar');
 const imageInPopup = imagePopup.querySelector('.popup__image'); 
 const altImage = imagePopup.querySelector('.popup__caption');
 
@@ -34,6 +37,15 @@ function handleProfileFormSubmit(evt){
     userName.textContent = nameInput.value;
     userAboutMe.textContent = aboutMeInput.value;
     closePopup(editPopup);
+}
+
+function handleAvatarFormSubmit(evt){
+    evt.preventDefault();
+    const avatarNew = editAvatar.querySelector('.popup__item_type_avatar');
+   // const avatar = document.querySelector('.profile__avatar');
+    avatar.src = avatarNew.value;
+    console.log(avatarNew.value);
+    closePopup(editAvatar);
 }
 
 function handleAddCardsFormSubmit(evt){
@@ -126,3 +138,6 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
 //добавление новой карточки
 formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
+
+//добавление новой карточки
+formEditAvatar.addEventListener('submit', handleAvatarFormSubmit);
