@@ -24,3 +24,6 @@ const initialCards = [
       link: 'images/elements/dagestan.jpg'
     }
   ]; 
+
+ 
+export {initialCards}; 
