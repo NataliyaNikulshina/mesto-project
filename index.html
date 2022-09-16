@@ -39,9 +39,16 @@
                 <button name="close-button" type="button" class="popup__button-close"></button>
                     <h2 class="popup__heading">Редактировать профиль</h2>
                     <fieldset class="popup__user-info">
-                        <input type="text" class="popup__item popup__item_type_name" name="user-name" id="name-input" placeholder="Жак-Ив Кусто" minlength='2' maxlength='40' required/>
+                        <input type="text" class="popup__item popup__item_type_name" name="user-name" 
+                            id="name-input" placeholder="Жак-Ив Кусто" 
+                            minlength='2' maxlength='40' 
+                            pattern="^[a-zA-Z]+$" 
+                            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
+                            required/>
                         <span class="name-input-error popup__input-error">Вы пропустили это поле.</span>
-                        <input type="text" class="popup__item popup__item_type_about-me" name="about-me-input" id="about-me-input" placeholder="Исследователь океана" minlength='2' maxlength='200' required/>
+                        <input type="text" class="popup__item popup__item_type_about-me" name="about-me-input" 
+                            id="about-me-input" placeholder="Исследователь океана" minlength='2' maxlength='200' 
+                            required/>
                         <span class="about-me-input-error popup__input-error">Вы пропустили это поле.</span>
                         <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_edit-profile">Сохранить</button>
                     </fieldset>
@@ -53,10 +60,15 @@
                 <button name="close-button" type="button" class="popup__button-close"></button>
                     <h2 class="popup__heading">Новое место</h2>
                     <fieldset class="popup__user-info">
-                        <input type="text" class="popup__item popup__item_type_caption" name="place-caption" id="name-input" placeholder="Название" minlength='2' maxlength='30' required/>
+                        <input type="text" class="popup__item popup__item_type_caption" name="place-caption" 
+                            id="name-input" placeholder="Название" minlength='2' maxlength='30' 
+                            required/>
                         <span class="name-input-error popup__input-error">Вы пропустили это поле.</span>
-                        <input type="url" class="popup__item popup__item_type_link" name="place-link" id="link-input" placeholder="Ссылка на картинку" required/>
-                        <span class="link-input-error popup__input-error">Введите адрес сайта.</span>
+                        <input type="text" class="popup__item popup__item_type_link" name="place-link" 
+                            id="link-input" placeholder="Ссылка на картинку" 
+                            pattern="https://.*" data-error-message="Введите адрес сайта."
+                            required/>
+                        <span class="link-input-error popup__input-error">Вы пропустили это поле.</span>
                         <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_add-cards">Создать</button>
                     </fieldset>
             </form>
@@ -77,8 +89,11 @@
                 <button name="close-button" type="button" class="popup__button-close"></button>
                     <h2 class="popup__heading">Обновить аватар</h2>
                     <fieldset class="popup__user-info">
-                        <input type="url" class="popup__item popup__item_type_avatar" name="place-link" id="link-avatar-input" placeholder="Ссылка на картинку" required/>
-                        <span class="link-avatar-input-error popup__input-error">Введите адрес сайта.</span>
+                        <input type="text" class="popup__item popup__item_type_avatar" name="place-link" 
+                        id="link-avatar-input" placeholder="Ссылка на картинку"
+                        pattern="http://.*" data-error-message="Введите адрес сайта."
+                        required/>
+                        <span class="link-avatar-input-error popup__input-error">Вы пропустили это поле.</span>
                         <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_edit-profile">Сохранить</button>
                     </fieldset>
             </form>

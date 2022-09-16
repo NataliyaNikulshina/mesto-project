@@ -22,7 +22,14 @@ const avatar = document.querySelector('.profile__avatar');
 const imageInPopup = imagePopup.querySelector('.popup__image'); 
 const altImage = imagePopup.querySelector('.popup__caption');
 
-
+/*const enableValidation = ({
+  formSelector: '.popup__form',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_inactive',
+  inputErrorClass: 'popup__item_type_error',
+  errorClass: 'popup__input-error_active'
+}); */
 
 function openPopup(popup){
     popup.classList.add('popup_opened');
@@ -162,6 +169,7 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add('popup__item_type_error');
     errorElement.textContent = errorMessage;
+    //console.log (errorElement);
     errorElement.classList.add('popup__input-error_active');
   };
   
@@ -173,8 +181,15 @@ const hideInputError = (formElement, inputElement) => {
   };
   
 const checkInputValidity = (formElement, inputElement) => {
+  //console.log(inputElement.validity.patternMismatch);
+    if (inputElement.validity.patternMismatch) {
+      inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+    } else {
+      inputElement.setCustomValidity("");
+    } 
     if (!inputElement.validity.valid) {
       showInputError(formElement, inputElement, inputElement.validationMessage);
+       console.log(validationMessage);
     } 
     else {
       hideInputError(formElement, inputElement);
