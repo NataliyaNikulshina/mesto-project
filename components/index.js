@@ -22,14 +22,15 @@ const avatar = document.querySelector('.profile__avatar');
 const imageInPopup = imagePopup.querySelector('.popup__image'); 
 const altImage = imagePopup.querySelector('.popup__caption');
 
-/*const enableValidation = ({
-  formSelector: '.popup__form',
+const enableValidation = ({
+  formSelector: '.popup__container',
+  fieldsetSelector: '.popup__user-info',
   inputSelector: '.popup__item',
   submitButtonSelector: '.popup__button-save',
   inactiveButtonClass: 'popup__button-save_inactive',
   inputErrorClass: 'popup__item_type_error',
   errorClass: 'popup__input-error_active'
-}); */
+}); 
 
 
 //добавление 6 карточек на сайт сразу
@@ -82,7 +83,7 @@ import {openPopup, closePopup, addElement} from './utils.js';
 import {handleProfileFormSubmit, handleAvatarFormSubmit, handleAddCardsFormSubmit} from './modal.js';
 import {createElement} from './card.js';  
 import {initialCards} from './initial-cards.js'; 
-import {enableValidation} from "./validate.js";
-export {editButton, saveButtonEditProfile, elementsContainer, saveButtonAddCard, editPopup, elementsTemplate, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards}; 
-enableValidation();
+import {enableValidation as eValidation} from "./validate.js";
+export {enableValidation, editButton, saveButtonEditProfile, elementsContainer, saveButtonAddCard, editPopup, elementsTemplate, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards, image, caption}; 
+eValidation();
   

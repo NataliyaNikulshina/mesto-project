@@ -6,27 +6,27 @@ const hasInvalidInput = (inputList) => {
   
 const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add('popup__button-save_inactive');
+        buttonElement.classList.add(objValidation.inactiveButtonClass);
         buttonElement.setAttribute('disabled', true);
       }
     else {
-        buttonElement.classList.remove('popup__button-save_inactive');
+        buttonElement.classList.remove(objValidation.inactiveButtonClass);
         buttonElement.removeAttribute('disabled');
       }
   }
   
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.add('popup__item_type_error');
+    inputElement.classList.add(objValidation.inputErrorClass);
     errorElement.textContent = errorMessage;
     //console.log (errorElement);
-    errorElement.classList.add('popup__input-error_active');
+    errorElement.classList.add(objValidation.errorClass);
   };
   
 const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-    inputElement.classList.remove('popup__item_type_error');
-    errorElement.classList.remove('popup__input-error_active');
+    inputElement.classList.remove(objValidation.inputErrorClass);
+    errorElement.classList.remove(objValidation.errorClass);
     errorElement.textContent = '';
   };
   
@@ -47,8 +47,8 @@ const checkInputValidity = (formElement, inputElement) => {
   };
   
 const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.popup__item'));
-    const buttonElement = formElement.querySelector('.popup__button-save');
+    const inputList = Array.from(formElement.querySelectorAll(objValidation.inputSelector));
+    const buttonElement = formElement.querySelector(objValidation.submitButtonSelector);
     //console.log(inputList);
     //console.log(buttonElement);
     toggleButtonState(inputList, buttonElement);
@@ -61,13 +61,13 @@ const setEventListeners = (formElement) => {
   };
   
 const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.popup__container'));
+    const formList = Array.from(document.querySelectorAll(objValidation.formSelector));
     //console.log(formList);
     formList.forEach((formElement) => {
       formElement.addEventListener('submit', function (evt) {
         evt.preventDefault();
       });
-      const fieldsetList = Array.from(formElement.querySelectorAll('.popup__user-info'));
+      const fieldsetList = Array.from(formElement.querySelectorAll(objValidation.fieldsetSelector));
       //console.log(fieldsetList);
       fieldsetList.forEach ((fieldSet) => {
        setEventListeners(fieldSet);
@@ -75,5 +75,5 @@ const enableValidation = () => {
     });
   };
 
- 
+import {enableValidation as objValidation} from "./index.js";
 export {hasInvalidInput, toggleButtonState, showInputError, hideInputError, setEventListeners, enableValidation};

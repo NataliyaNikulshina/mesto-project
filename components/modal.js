@@ -1,5 +1,3 @@
-
-
 function openImage(img){
     openPopup(imagePopup);
     imageInPopup.src = img.src;
@@ -29,6 +27,8 @@ function handleAddCardsFormSubmit(evt){
     closePopup(addPopup);
     formAddCards.reset();
 }
-import {imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards} from './index.js'; 
+
+import {createElement} from './card.js';
+import {editPopup, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards, image, caption} from './index.js'; 
 import {openPopup, closePopup, addElement} from './utils.js'; 
 export {openImage, handleProfileFormSubmit, handleAvatarFormSubmit, handleAddCardsFormSubmit};
