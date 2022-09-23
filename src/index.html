@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="author" content="Наталия Никульшина" />
+        <meta name="description" content="Здесь ты можешь поделиться своей фотографией из любой точки мира." />
+        <meta name="keywords" content="foto, social media, travel" />
+        <link rel="icon" href="<%=require('./images/avatar.jpg')%>">
+        <title>Mesto</title>
+    </head>
+    <body class="page">
+        <header class="header">
+            <img class="header__logo" alt="Логотип Mesto" src="<%=require('./images/logo.svg')%>" />
+        </header>
+        <main class="content">
+            <section class="profile">
+                <div class="profile__user-info">
+                    <img src="<%=require('./images/avatar.jpg')%>" class="profile__avatar" alt="Твой аватар" />
+                    <h1 class="profile__nickname">Жак-Ив Кусто</h1>
+                    <p class="profile__about-me">Исследователь океана</p>
+                    <button name="edit-button" type="button" class="profile__edit-button"></button>
+                </div>
+                <button name="add-button" type="button" class="profile__add-button"></button>
+            </section>
+
+            <section class="elements">
+               
+            </section>
+        </main>
+        
+        <footer class="footer">
+            <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+        </footer>
+
+        <div class="popup popup_type_edit">
+            <form class="popup__container popup__container_type_edit-profile" name="form-edit-profile" novalidate>
+                <button name="close-button" type="button" class="popup__button-close"></button>
+                    <h2 class="popup__heading">Редактировать профиль</h2>
+                    <fieldset class="popup__user-info">
+                        <input type="text" class="popup__item popup__item_type_name" name="user-name" 
+                            id="name-input" placeholder="Жак-Ив Кусто" 
+                            minlength='2' maxlength='40' 
+                            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"  
+                            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
+                            required/>
+                        <span class="name-input-error popup__input-error"></span>
+                        <input type="text" class="popup__item popup__item_type_about-me" name="about-me-input" 
+                            id="about-me-input" placeholder="Исследователь океана" minlength='2' maxlength='200' 
+                            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" 
+                            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
+                            required/>
+                        <span class="about-me-input-error popup__input-error"></span>
+                        <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_edit-profile">Сохранить</button>
+                    </fieldset>
+            </form>
+        </div>
+
+        <div class="popup popup_type_add">
+            <form class="popup__container popup__container_type_add-cards" name="form-add-cards" novalidate>
+                <button name="close-button" type="button" class="popup__button-close"></button>
+                    <h2 class="popup__heading">Новое место</h2>
+                    <fieldset class="popup__user-info">
+                        <input type="text" class="popup__item popup__item_type_caption" name="place-caption" 
+                            id="place-input" placeholder="Название" minlength='2' maxlength='30' 
+                            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" 
+                            data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
+                            required/>
+                        <span class="place-input-error popup__input-error"></span>
+                        <input type="text" class="popup__item popup__item_type_link" name="place-link" 
+                            id="link-input" placeholder="Ссылка на картинку" 
+                            pattern="https?://.*" data-error-message="Введите адрес сайта."
+                            required/>
+                        <span class="link-input-error popup__input-error"></span>
+                        <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_add-cards">Создать</button>
+                    </fieldset>
+            </form>
+        </div>
+
+        <div class="popup popup_type_image">
+            <div class="popup__container_type_image">
+                <button name="close-button" type="button" class="popup__button-close"></button>
+                <figure class="popup__figure">
+                    <img class="popup__image" src="#" alt="#">
+                    <figcaption class="popup__caption"></figcaption>
+                </figure>
+            </div>
+        </div>
+
+        <div class="popup popup_type_avatar popup_opened">
+            <form class="popup__container popup__container_type_edit-avatar" name="form-edit-profile" novalidate>
+                <button name="close-button" type="button" class="popup__button-close"></button>
+                    <h2 class="popup__heading">Обновить аватар</h2>
+                    <fieldset class="popup__user-info">
+                        <input type="text" class="popup__item popup__item_type_avatar" name="avatar-link" 
+                        id="link-avatar-input" placeholder="Ссылка на картинку"
+                        pattern="https?://.*" data-error-message="Введите адрес сайта."
+                        required/>
+                        <span class="link-avatar-input-error popup__input-error"></span>
+                        <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_edit-profile">Сохранить</button>
+                    </fieldset>
+            </form>
+        </div>
+    
+        <template id="element-template">
+            <article class="element">
+                <img class="element__image"/>
+                <h2 class="element__caption"></h2>
+                <button class="element__like" type="button"></button>
+                <button class="element__trash" type="button"></button>
+            </article>
+        </template>
+     </body>
+</html>

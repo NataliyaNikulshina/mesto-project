@@ -2,7 +2,7 @@
     background-color: #fff;
     border-radius: 10px;
     width: 430px;
-    height: 330px;
+    min-height: 330px;
     position: relative;
     padding: 34px 36px;
     box-sizing: border-box;

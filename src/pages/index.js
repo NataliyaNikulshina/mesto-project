@@ -1,5 +1,6 @@
 const editButton = document.querySelector('.profile__edit-button');
 const editPopup = document.querySelector('.popup_type_edit');
+const editAvatar = document.querySelector('.popup_type_avatar');
 const imagePopup = document.querySelector('.popup_type_image');
 const addPopup = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button');
@@ -9,6 +10,7 @@ const elementsContainer = document.querySelector('.elements');
 const saveButtonAddCard = document.querySelector('.popup__button-save_type_add-cards');
 const formEditProfile = document.querySelector('.popup__container_type_edit-profile');
 const formAddCards = document.querySelector('.popup__container_type_add-cards');
+const formEditAvatar = document.querySelector('.popup__container_type_edit-avatar');
 const nameInput = document.querySelector('.popup__item_type_name');
 const aboutMeInput = document.querySelector('.popup__item_type_about-me');
 const userName = document.querySelector('.profile__nickname');
@@ -16,73 +18,20 @@ const userAboutMe = document.querySelector('.profile__about-me');
 const elementsTemplate = document.querySelector('#element-template').content;
 const image = addPopup.querySelector('.popup__item_type_link');
 const caption = addPopup.querySelector('.popup__item_type_caption');
+const avatar = document.querySelector('.profile__avatar');
 const imageInPopup = imagePopup.querySelector('.popup__image'); 
 const altImage = imagePopup.querySelector('.popup__caption');
 
+const enableValidation = ({
+  formSelector: '.popup__container',
+  fieldsetSelector: '.popup__user-info',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_inactive',
+  inputErrorClass: 'popup__item_type_error',
+  errorClass: 'popup__input-error_active'
+}); 
 
-
-function openPopup(popup){
-    popup.classList.add('popup_opened');
-}
-
-function closePopup(popup){
-    popup.classList.remove('popup_opened');
-}
-
-function handleProfileFormSubmit(evt){
-    evt.preventDefault();
-    userName.textContent = nameInput.value;
-    userAboutMe.textContent = aboutMeInput.value;
-    closePopup(editPopup);
-}
-
-function handleAddCardsFormSubmit(evt){
-    evt.preventDefault();
-    const cardNew = createElement(image.value, caption.value);
-    addElement(cardNew);
-    closePopup(addPopup);
-    formAddCards.reset();
-}
-
-function handleElementLike(evt){
-    evt.target.classList.toggle('element__like_active')
-}
-
-function handleElementDelete(evt){
-    removeElement(evt.target.closest('.element'))
-}
-
-function createElement(linkValue, captionValue){
-    const element = elementsTemplate.querySelector('.element').cloneNode(true);
-    const imageElement = element.querySelector('.element__image');
-    imageElement.src = linkValue;
-    imageElement.alt = captionValue;
-    element.querySelector('.element__caption').textContent = captionValue;
-//добавление лайков
-    element.querySelector('.element__like').addEventListener('click', handleElementLike);
-//добавление корзины
-    element.querySelector('.element__trash').addEventListener('click', handleElementDelete);
-//открытие изображения карточки
-    imageElement.addEventListener('click', function(){
-        openImage(imageElement)
-    });
-    return(element);
-}
-
-function addElement(element){
-    elementsContainer.prepend(element);
-}
-
-function removeElement(element){
-    element.remove();
-}
-
-function openImage(img){
-    openPopup(imagePopup);
-    imageInPopup.src = img.src;
-    imageInPopup.alt = img.alt;
-    altImage.textContent = img.alt;
-}
 
 //добавление 6 карточек на сайт сразу
 initialCards.forEach(function(card){
@@ -123,6 +72,18 @@ document.addEventListener('mouseup', function(evt){
 //редактировать профиль 
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 
-
 //добавление новой карточки
 formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
+
+//изменение аватар
+formEditAvatar.addEventListener('submit', handleAvatarFormSubmit);
+
+import './index.css'; 
+import {openPopup, closePopup, addElement} from '../components/utils.js'; 
+import {handleProfileFormSubmit, handleAvatarFormSubmit, handleAddCardsFormSubmit} from '../components/modal.js';
+import {createElement} from '../components/card.js';  
+import {initialCards} from '../components/initial-cards.js'; 
+import {enableValidation as eValidation} from "../components/validate.js";
+export {enableValidation, editButton, saveButtonEditProfile, elementsContainer, saveButtonAddCard, editPopup, elementsTemplate, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards, image, caption}; 
+eValidation();
+  
