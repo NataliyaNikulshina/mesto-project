@@ -1,4 +1,6 @@
+import {removeElement, openPopupImage} from './utils.js'; 
 
+const elementsTemplate = document.querySelector('#element-template').content;
 
 function handleElementLike(evt){
     evt.target.classList.toggle('element__like_active')
@@ -20,12 +22,9 @@ function createElement(linkValue, captionValue){
     element.querySelector('.element__trash').addEventListener('click', handleElementDelete);
 //открытие изображения карточки
     imageElement.addEventListener('click', function(){
-        openImage(imageElement)
+        openPopupImage(imageElement)
     });
     return(element);
 }
 
-import {elementsTemplate} from '../pages/index.js'; 
-import {removeElement} from './utils.js'; 
-import {openImage} from './modal.js';
 export {handleElementLike, handleElementDelete, createElement};

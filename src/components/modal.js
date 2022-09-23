@@ -1,34 +1,19 @@
-function openImage(img){
-    openPopup(imagePopup);
-    imageInPopup.src = img.src;
-    imageInPopup.alt = img.alt;
-    altImage.textContent = img.alt;
+function openPopup(popup){
+    popup.classList.add('popup_opened');
+    document.addEventListener('keydown', handlePopupEsc);
 }
 
-function handleProfileFormSubmit(evt){
-    evt.preventDefault();
-    userName.textContent = nameInput.value;
-    userAboutMe.textContent = aboutMeInput.value;
-    closePopup(editPopup);
+function closePopup(popup){
+    popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', handlePopupEsc);
 }
 
-function handleAvatarFormSubmit(evt){
-    evt.preventDefault();
-    const avatarNew = editAvatar.querySelector('.popup__item_type_avatar');
-    avatar.src = avatarNew.value;
-   // console.log(avatarNew.value);
-    closePopup(editAvatar);
+//закрытие формы, нажимая на Esc
+function handlePopupEsc(evt) {
+    if (evt.key === 'Escape') {
+        // console.log(document.querySelector('.popup_opened'));
+         closePopup(document.querySelector('.popup_opened'));}
 }
+ 
 
-function handleAddCardsFormSubmit(evt){
-    evt.preventDefault();
-    const cardNew = createElement(image.value, caption.value);
-    addElement(cardNew);
-    closePopup(addPopup);
-    formAddCards.reset();
-}
-
-import {createElement} from './card.js';
-import {editPopup, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards, image, caption} from '../pages/index.js'; 
-import {openPopup, closePopup, addElement} from './utils.js'; 
-export {openImage, handleProfileFormSubmit, handleAvatarFormSubmit, handleAddCardsFormSubmit};
+export {openPopup, closePopup};
