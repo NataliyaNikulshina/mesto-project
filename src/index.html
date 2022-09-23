@@ -41,13 +41,13 @@
                         <input type="text" class="popup__item popup__item_type_name" name="user-name" 
                             id="name-input" placeholder="Жак-Ив Кусто" 
                             minlength='2' maxlength='40' 
-                            pattern="/[a-zа-яё\-\s]/gi" 
+                            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$"  
                             data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
                             required/>
                         <span class="name-input-error popup__input-error"></span>
                         <input type="text" class="popup__item popup__item_type_about-me" name="about-me-input" 
                             id="about-me-input" placeholder="Исследователь океана" minlength='2' maxlength='200' 
-                            pattern="/[a-zа-яё\-\s]/gi" 
+                            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" 
                             data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
                             required/>
                         <span class="about-me-input-error popup__input-error"></span>
@@ -63,13 +63,13 @@
                     <fieldset class="popup__user-info">
                         <input type="text" class="popup__item popup__item_type_caption" name="place-caption" 
                             id="place-input" placeholder="Название" minlength='2' maxlength='30' 
-                            pattern="/[a-zа-яё\-\s]/gi" 
+                            pattern="^[A-Za-zА-Яа-яЁё\s\-]+$" 
                             data-error-message="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" 
                             required/>
                         <span class="place-input-error popup__input-error"></span>
                         <input type="text" class="popup__item popup__item_type_link" name="place-link" 
                             id="link-input" placeholder="Ссылка на картинку" 
-                            pattern="/https?:\/\//" data-error-message="Введите адрес сайта."
+                            pattern="https://.*" data-error-message="Введите адрес сайта."
                             required/>
                         <span class="link-input-error popup__input-error"></span>
                         <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_add-cards">Создать</button>
@@ -94,7 +94,7 @@
                     <fieldset class="popup__user-info">
                         <input type="text" class="popup__item popup__item_type_avatar" name="place-link" 
                         id="link-avatar-input" placeholder="Ссылка на картинку"
-                        pattern="/https?:\/\//" data-error-message="Введите адрес сайта."
+                        pattern="https://.*" data-error-message="Введите адрес сайта."
                         required/>
                         <span class="link-avatar-input-error popup__input-error"></span>
                         <button name="save-button" type="submit" class="popup__button-save popup__button-save_type_edit-profile">Сохранить</button>
@@ -110,11 +110,5 @@
                 <button class="element__trash" type="button"></button>
             </article>
         </template>
-        <script type="module" src="./pages/index.js"></script>
-        <script type="module" src="./components/card.js" ></script>
-        <script type="module" src="./components/modal.js"></script>
-        <script type="module" src="./components/utils.js"></script>
-        <script type="module" src="./components/validate.js"></script>
-        <script type="module" src="./components/initial-cards.js"></script>
      </body>
 </html>

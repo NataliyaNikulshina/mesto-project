@@ -31,7 +31,9 @@ const hideInputError = (formElement, inputElement) => {
   };
   
 const checkInputValidity = (formElement, inputElement) => {
-  console.log(inputElement.validity.patternMismatch);
+  console.log('должен вывести патерн ' + inputElement.validity.patternMismatch );
+  console.log('валид ' + inputElement.validity.valid );
+  console.log(inputElement.validity);
     if (inputElement.validity.patternMismatch) {
       inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
@@ -39,7 +41,6 @@ const checkInputValidity = (formElement, inputElement) => {
     } 
     if (!inputElement.validity.valid) {
       showInputError(formElement, inputElement, inputElement.validationMessage);
-      
     } 
     else {
       hideInputError(formElement, inputElement);
