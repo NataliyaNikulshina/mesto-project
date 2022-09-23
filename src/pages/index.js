@@ -78,12 +78,12 @@ formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
 //изменение аватар
 formEditAvatar.addEventListener('submit', handleAvatarFormSubmit);
 
-
-import {openPopup, closePopup, addElement} from './utils.js'; 
-import {handleProfileFormSubmit, handleAvatarFormSubmit, handleAddCardsFormSubmit} from './modal.js';
-import {createElement} from './card.js';  
-import {initialCards} from './initial-cards.js'; 
-import {enableValidation as eValidation} from "./validate.js";
+import './index.css'; 
+import {openPopup, closePopup, addElement} from '../components/utils.js'; 
+import {handleProfileFormSubmit, handleAvatarFormSubmit, handleAddCardsFormSubmit} from '../components/modal.js';
+import {createElement} from '../components/card.js';  
+import {initialCards} from '../components/initial-cards.js'; 
+import {enableValidation as eValidation} from "../components/validate.js";
 export {enableValidation, editButton, saveButtonEditProfile, elementsContainer, saveButtonAddCard, editPopup, elementsTemplate, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards, image, caption}; 
 eValidation();
   

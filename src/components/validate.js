@@ -31,7 +31,7 @@ const hideInputError = (formElement, inputElement) => {
   };
   
 const checkInputValidity = (formElement, inputElement) => {
-  //console.log(inputElement.validity.patternMismatch);
+  console.log(inputElement.validity.patternMismatch);
     if (inputElement.validity.patternMismatch) {
       inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
@@ -75,5 +75,5 @@ const enableValidation = () => {
     });
   };
 
-import {enableValidation as objValidation} from "./index.js";
+import {enableValidation as objValidation} from "../pages/index.js";
 export {hasInvalidInput, toggleButtonState, showInputError, hideInputError, setEventListeners, enableValidation};

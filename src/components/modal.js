@@ -29,6 +29,6 @@ function handleAddCardsFormSubmit(evt){
 }
 
 import {createElement} from './card.js';
-import {editPopup, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards, image, caption} from './index.js'; 
+import {editPopup, imageInPopup, imagePopup, altImage, userName, userAboutMe, nameInput, aboutMeInput, editAvatar, avatar, addPopup, formAddCards, image, caption} from '../pages/index.js'; 
 import {openPopup, closePopup, addElement} from './utils.js'; 
 export {openImage, handleProfileFormSubmit, handleAvatarFormSubmit, handleAddCardsFormSubmit};

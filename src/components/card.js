@@ -25,7 +25,7 @@ function createElement(linkValue, captionValue){
     return(element);
 }
 
-import {elementsTemplate} from './index.js'; 
+import {elementsTemplate} from '../pages/index.js'; 
 import {removeElement} from './utils.js'; 
 import {openImage} from './modal.js';
 export {handleElementLike, handleElementDelete, createElement};

@@ -13,5 +13,5 @@ function addElement(element){
 function removeElement(element){
     element.remove();
 }
-import {elementsContainer} from './index.js'; 
+import {elementsContainer} from '../pages/index.js'; 
 export {openPopup, closePopup, addElement, removeElement};
