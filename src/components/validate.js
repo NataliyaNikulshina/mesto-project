@@ -1,12 +1,4 @@
-const objValidation = ({
-  formSelector: '.popup__container',
-  fieldsetSelector: '.popup__user-info',
-  inputSelector: '.popup__item',
-  submitButtonSelector: '.popup__button-save',
-  inactiveButtonClass: 'popup__button-save_inactive',
-  inputErrorClass: 'popup__item_type_error',
-  errorClass: 'popup__input-error_active'
-}); 
+
 
 const hasInvalidInput = (inputList) => {
     return inputList.some((inputElement) => {
@@ -14,7 +6,7 @@ const hasInvalidInput = (inputList) => {
     })
   }; 
   
-export const toggleButtonState = (inputList, buttonElement) => {
+const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
         buttonElement.classList.add(objValidation.inactiveButtonClass);
         buttonElement.setAttribute('disabled', true);
@@ -68,7 +60,17 @@ const setEventListeners = (formElement) => {
     })
 };
   
-export const enableValidation = () => {
+export const objValidation = ({
+  formSelector: '.popup__container',
+  fieldsetSelector: '.popup__user-info',
+  inputSelector: '.popup__item',
+  submitButtonSelector: '.popup__button-save',
+  inactiveButtonClass: 'popup__button-save_inactive',
+  inputErrorClass: 'popup__item_type_error',
+  errorClass: 'popup__input-error_active'
+}); 
+
+export const enableValidation = (objValidation) => {
     const formList = Array.from(document.querySelectorAll(objValidation.formSelector));
     formList.forEach((formElement) => {
       formElement.addEventListener('submit', function (evt) {
@@ -81,3 +83,4 @@ export const enableValidation = () => {
     });
   };
 
+ 

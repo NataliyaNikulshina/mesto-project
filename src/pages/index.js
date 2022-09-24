@@ -3,7 +3,7 @@ import {addElement} from '../components/utils.js';
 import {openPopup, closePopup} from '../components/modal.js';
 import {createElement} from '../components/card.js';  
 import {initialCards} from '../components/initial-cards.js'; 
-import {enableValidation} from '../components/validate.js'; 
+import {enableValidation,objValidation} from '../components/validate.js'; 
 
 const popups = document.querySelectorAll(".popup");
 const editButton = document.querySelector('.profile__edit-button');
@@ -21,15 +21,6 @@ const image = popupAddCard.querySelector('.popup__item_type_link');
 const caption = popupAddCard.querySelector('.popup__item_type_caption');
 
 
-const objValidation = ({
-    formSelector: '.popup__container',
-    fieldsetSelector: '.popup__user-info',
-    inputSelector: '.popup__item',
-    submitButtonSelector: '.popup__button-save',
-    inactiveButtonClass: 'popup__button-save_inactive',
-    inputErrorClass: 'popup__item_type_error',
-    errorClass: 'popup__input-error_active'
-  }); 
 
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
@@ -87,5 +78,5 @@ formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
 
 enableValidation(objValidation); 
 
-export { objValidation}; 
+
 
