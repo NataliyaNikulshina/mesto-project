@@ -30,9 +30,6 @@ const hideInputError = (formElement, inputElement) => {
   };
   
 const checkInputValidity = (formElement, inputElement) => {
-  console.log('должен вывести патерн ' + inputElement.validity.patternMismatch );
-  console.log('валид ' + inputElement.validity.valid );
-  console.log(inputElement.validity);
     if (inputElement.validity.patternMismatch) {
       inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
@@ -87,12 +84,10 @@ export const enableValidation = (validationConfig) => {
 //удаление ошибок при открытии формы
 export const handleErrorOpenForm = (popup) => {
   const errorElements = Array.from(popup.querySelectorAll('.popup__input-error'));
-  console.log(errorElements);
   errorElements.forEach((errEl) => {
       errEl.textContent = '';
   });
   const inputElements = Array.from(popup.querySelectorAll('.popup__item'));
-  console.log(inputElements);
   inputElements.forEach((inpEl) => {
       inpEl.setCustomValidity("");
   });
