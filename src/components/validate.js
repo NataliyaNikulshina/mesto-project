@@ -90,5 +90,6 @@ export const handleErrorOpenForm = (popup) => {
   const inputElements = Array.from(popup.querySelectorAll('.popup__item'));
   inputElements.forEach((inpEl) => {
       inpEl.setCustomValidity("");
+      inpEl.classList.remove(validationConfig.inputErrorClass);
   });
 };
