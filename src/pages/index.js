@@ -3,7 +3,7 @@ import {addElement} from '../components/utils.js';
 import {openPopup, closePopup} from '../components/modal.js';
 import {createElement} from '../components/card.js';  
 import {initialCards} from '../components/initial-cards.js'; 
-import {enableValidation,objValidation} from '../components/validate.js'; 
+import {enableValidation,validationConfig, handleErrorOpenForm} from '../components/validate.js'; 
 
 const popups = document.querySelectorAll(".popup");
 const editButton = document.querySelector('.profile__edit-button');
@@ -20,8 +20,6 @@ const userAboutMe = document.querySelector('.profile__about-me');
 const image = popupAddCard.querySelector('.popup__item_type_link');
 const caption = popupAddCard.querySelector('.popup__item_type_caption');
 
-
-
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
     userName.textContent = nameInput.value;
@@ -35,9 +33,7 @@ function handleAddCardsFormSubmit(evt){
     addElement(cardNew);
     closePopup(popupAddCard);
     formAddCards.reset();
-    enableValidation(objValidation); 
 }
-
 
 //добавление 6 карточек на сайт сразу
 initialCards.forEach(function(card){
@@ -50,9 +46,14 @@ editButton.addEventListener('click', function() {
     openPopup(popupEditProfile);
     nameInput.value = userName.textContent;
     aboutMeInput.value = userAboutMe.textContent;
+    handleErrorOpenForm(popupEditProfile);
 });
 
-addButton.addEventListener('click', () => openPopup(popupAddCard));
+addButton.addEventListener('click', () => {
+    openPopup(popupAddCard);
+    formAddCards.reset();
+    handleErrorOpenForm(popupAddCard);
+});
 
 //закрытие форм по кнопке "Закрыть" 
 closeButtons.forEach((btn) =>  
@@ -76,7 +77,7 @@ formEditProfile.addEventListener('submit', handleProfileFormSubmit);
 //добавление новой карточки
 formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
 
-enableValidation(objValidation); 
+enableValidation(validationConfig); 
 
 
 

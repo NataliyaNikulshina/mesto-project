@@ -1,4 +1,5 @@
-import {removeElement, openPopupImage} from './utils.js'; 
+import {removeElement} from './utils.js'; 
+import {openPopupImage} from './modal.js'; 
 
 const elementsTemplate = document.querySelector('#element-template').content;
 
@@ -10,6 +11,7 @@ function handleElementDelete(evt){
     removeElement(evt.target.closest('.element'))
 }
 
+//создание новой карточки
 function createElement(linkValue, captionValue){
     const element = elementsTemplate.querySelector('.element').cloneNode(true);
     const imageElement = element.querySelector('.element__image');
