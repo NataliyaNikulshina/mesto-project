@@ -36,7 +36,8 @@ export const allCards = new GetAllCards (function (cohortId, token) {
 }); 
 });*/
 import { createElement} from "./card.js";
-import { addElement, createUserInfo } from "./utils.js";
+import { addElement,  addAllElements, createUserInfo, userName, userAboutMe} from "./utils.js";
+const avatar = document.querySelector('.profile__avatar');
 
 const api = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-15",
@@ -75,7 +76,7 @@ export function getAllCards() {
     .then((data) => { 
       data.forEach((card) => {
         const cardInProfile = createElement(card.link, card.name);
-        addElement(cardInProfile);
+        addAllElements(cardInProfile);
       //  console.log(cardInProfile);
      });
     })
@@ -96,6 +97,40 @@ export function postNewCards(link, name) {
     //console.log(data);
     const cardInProfile = createElement(data.link, data.name);
     addElement(cardInProfile);
+  })
+    .catch((err) => console.log(err));
+}
+
+export function editUserInfo(name, about) {
+  return fetch(`${api.baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: api.headers,
+    body: JSON.stringify({
+      name: name,
+      about: about,
+    })
+  })
+  .then((res) => jsonRes(res))
+  .then((data) => {
+    //console.log(data);
+    userName.textContent = data.name;
+    userAboutMe.textContent = data.about;
+  })
+    .catch((err) => console.log(err));
+}
+
+export function editUserAvatar(link) {
+  return fetch(`${api.baseUrl}/users/me/avatar`, {
+    method: "PATCH",
+    headers: api.headers,
+    body: JSON.stringify({
+      avatar: link,
+    })
+  })
+  .then((res) => jsonRes(res))
+  .then((data) => {
+    console.log(data);
+    avatar.src = data.link;
   })
     .catch((err) => console.log(err));
 }

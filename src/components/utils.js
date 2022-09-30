@@ -7,6 +7,10 @@ function addElement(element){
     elementsContainer.prepend(element);
 }
 
+function addAllElements(element){
+    elementsContainer.append(element);
+}
+
 function removeElement(element){
     element.remove();
 }
@@ -17,4 +21,4 @@ function createUserInfo(name, description, url) {
     userAvatar.src = url;
   }
 
-export {addElement, removeElement, createUserInfo, userName, userAboutMe};
+export {addElement,  addAllElements, removeElement, createUserInfo, userName, userAboutMe};

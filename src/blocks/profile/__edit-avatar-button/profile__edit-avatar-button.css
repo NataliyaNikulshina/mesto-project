@@ -14,3 +14,10 @@
   background-position: center;
 }
 
+@media screen and (max-width:799px) {
+  .profile__edit-avatar-button{
+      grid-column: 1/span 2;
+      justify-self: center;
+      align-self: start;
+  }
+}

@@ -1,10 +1,10 @@
 import './index.css'; 
-import {addElement, userName, userAboutMe} from '../components/utils.js'; 
+//import {addElement, userName, userAboutMe} from '../components/utils.js'; 
 import {openPopup, closePopup} from '../components/modal.js';
 import {createElement} from '../components/card.js';  
 //import {initialCards} from '../components/initial-cards.js'; 
 import {enableValidation,validationConfig, handleErrorOpenForm} from '../components/validate.js'; 
-import {getAllCards, getUserInfo, postNewCards} from '../components/api.js'; 
+import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
 
 
 const popups = document.querySelectorAll(".popup");
@@ -23,7 +23,7 @@ const image = popupAddCard.querySelector('.popup__item_type_link');
 const caption = popupAddCard.querySelector('.popup__item_type_caption');
 const popupEditAvatar = document.querySelector('.popup_type_avatar');
 const formEditAvatar = document.querySelector('.popup__container_type_edit-avatar');
-const avatar = document.querySelector('.profile__avatar');
+//const avatar = document.querySelector('.profile__avatar');
 const avatarButton = document.querySelector('.profile__edit-avatar-button');
 
 
@@ -32,9 +32,11 @@ const avatarButton = document.querySelector('.profile__edit-avatar-button');
 
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
-    userName.textContent = nameInput.value;
-    userAboutMe.textContent = aboutMeInput.value;
+    editUserInfo(nameInput.value, aboutMeInput.value);
+    //userName.textContent = nameInput.value;
+    //userAboutMe.textContent = aboutMeInput.value;
     closePopup(popupEditProfile);
+    formEditAvatar.reset();
 }
 
 function handleAddCardsFormSubmit(evt){
@@ -49,7 +51,9 @@ function handleAddCardsFormSubmit(evt){
 function handleAvatarFormSubmit(evt){
     evt.preventDefault();
     const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
-    avatar.src = avatarNew.value;
+    editUserAvatar(avatarNew.value);
+   // const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
+   // avatar.src = avatarNew.value;
    // console.log(avatarNew.value);
     closePopup(popupEditAvatar); 
 }
