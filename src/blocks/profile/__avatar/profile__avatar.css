@@ -5,8 +5,13 @@
     align-self: center;
     justify-self: start;
     aspect-ratio: 1/1;
-    
+    cursor: pointer;
+    transition: opacity 0.3s ease;
 }
+
+.profile__avatar:hover {
+    opacity: 0.2;
+  }
 
 @media screen and (max-width:799px) {
     .profile__avatar{

@@ -26,6 +26,7 @@ function createElement(linkValue, captionValue){
     imageElement.addEventListener('click', function(){
         openPopupImage(imageElement)
     });
+  //  console.log('это кардс ' +imageElement);
     return(element);
 }
 
