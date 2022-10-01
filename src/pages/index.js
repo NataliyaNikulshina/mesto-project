@@ -1,7 +1,7 @@
 import './index.css'; 
-//import {addElement, userName, userAboutMe} from '../components/utils.js'; 
+import {loadingForm} from '../components/utils.js'; 
 import {openPopup, closePopup} from '../components/modal.js';
-import {createElement} from '../components/card.js';  
+//import {createElement} from '../components/card.js';  
 //import {initialCards} from '../components/initial-cards.js'; 
 import {enableValidation,validationConfig, handleErrorOpenForm} from '../components/validate.js'; 
 import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
@@ -23,7 +23,6 @@ const image = popupAddCard.querySelector('.popup__item_type_link');
 const caption = popupAddCard.querySelector('.popup__item_type_caption');
 const popupEditAvatar = document.querySelector('.popup_type_avatar');
 const formEditAvatar = document.querySelector('.popup__container_type_edit-avatar');
-//const avatar = document.querySelector('.profile__avatar');
 const avatarButton = document.querySelector('.profile__edit-avatar-button');
 
 
@@ -32,7 +31,8 @@ const avatarButton = document.querySelector('.profile__edit-avatar-button');
 
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
-    editUserInfo(nameInput.value, aboutMeInput.value);
+    loadingForm(true, popupEditProfile);
+    editUserInfo(nameInput.value, aboutMeInput.value, popupEditProfile);
     //userName.textContent = nameInput.value;
     //userAboutMe.textContent = aboutMeInput.value;
     closePopup(popupEditProfile);
@@ -41,7 +41,8 @@ function handleProfileFormSubmit(evt){
 
 function handleAddCardsFormSubmit(evt){
     evt.preventDefault();
-    postNewCards(image.value, caption.value);
+    loadingForm(true, popupAddCard);
+    postNewCards(image.value, caption.value, popupAddCard);
     //createElement(image.value, caption.value);
     //addElement(cardNew);
     closePopup(popupAddCard);
@@ -50,8 +51,9 @@ function handleAddCardsFormSubmit(evt){
 
 function handleAvatarFormSubmit(evt){
     evt.preventDefault();
+    loadingForm(true, popupEditAvatar);
     const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
-    editUserAvatar(avatarNew.value);
+    editUserAvatar(avatarNew.value, popupEditAvatar);
    // const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
    // avatar.src = avatarNew.value;
    // console.log(avatarNew.value);
@@ -112,6 +114,7 @@ formEditAvatar.addEventListener('submit', handleAvatarFormSubmit);
 //добавление новой карточки
 formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
 
+//валидация полей ввода
 enableValidation(validationConfig); 
 
 

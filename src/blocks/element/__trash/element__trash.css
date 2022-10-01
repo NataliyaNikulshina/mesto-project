@@ -11,6 +11,7 @@
     transition: opacity 0.3s ease;
     width: 18px;
     height: 19px;
+    display: none;
 }
 
 .element__trash:hover {

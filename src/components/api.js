@@ -1,43 +1,7 @@
-
-
-/*function checkResponse (res){
-  if (res.ok) {
-    //return res.json();
-    console.log('ляля');
-  }
-  return Promise.reject(`Ошибка: ${res.status} - ${res.statusText}`);
-}
-
-export const api = new Api(function (cohortId, token){
-    return fetch(`https://nomoreparties.co/v1/${cohortId}`, {
-    headers: {
-      authorization: token,
-      'Content-Type': 'application/json',
-    }
-})
-.then((res) => checkResponse(res))
-.then((result) => {
-  console.log(result);
-}); 
-});
-
-
-export const allCards = new GetAllCards (function (cohortId, token) {
-  return fetch(`https://nomoreparties.co/v1/${cohortId}/cards`, {
-    headers: {
-      authorization: token,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify('')
-})
-.then(checkResponse(res))
-.then((result) => {
-  console.log(result);
-}); 
-});*/
 import { createElement} from "./card.js";
-import { addElement,  addAllElements, createUserInfo, userName, userAboutMe} from "./utils.js";
+import { addElement,  addAllElements, createUserInfo, userName, userAboutMe, loadingForm} from "./utils.js";
 const avatar = document.querySelector('.profile__avatar');
+
 
 const api = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-15",
@@ -75,15 +39,16 @@ export function getAllCards() {
     .then((res) => jsonRes(res))
     .then((data) => { 
       data.forEach((card) => {
-        const cardInProfile = createElement(card.link, card.name);
+        const cardInProfile = createElement(card.link, card.name, card._id, card.likes, card.owner);
         addAllElements(cardInProfile);
-      //  console.log(cardInProfile);
+      //  console.log(data);
+      //  console.log(card.likes);
      });
     })
     .catch((err) => console.log('ошибКа' + err));
 }
 
-export function postNewCards(link, name) {
+export function postNewCards(link, name, evt) {
   return fetch(`${api.baseUrl}/cards`, {
     method: "POST",
     headers: api.headers,
@@ -94,14 +59,30 @@ export function postNewCards(link, name) {
   })
   .then((res) => jsonRes(res))
   .then((data) => {
-    //console.log(data);
-    const cardInProfile = createElement(data.link, data.name);
+   // console.log(data);
+    const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner);
     addElement(cardInProfile);
+  })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      loadingForm(false, evt);  
+    });
+}
+
+export function deleteCard(id) {
+  return fetch(`${api.baseUrl}/cards/${id}`, {
+    method: "DELETE",
+    headers: api.headers,
+    })
+  .then((res) => jsonRes(res))
+  .then((data) => {
+    //console.log(data);
+    
   })
     .catch((err) => console.log(err));
 }
 
-export function editUserInfo(name, about) {
+export function editUserInfo(name, about, evt) {
   return fetch(`${api.baseUrl}/users/me`, {
     method: "PATCH",
     headers: api.headers,
@@ -116,10 +97,13 @@ export function editUserInfo(name, about) {
     userName.textContent = data.name;
     userAboutMe.textContent = data.about;
   })
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err))
+    .finally(() => {
+      loadingForm(false, evt);  
+    });;
 }
 
-export function editUserAvatar(link) {
+export function editUserAvatar(link, evt) {
   return fetch(`${api.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: api.headers,
@@ -129,8 +113,37 @@ export function editUserAvatar(link) {
   })
   .then((res) => jsonRes(res))
   .then((data) => {
-    console.log(data);
+   // console.log(data);
     avatar.src = data.link;
   })
+    .catch((err) => console.log(err))
+    .finally(() => {
+      loadingForm(false, evt);  
+    });;
+}
+
+export function addLikes(id) {
+  return fetch(`${api.baseUrl}/cards/likes/${id}`, {
+    method: "PUT",
+    headers: api.headers,
+  })
+  .then((res) => jsonRes(res))
+ // .then((data) => {
+   // console.log(data);
+ //   count.textContent = data.likes.length;
+ // })
+    .catch((err) => console.log(err));
+}
+
+export function deleteLikes(id) {
+  return fetch(`${api.baseUrl}/cards/likes/${id}`, {
+    method: "DELETE",
+    headers: api.headers,
+  })
+  .then((res) => jsonRes(res))
+ // .then((data) => {
+   // console.log(data);
+ //   count.textContent = data.likes.length;
+ // })
     .catch((err) => console.log(err));
 }

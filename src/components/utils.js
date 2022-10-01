@@ -21,4 +21,13 @@ function createUserInfo(name, description, url) {
     userAvatar.src = url;
   }
 
-export {addElement,  addAllElements, removeElement, createUserInfo, userName, userAboutMe};
+function loadingForm(isLoading, evt) {
+    const saveButton = evt.querySelector(".popup__button-save");
+    if (isLoading) {
+        saveButton.textContent = "Сохранение...";
+      } else {
+        saveButton.textContent = "Сохранить";
+      }
+}
+
+export {loadingForm, addElement,  addAllElements, removeElement, createUserInfo, userName, userAboutMe};
