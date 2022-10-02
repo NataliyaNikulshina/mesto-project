@@ -73,11 +73,9 @@ function handleAvatarFormSubmit(evt){
          .finally(() => {
            loadingForm(false, popupEditAvatar);  
          });
-   // const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
-   // avatar.src = avatarNew.value;
-   // console.log(avatarNew.value);
 }
 
+//отрисовка страницы
 Promise.all([getUserInfo(), getAllCards()])
     .then(([profileData, cardsData]) => {
         createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
@@ -87,14 +85,6 @@ Promise.all([getUserInfo(), getAllCards()])
     });
 })
     .catch((err) => console.log('ошибКа' + err));
-//    .catch((err) => console.log(err));
-//добавление 6 карточек на сайт сразу
-//initialCards.forEach(function(card){
-   // const cardInProfile = createElement(card.link, card.name);
-  //  addElement(cardInProfile);
-  //  });  
-  //  getAllCards();
-  //  getUserInfo();
 
 //открыть формы
 editButton.addEventListener('click', function() { 
