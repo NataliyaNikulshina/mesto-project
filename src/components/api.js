@@ -1,8 +1,3 @@
-import { createElement} from "./card.js";
-import { addElement,  addAllElements, createUserInfo, userName, userAboutMe, loadingForm} from "./utils.js";
-
-
-
 const api = {
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-15",
   headers: {
@@ -24,11 +19,7 @@ export function getUserInfo() {
     method: "GET",
     headers: api.headers,
   })
-    .then((res) => checkJson(res))
-    .then((data) => {
-      createUserInfo(data.name, data.about, data.avatar);
-    })
-    .catch((err) => console.log('ошибКа' + err));
+    .then((res) => checkJson(res));
 }
 
 export function getAllCards() {
@@ -36,16 +27,7 @@ export function getAllCards() {
     method: "GET",
     headers: api.headers,
   })
-    .then((res) => checkJson(res))
-    .then((data) => { 
-      data.forEach((card) => {
-        const cardInProfile = createElement(card.link, card.name, card._id, card.likes, card.owner);
-        addAllElements(cardInProfile);
-      //  console.log(data);
-      //  console.log(card.likes);
-     });
-    })
-    .catch((err) => console.log('ошибКа' + err));
+    .then((res) => checkJson(res));
 }
 
 export function postNewCards(link, name) {
@@ -96,12 +78,7 @@ export function addLikes(id) {
     method: "PUT",
     headers: api.headers,
   })
-  .then((res) => checkJson(res))
- // .then((data) => {
-   // console.log(data);
- //   count.textContent = data.likes.length;
- // })
-    .catch((err) => console.log(err));
+  .then((res) => checkJson(res));
 }
 
 export function deleteLikes(id) {
@@ -109,10 +86,5 @@ export function deleteLikes(id) {
     method: "DELETE",
     headers: api.headers,
   })
-  .then((res) => checkJson(res))
- // .then((data) => {
-   // console.log(data);
- //   count.textContent = data.likes.length;
- // })
-    .catch((err) => console.log(err));
+  .then((res) => checkJson(res));
 }

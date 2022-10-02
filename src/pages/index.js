@@ -1,5 +1,5 @@
 import './index.css'; 
-import {loadingForm, addElement, assignUserInfo} from '../components/utils.js'; 
+import {loadingForm, addElement, assignUserInfo, createUserInfo, addAllElements} from '../components/utils.js'; 
 import {openPopup, closePopup} from '../components/modal.js';
 import {createElement} from '../components/card.js';  
 import {enableValidation,validationConfig, handleErrorOpenForm, addButtonDisabled} from '../components/validate.js'; 
@@ -78,18 +78,23 @@ function handleAvatarFormSubmit(evt){
    // console.log(avatarNew.value);
 }
 
-//Promise.all([getUserInfo(), getAllCards()])
-//    .then(([profileData, cardsData]) => {
-              
- //   })
+Promise.all([getUserInfo(), getAllCards()])
+    .then(([profileData, cardsData]) => {
+        createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
+        cardsData.forEach((cards) => {
+            const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner);
+            addAllElements(cardInProfile);     
+    });
+})
+    .catch((err) => console.log('ошибКа' + err));
 //    .catch((err) => console.log(err));
 //добавление 6 карточек на сайт сразу
 //initialCards.forEach(function(card){
    // const cardInProfile = createElement(card.link, card.name);
   //  addElement(cardInProfile);
   //  });  
-    getAllCards();
-    getUserInfo();
+  //  getAllCards();
+  //  getUserInfo();
 
 //открыть формы
 editButton.addEventListener('click', function() { 
@@ -126,6 +131,4 @@ formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
 
 //валидация полей ввода
 enableValidation(validationConfig); 
-
-
 

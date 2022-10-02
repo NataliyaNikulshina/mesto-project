@@ -1,8 +1,8 @@
- import {openPopupImage} from './modal.js'; 
+import {openPopupImage} from './modal.js'; 
+import {Id_user} from './utils.js'; 
 import {addLikes, deleteLikes, deleteCard} from './api.js'; 
 
 const elementsTemplate = document.querySelector('#element-template').content;
-const Id_user = "097ee30ca84baef4ec66561a";
 
 function handleElementLike(count, like, el){
 if (!(like.classList.contains('element__like_active'))){
@@ -11,12 +11,14 @@ if (!(like.classList.contains('element__like_active'))){
             like.classList.toggle('element__like_active');
             count.textContent = res.likes.length;
         })
+        .catch((err) => console.log(err));
    } else {
     deleteLikes(el, count)
     .then(res => {
         like.classList.toggle('element__like_active');
         count.textContent = res.likes.length;
     })
+    .catch((err) => console.log(err));
    }
 }
 
