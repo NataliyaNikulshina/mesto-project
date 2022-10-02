@@ -1,6 +1,6 @@
 import { createElement} from "./card.js";
 import { addElement,  addAllElements, createUserInfo, userName, userAboutMe, loadingForm} from "./utils.js";
-const avatar = document.querySelector('.profile__avatar');
+
 
 
 const api = {
@@ -11,7 +11,7 @@ const api = {
   },
 };
 
-function jsonRes(res) {
+function checkJson(res) {
   if (res.ok) {
     return res.json();
     
@@ -24,7 +24,7 @@ export function getUserInfo() {
     method: "GET",
     headers: api.headers,
   })
-    .then((res) => jsonRes(res))
+    .then((res) => checkJson(res))
     .then((data) => {
       createUserInfo(data.name, data.about, data.avatar);
     })
@@ -36,7 +36,7 @@ export function getAllCards() {
     method: "GET",
     headers: api.headers,
   })
-    .then((res) => jsonRes(res))
+    .then((res) => checkJson(res))
     .then((data) => { 
       data.forEach((card) => {
         const cardInProfile = createElement(card.link, card.name, card._id, card.likes, card.owner);
@@ -48,7 +48,7 @@ export function getAllCards() {
     .catch((err) => console.log('ошибКа' + err));
 }
 
-export function postNewCards(link, name, evt) {
+export function postNewCards(link, name) {
   return fetch(`${api.baseUrl}/cards`, {
     method: "POST",
     headers: api.headers,
@@ -57,16 +57,7 @@ export function postNewCards(link, name, evt) {
       link: link,
     })
   })
-  .then((res) => jsonRes(res))
-  .then((data) => {
-   // console.log(data);
-    const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner);
-    addElement(cardInProfile);
-  })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      loadingForm(false, evt);  
-    });
+  .then((res) => checkJson(res));
 }
 
 export function deleteCard(id) {
@@ -74,15 +65,10 @@ export function deleteCard(id) {
     method: "DELETE",
     headers: api.headers,
     })
-  .then((res) => jsonRes(res))
-  .then((data) => {
-    //console.log(data);
-    
-  })
-    .catch((err) => console.log(err));
+  .then((res) => checkJson(res))
 }
 
-export function editUserInfo(name, about, evt) {
+export function editUserInfo(name, about) {
   return fetch(`${api.baseUrl}/users/me`, {
     method: "PATCH",
     headers: api.headers,
@@ -91,19 +77,10 @@ export function editUserInfo(name, about, evt) {
       about: about,
     })
   })
-  .then((res) => jsonRes(res))
-  .then((data) => {
-    //console.log(data);
-    userName.textContent = data.name;
-    userAboutMe.textContent = data.about;
-  })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      loadingForm(false, evt);  
-    });;
+  .then((res) => checkJson(res));
 }
 
-export function editUserAvatar(link, evt) {
+export function editUserAvatar(link) {
   return fetch(`${api.baseUrl}/users/me/avatar`, {
     method: "PATCH",
     headers: api.headers,
@@ -111,15 +88,7 @@ export function editUserAvatar(link, evt) {
       avatar: link,
     })
   })
-  .then((res) => jsonRes(res))
-  .then((data) => {
-   // console.log(data);
-    avatar.src = data.link;
-  })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      loadingForm(false, evt);  
-    });;
+  .then((res) => checkJson(res));
 }
 
 export function addLikes(id) {
@@ -127,7 +96,7 @@ export function addLikes(id) {
     method: "PUT",
     headers: api.headers,
   })
-  .then((res) => jsonRes(res))
+  .then((res) => checkJson(res))
  // .then((data) => {
    // console.log(data);
  //   count.textContent = data.likes.length;
@@ -140,7 +109,7 @@ export function deleteLikes(id) {
     method: "DELETE",
     headers: api.headers,
   })
-  .then((res) => jsonRes(res))
+  .then((res) => checkJson(res))
  // .then((data) => {
    // console.log(data);
  //   count.textContent = data.likes.length;

@@ -1,18 +1,14 @@
 import './index.css'; 
-import {loadingForm} from '../components/utils.js'; 
+import {loadingForm, addElement, assignUserInfo} from '../components/utils.js'; 
 import {openPopup, closePopup} from '../components/modal.js';
-//import {createElement} from '../components/card.js';  
-//import {initialCards} from '../components/initial-cards.js'; 
-import {enableValidation,validationConfig, handleErrorOpenForm} from '../components/validate.js'; 
+import {createElement} from '../components/card.js';  
+import {enableValidation,validationConfig, handleErrorOpenForm, addButtonDisabled} from '../components/validate.js'; 
 import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
 
-
-const popups = document.querySelectorAll(".popup");
 const editButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_add');
 const addButton = document.querySelector('.profile__add-button');
-const closeButtons = document.querySelectorAll('.popup__button-close');
 const formEditProfile = document.querySelector('.popup__container_type_edit-profile');
 const formAddCards = document.querySelector('.popup__container_type_add-cards');
 const nameInput = document.querySelector('.popup__item_type_name');
@@ -21,10 +17,14 @@ const newName = document.querySelector('.profile__nickname');
 const newAboutMe = document.querySelector('.profile__about-me');
 const image = popupAddCard.querySelector('.popup__item_type_link');
 const caption = popupAddCard.querySelector('.popup__item_type_caption');
+const avatar = document.querySelector('.profile__avatar');
 const popupEditAvatar = document.querySelector('.popup_type_avatar');
 const formEditAvatar = document.querySelector('.popup__container_type_edit-avatar');
 const avatarButton = document.querySelector('.profile__edit-avatar-button');
-
+const buttonSaveCard = document.querySelector('.popup__button-save_type_add-cards');
+const buttonSaveAvatar = document.querySelector('.popup__button-save_type_edit-avatar');
+const buttonSaveProfile = document.querySelector('.popup__button-save_type_edit-profile');
+const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
 
 
 
@@ -32,34 +32,57 @@ const avatarButton = document.querySelector('.profile__edit-avatar-button');
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupEditProfile);
-    editUserInfo(nameInput.value, aboutMeInput.value, popupEditProfile);
-    //userName.textContent = nameInput.value;
-    //userAboutMe.textContent = aboutMeInput.value;
-    closePopup(popupEditProfile);
-    formEditAvatar.reset();
+    editUserInfo(nameInput.value, aboutMeInput.value)
+    .then((data) => {
+        //console.log(data);
+        assignUserInfo(data.name, data.about);
+        closePopup(popupEditProfile);
+      })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          loadingForm(false, popupEditProfile);  
+        });
 }
 
 function handleAddCardsFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupAddCard);
-    postNewCards(image.value, caption.value, popupAddCard);
-    //createElement(image.value, caption.value);
-    //addElement(cardNew);
-    closePopup(popupAddCard);
-    formAddCards.reset();
+    postNewCards(image.value, caption.value)
+    .then((data) => {
+        // console.log(data);
+         const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner);
+         addElement(cardInProfile);
+         closePopup(popupAddCard);
+       })
+    .catch((err) => console.log(err))
+    .finally(() => {
+        loadingForm(false, popupAddCard);  
+    });
 }
 
 function handleAvatarFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupEditAvatar);
-    const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
-    editUserAvatar(avatarNew.value, popupEditAvatar);
+    editUserAvatar(avatarNew.value)
+    .then((data) => {
+         //console.log(data);
+         avatar.src = data.avatar;
+         closePopup(popupEditAvatar); 
+       })
+         .catch((err) => console.log(err))
+         .finally(() => {
+           loadingForm(false, popupEditAvatar);  
+         });
    // const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
    // avatar.src = avatarNew.value;
    // console.log(avatarNew.value);
-    closePopup(popupEditAvatar); 
 }
 
+//Promise.all([getUserInfo(), getAllCards()])
+//    .then(([profileData, cardsData]) => {
+              
+ //   })
+//    .catch((err) => console.log(err));
 //добавление 6 карточек на сайт сразу
 //initialCards.forEach(function(card){
    // const cardInProfile = createElement(card.link, card.name);
@@ -73,37 +96,24 @@ editButton.addEventListener('click', function() {
     openPopup(popupEditProfile);
     nameInput.value = newName.textContent;
     aboutMeInput.value = newAboutMe.textContent;
+    addButtonDisabled(buttonSaveProfile);
     handleErrorOpenForm(popupEditProfile);
 });
 
 addButton.addEventListener('click', () => {
     openPopup(popupAddCard);
     formAddCards.reset();
+    addButtonDisabled(buttonSaveCard);
     handleErrorOpenForm(popupAddCard);
 });
 
 avatarButton.addEventListener('click', () => {
     openPopup(popupEditAvatar);
     formEditAvatar.reset();
+    addButtonDisabled(buttonSaveAvatar);
     handleErrorOpenForm(popupEditAvatar);
 });
 
-
-//закрытие форм по кнопке "Закрыть" 
-closeButtons.forEach((btn) =>  
-    btn.addEventListener('click', (evt) =>  
-closePopup(evt.target.closest('.popup')) 
-)); 
-
-//закрытие формы по клику на оверлей
-popups.forEach(function(popup) {
-    popup.addEventListener('mouseup', function(evt){
-    if(evt.target.classList.contains('popup')){
-       // console.log(evt.target);
-       // console.log(evt.target.closest('.popup'));
-        closePopup(evt.target.closest('.popup'));}
-    });
-});
 
 //редактировать профиль 
 formEditProfile.addEventListener('submit', handleProfileFormSubmit);

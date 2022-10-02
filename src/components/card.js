@@ -1,5 +1,4 @@
-import {removeElement} from './utils.js'; 
-import {openPopupImage} from './modal.js'; 
+ import {openPopupImage} from './modal.js'; 
 import {addLikes, deleteLikes, deleteCard} from './api.js'; 
 
 const elementsTemplate = document.querySelector('#element-template').content;
@@ -22,8 +21,16 @@ if (!(like.classList.contains('element__like_active'))){
 }
 
 function handleElementDelete(del, el){
-    deleteCard(el);
-    removeElement(del.closest('.element'))
+    deleteCard(el)
+        .then((data) => {
+            //console.log(data);
+            removeElement(del.closest('.element'))
+        })
+        .catch((err) => console.log(err));  
+}
+
+function removeElement(element){
+    element.remove();
 }
 
 //создание новой карточки

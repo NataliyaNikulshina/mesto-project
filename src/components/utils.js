@@ -11,14 +11,17 @@ function addAllElements(element){
     elementsContainer.append(element);
 }
 
-function removeElement(element){
-    element.remove();
-}
+
 
 function createUserInfo(name, description, url) {
     userName.textContent = name;
     userAboutMe.textContent = description;
     userAvatar.src = url;
+  }
+
+function assignUserInfo(name, about) {
+    userName.textContent = name;
+    userAboutMe.textContent = about;
   }
 
 function loadingForm(isLoading, evt) {
@@ -30,4 +33,4 @@ function loadingForm(isLoading, evt) {
       }
 }
 
-export {loadingForm, addElement,  addAllElements, removeElement, createUserInfo, userName, userAboutMe};
+export {loadingForm, addElement,  addAllElements, createUserInfo, assignUserInfo, userName, userAboutMe};
