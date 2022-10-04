@@ -1,4 +1,4 @@
-import {openPopupImage} from './modal.js'; 
+
 import {Id_user} from './utils.js'; 
 import {addLikes, deleteLikes, deleteCard} from './api.js'; 
 
@@ -36,7 +36,7 @@ function removeElement(element){
 }
 
 //создание новой карточки
-function createElement(linkValue, captionValue, idValue, likesValue, ownerValue){
+function createElement(linkValue, captionValue, idValue, likesValue, ownerValue, openPopupImage){
     const element = elementsTemplate.querySelector('.element').cloneNode(true);
     const imageElement = element.querySelector('.element__image');
     const countLike = element.querySelector('.element__like-count');

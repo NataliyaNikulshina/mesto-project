@@ -25,6 +25,9 @@ const buttonSaveCard = document.querySelector('.popup__button-save_type_add-card
 const buttonSaveAvatar = document.querySelector('.popup__button-save_type_edit-avatar');
 const buttonSaveProfile = document.querySelector('.popup__button-save_type_edit-profile');
 const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
+const popupImage = document.querySelector('.popup_type_image');
+const imageInPopup = popupImage.querySelector('.popup__image'); 
+const altImage = popupImage.querySelector('.popup__caption');
 
 
 
@@ -50,7 +53,7 @@ function handleAddCardsFormSubmit(evt){
     postNewCards(image.value, caption.value)
     .then((data) => {
         // console.log(data);
-         const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner);
+         const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner, openPopupImage);
          addElement(cardInProfile);
          closePopup(popupAddCard);
        })
@@ -75,12 +78,20 @@ function handleAvatarFormSubmit(evt){
          });
 }
 
+//открытие формы с картинкой
+function openPopupImage(img){
+    openPopup(popupImage);
+    imageInPopup.src = img.src;
+    imageInPopup.alt = img.alt;
+    altImage.textContent = img.alt;
+}
+
 //отрисовка страницы
 Promise.all([getUserInfo(), getAllCards()])
     .then(([profileData, cardsData]) => {
         createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
         cardsData.forEach((cards) => {
-            const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner);
+            const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner, openPopupImage);
             addAllElements(cardInProfile);     
     });
 })

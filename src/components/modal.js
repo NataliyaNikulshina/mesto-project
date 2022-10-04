@@ -1,6 +1,3 @@
-const popupImage = document.querySelector('.popup_type_image');
-const imageInPopup = popupImage.querySelector('.popup__image'); 
-const altImage = popupImage.querySelector('.popup__caption');
 const closeButtons = document.querySelectorAll('.popup__button-close');
 const popups = document.querySelectorAll(".popup");
 
@@ -39,12 +36,5 @@ popups.forEach(function(popup) {
     });
 });
 
-//открытие формы с картинкой (будет вызываться из card.js, в index.js нельзя размещать)
-function openPopupImage(img){
-    openPopup(popupImage);
-    imageInPopup.src = img.src;
-    imageInPopup.alt = img.alt;
-    altImage.textContent = img.alt;
-}
 
-export {openPopup, closePopup, openPopupImage};
+export {openPopup, closePopup};
