@@ -22,10 +22,6 @@ JavaScript | HTML5 | CSS3 | БЭМ / файловая структура в со
 * [Ссылка на макет в Figma-2](https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1)
 
 
-**Планы по доработке**
-
-С помощью JavaScript:
-* Осуществить взаимодействие сайта с сервером
 
 
 
