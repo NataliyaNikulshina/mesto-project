@@ -14,7 +14,7 @@ https://nataliyanikulshina.github.io/mesto-project/
 
 **Технологии**
 
-JavaScript | HTML5 | CSS3 | БЭМ / файловая структура в соответствии с Nested БЭМ | адаптивная верстка | Grid Layout и Flexbox-верстка | CSS - animation | Разметка и верстка форм на стороне пользователя | Webpack
+JavaScript | HTML5 | CSS3 | БЭМ / файловая структура в соответствии с Nested БЭМ | адаптивная верстка | Grid Layout и Flexbox-верстка | CSS - animation | Разметка и верстка форм на стороне пользователя | сборка проекта с Webpack | Валидация | Модульность | Асинхронный код | API
 
 **Figma**
 
