@@ -1,6 +1,6 @@
 
 import {Id_user} from './utils.js'; 
-import {Api} from './api.js'; 
+import Api from './api.js'; 
 
 const api = new Api();
 
