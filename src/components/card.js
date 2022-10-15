@@ -1,19 +1,21 @@
 
 import {Id_user} from './utils.js'; 
-import {addLikes, deleteLikes, deleteCard} from './api.js'; 
+import {Api} from './api.js'; 
+
+const api = new Api();
 
 const elementsTemplate = document.querySelector('#element-template').content;
 
 function handleElementLike(count, like, el){
 if (!(like.classList.contains('element__like_active'))){
-    addLikes(el, count)
+    api.addLike(el, count)
         .then(res => {
             like.classList.toggle('element__like_active');
             count.textContent = res.likes.length;
         })
         .catch((err) => console.log(err));
    } else {
-    deleteLikes(el, count)
+    api.delLike(el, count)
     .then(res => {
         like.classList.toggle('element__like_active');
         count.textContent = res.likes.length;
@@ -23,7 +25,7 @@ if (!(like.classList.contains('element__like_active'))){
 }
 
 function handleElementDelete(del, el){
-    deleteCard(el)
+    api.deleteCard(el)
         .then((data) => {
             //console.log(data);
             removeElement(del.closest('.element'))

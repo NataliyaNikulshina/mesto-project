@@ -1,90 +1,76 @@
-const api = {
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-15",
-  headers: {
-    authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
-    "Content-Type": "application/json",
-  },
-};
-
-function checkJson(res) {
-  if (res.ok) {
-    return res.json();
-    
+export default class Api {
+  constructor() {
+    this._baseUrl = "https://nomoreparties.co/v1/plus-cohort-15/";
+    this._headers = {
+      authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
+      "Content-Type": "application/json",
+    }
+    this._mGet = 'GET';
+    this._mPut = 'PUT';
+    this._mPost = 'POST';
+    this._mPatch = 'PATCH';
+    this._mDel = 'DELETE';
   }
-  return Promise.reject(`Error: ${res.status}`);
-}
 
-export function getUserInfo() {
-  return fetch(`${api.baseUrl}/users/me`, {
-    method: "GET",
-    headers: api.headers,
-  })
-    .then((res) => checkJson(res));
-}
+  _checkJson(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`There is an error: ${res.status}`);
+  }
 
-export function getAllCards() {
-  return fetch(`${api.baseUrl}/cards`, {
-    method: "GET",
-    headers: api.headers,
-  })
-    .then((res) => checkJson(res));
-}
+  _require(url, method, {data}) {
+    if (method === 'GET' || method === 'DELETE'|| method === 'PUT') {
+      return fetch(`${this._baseUrl}${url}`, {
+        method: method,
+        headers: this._headers
+      }).then(this._checkJson)
+    } else {
+      return fetch(`${this._baseUrl}${url}`, {
+        method: method,
+        headers: this._headers,
+        body: JSON.stringify({
+          name: data.name,
+          link: data.link,
+          avatar: data.avatar,
+          about: data.about
+        })
+      }).then(this._checkJson)
+    }
+  }
 
-export function postNewCards(link, name) {
-  return fetch(`${api.baseUrl}/cards`, {
-    method: "POST",
-    headers: api.headers,
-    body: JSON.stringify({
-      name: name,
-      link: link,
-    })
-  })
-  .then((res) => checkJson(res));
-}
+  getUserInfo() {
+    return this._require('users/me', this._mGet, {})
+  }
 
-export function deleteCard(id) {
-  return fetch(`${api.baseUrl}/cards/${id}`, {
-    method: "DELETE",
-    headers: api.headers,
-    })
-  .then((res) => checkJson(res))
-}
+  getStartCards() {
+    return this._require('cards', this._mGet, {})
+  }
 
-export function editUserInfo(name, about) {
-  return fetch(`${api.baseUrl}/users/me`, {
-    method: "PATCH",
-    headers: api.headers,
-    body: JSON.stringify({
-      name: name,
-      about: about,
-    })
-  })
-  .then((res) => checkJson(res));
-}
+  deleteCard(id) {
+    return this._require(`cards/${id}`, this._mDel, {})
+  }
 
-export function editUserAvatar(link) {
-  return fetch(`${api.baseUrl}/users/me/avatar`, {
-    method: "PATCH",
-    headers: api.headers,
-    body: JSON.stringify({
-      avatar: link,
-    })
-  })
-  .then((res) => checkJson(res));
-}
+  addLike(id) {
+    return this._require(`cards/likes/${id}`, this._mPut, {})
+  }
 
-export function addLikes(id) {
-  return fetch(`${api.baseUrl}/cards/likes/${id}`, {
-    method: "PUT",
-    headers: api.headers,
-  })
-  .then((res) => checkJson(res));
-}
+  delLike(id) {
+    return this._require(`cards/likes/${id}`, this._mDel, {})
+  }
 
-export function deleteLikes(id) {
-  return fetch(`${api.baseUrl}/cards/likes/${id}`, {
-    method: "DELETE",
-    headers: api.headers,
-  })
-  .then((res) => checkJson(res));
+  postNewCard(name, link) {
+    const data = {name: name, link: link};
+    return this._require('cards', this._mPost, {data})
+  }
+
+  editUserInfo(name, about) {
+    const data = {name: name, about: about}
+    return this._require('users/me', this._mPatch, {data})
+  }
+
+  editUserAvatar(avatar) {
+    const data = {avatar: avatar};
+    return this._require('users/me/avatar', this._mPatch, {data})
+  }
 }
