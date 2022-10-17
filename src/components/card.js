@@ -2,7 +2,13 @@
 import {Id_user} from './utils.js'; 
 import Api from './api.js'; 
 
-const api = new Api();
+const api = new Api({
+    baseUrl: "https://nomoreparties.co/v1/plus-cohort-15/",
+    headers: {
+      authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
+      "Content-Type": "application/json",
+    }
+  });
 
 const elementsTemplate = document.querySelector('#element-template').content;
 

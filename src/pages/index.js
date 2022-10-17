@@ -50,7 +50,13 @@ const popupImage = document.querySelector(".popup_type_image");
 const imageInPopup = popupImage.querySelector(".popup__image");
 const altImage = popupImage.querySelector(".popup__caption");
 
-const api = new Api();
+const api = new Api({
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-15/",
+  headers: {
+    authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
+    "Content-Type": "application/json",
+  }
+});
 
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
@@ -72,7 +78,7 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
       addAllElements(cardInProfile);
     });
   })
-  .catch((err) => console.log("ошибКа" + err));
+  .catch((err) => console.log("ошибКа111" + err));
 
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();

@@ -1,10 +1,7 @@
 export default class Api {
-  constructor() {
-    this._baseUrl = "https://nomoreparties.co/v1/plus-cohort-15/";
-    this._headers = {
-      authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
-      "Content-Type": "application/json",
-    }
+  constructor({baseUrl, headers}) {
+    this._baseUrl = baseUrl; 
+    this._headers = headers; 
     this._mGet = 'GET';
     this._mPut = 'PUT';
     this._mPost = 'POST';
@@ -21,6 +18,7 @@ export default class Api {
 
   _require(url, method, {data}) {
     if (method === 'GET' || method === 'DELETE'|| method === 'PUT') {
+      console.log(`${this._baseUrl}${url}`)
       return fetch(`${this._baseUrl}${url}`, {
         method: method,
         headers: this._headers

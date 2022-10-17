@@ -7,7 +7,7 @@
     grid-column: 2;
     grid-row: 2;
     cursor: pointer;
-    transition: opacity 0.3s ease;
+    transition: background-image 0.3s ease;
     width: 22px;
     height: 19px;
 }
@@ -16,7 +16,7 @@
     opacity: 0.5;
   }
 
-.element__like:active {
+/* .element__like:active {
     opacity: 1;
     background-image: url(../../../images/Like_black.svg);
-  }
+  } */
