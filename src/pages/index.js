@@ -4,6 +4,7 @@ import {openPopup, closePopup} from '../components/modal.js';
 import {createElement} from '../components/card.js';  
 import {enableValidation,validationConfig, handleErrorOpenForm, addButtonDisabled} from '../components/validate.js'; 
 import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
+import Card from "../components/card.js";
 
 const editButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
@@ -30,7 +31,13 @@ const imageInPopup = popupImage.querySelector('.popup__image');
 const altImage = popupImage.querySelector('.popup__caption');
 
 
-
+const createCard = (data) => {
+    const card = new Card({
+      data: data,
+      elementsTemplate: '#element-template',
+      userId: userId,
+    })
+};
 
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
