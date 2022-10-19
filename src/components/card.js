@@ -18,7 +18,7 @@ export default class Card {
       .content
       .querySelector('.element')
       .cloneNode(true);
-
+      
       return this.element;
    }
 
@@ -30,7 +30,7 @@ export default class Card {
    handleElementDelete(del, el){
     deleteCard(el)
         .then((data) => {
-            //console.log(data);
+            console.log('remove' + data);
             removeElement(del.closest('.element'))
         })
         .catch((err) => console.log(err));  
@@ -56,6 +56,7 @@ export default class Card {
 
    createCard(){
     this._card = this.element;
+    console.log(this._card);
     this._imageElement = element.querySelector('.element__image');
     this._countLike = element.querySelector('.element__like-count');
     this._buttonLike = element.querySelector('.element__like');
@@ -65,9 +66,10 @@ export default class Card {
     this._imageElement.alt = this._name;
     this._countLike.textContent = this._likes.length;
     this._cardHeading.textContent = this._name;
-    this._setButtonTrashState();
-    this._setLikeState();
-    this._setEventListeners();
+   // this._setButtonTrashState();
+   // this._setLikeState();
+  //  this._setEventListeners();
+    console.log(this._card);
     return this._card;
    }
 

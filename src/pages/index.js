@@ -29,15 +29,16 @@ const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
 const popupImage = document.querySelector('.popup_type_image');
 const imageInPopup = popupImage.querySelector('.popup__image'); 
 const altImage = popupImage.querySelector('.popup__caption');
+const cardTemplateSelector = document.querySelector('#element-template');
 
 
-const createCard = (data) => {
+/*const createCard = (data) => {
     const card = new Card({
       data: data,
       elementsTemplate: '#element-template',
       userId: userId,
     })
-};
+};*/
 
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
@@ -59,6 +60,32 @@ function handleAddCardsFormSubmit(evt){
     loadingForm(true, popupAddCard);
     postNewCards(image.value, caption.value)
     .then((data) => {
+         console.log('123' + data);
+         console.log(cardInProfile);
+         addElement(cardInProfile);
+         closePopup(popupAddCard);
+       })
+    .catch((err) => console.log(err))
+    .finally(() => {
+        loadingForm(false, popupAddCard);  
+    });
+}
+
+const cardInProfile = new Card (data, cardTemplateSelector, {
+    handleCardClick: data => openPopupImage(data),
+    handleElementDelete: () => {
+      currentCard = card;
+      popupWithConfirm.open(data._id);
+    },
+    handleElementLike: () => handleElementLike(card, data)
+  });
+
+
+/*  function handleAddCardsFormSubmit(evt){
+    evt.preventDefault();
+    loadingForm(true, popupAddCard);
+    postNewCards(image.value, caption.value)
+    .then((data) => {
         // console.log(data);
          const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner, openPopupImage);
          addElement(cardInProfile);
@@ -69,6 +96,19 @@ function handleAddCardsFormSubmit(evt){
         loadingForm(false, popupAddCard);  
     });
 }
+
+const createNewCard = data => {
+    const card = new Card(data, cardTemplateSelector, {
+      handleCardClick: data => openPopupImage(data),
+      handleElementDelete: () => {
+        currentCard = card;
+        popupWithConfirm.open(data._id);
+      },
+      handleElementLike: () => handleElementLike(card, data)
+    });
+    return card;
+  };*/
+
 
 function handleAvatarFormSubmit(evt){
     evt.preventDefault();
@@ -97,10 +137,13 @@ function openPopupImage(img){
 Promise.all([getUserInfo(), getAllCards()])
     .then(([profileData, cardsData]) => {
         createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
-        cardsData.forEach((cards) => {
-            const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner, openPopupImage);
-            addAllElements(cardInProfile);     
-    });
+        //cardsData.forEach((cards) => {
+          //  const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner, openPopupImage);
+          
+            console.log(cardsData);
+          addAllElements(cardInProfile);    
+         // console.log(cards); 
+   // });
 })
     .catch((err) => console.log('ошибКа' + err));
 
