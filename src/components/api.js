@@ -18,7 +18,6 @@ export default class Api {
 
   _require(url, method, {data}) {
     if (method === 'GET' || method === 'DELETE'|| method === 'PUT') {
-      console.log(`${this._baseUrl}${url}`)
       return fetch(`${this._baseUrl}${url}`, {
         method: method,
         headers: this._headers
