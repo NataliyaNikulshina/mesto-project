@@ -1,10 +1,13 @@
 import './index.css'; 
 import {loadingForm, addElement, assignUserInfo, createUserInfo, addAllElements} from '../components/utils.js'; 
 import {openPopup, closePopup} from '../components/modal.js';
-import {createElement} from '../components/card.js';  
+//import {createElement} from '../components/card.js';  
 import {enableValidation,validationConfig, handleErrorOpenForm, addButtonDisabled} from '../components/validate.js'; 
-import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
+//import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
 import Card from "../components/card.js";
+import Api from "../components/api.js";
+import Section from "../components/Section.js";
+import {Id_user} from '../components/utils.js'; 
 
 const editButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
@@ -30,6 +33,7 @@ const popupImage = document.querySelector('.popup_type_image');
 const imageInPopup = popupImage.querySelector('.popup__image'); 
 const altImage = popupImage.querySelector('.popup__caption');
 const cardTemplateSelector = document.querySelector('#element-template');
+const cardContainer = document.querySelector('.elements');
 
 
 /*const createCard = (data) => {
@@ -43,7 +47,7 @@ const cardTemplateSelector = document.querySelector('#element-template');
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupEditProfile);
-    editUserInfo(nameInput.value, aboutMeInput.value)
+    api.editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
         //console.log(data);
         assignUserInfo(data.name, data.about);
@@ -58,7 +62,7 @@ function handleProfileFormSubmit(evt){
 function handleAddCardsFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupAddCard);
-    postNewCards(image.value, caption.value)
+    api.postNewCard(caption.value, image.value)
     .then((data) => {
          console.log('123' + data);
          console.log(cardInProfile);
@@ -71,14 +75,49 @@ function handleAddCardsFormSubmit(evt){
     });
 }
 
-const cardInProfile = new Card (data, cardTemplateSelector, {
-    handleCardClick: data => openPopupImage(data),
-    handleElementDelete: () => {
-      currentCard = card;
-      popupWithConfirm.open(data._id);
+const api = new Api({
+  baseUrl: "https://nomoreparties.co/v1/plus-cohort-15/",
+  headers: {
+    authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
+    "Content-Type": "application/json",
+  }
+});
+
+/*const card = new Section ({
+  data: cardsData,
+  renderer: (item) => {
+    const newCard = new Card ({
+      data:item,
+      handleAddLike: (id, count, like) => {
+      api.addLikes(id)
+      .then(res => {
+          like.classList.toggle('element__like_active');
+          count.textContent = res.likes.length;
+      })
+      .catch((err) => console.log(err));
     },
-    handleElementLike: () => handleElementLike(card, data)
-  });
+      handleDelLike: (id, count, like) => {
+        api.deleteLikes(id)
+        .then(res => {
+            like.classList.toggle('element__like_active');
+            count.textContent = res.likes.length;
+        })
+        .catch((err) => console.log(err));
+      },
+      handleDelCard: (id, card) => {
+        api.deleteCard(id)
+        .then((data) => {
+            console.log('remove' + data);
+            card.remove();
+        })
+        .catch((err) => console.log(err));  
+      },
+      cardTemplateSelector
+    })
+    const cardElement = newCard.createCard(userId);
+    card.setItem(cardElement);
+  }
+  });*/
 
 
 /*  function handleAddCardsFormSubmit(evt){
@@ -113,7 +152,7 @@ const createNewCard = data => {
 function handleAvatarFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupEditAvatar);
-    editUserAvatar(avatarNew.value)
+    api.editUserAvatar(avatarNew.value)
     .then((data) => {
          //console.log(data);
          avatar.src = data.avatar;
@@ -134,16 +173,56 @@ function openPopupImage(img){
 }
 
 //отрисовка страницы
-Promise.all([getUserInfo(), getAllCards()])
+Promise.all([api.getUserInfo(), api.getStartCards()])
     .then(([profileData, cardsData]) => {
-        createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
-        //cardsData.forEach((cards) => {
+      createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
+      //  cardsData.forEach((cards) => {
           //  const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner, openPopupImage);
           
-            console.log(cardsData);
-          addAllElements(cardInProfile);    
+           // console.log(cardsData, profileData._id);
+          const userId = profileData._id;
+         // console.log(userId);
+        //  addAllElements(cardsData);    
          // console.log(cards); 
    // });
+   const card = new Section ({
+    data: cardsData,
+    renderer: (item) => {
+      const newCard = new Card ({
+        data:item,
+        handleAddLike: (id, count, like) => {
+        api.addLike(id)
+        .then(res => {
+            like.classList.toggle('element__like_active');
+            count.textContent = res.likes.length;
+        })
+        .catch((err) => console.log(err));
+      },
+        handleDelLike: (id, count, like) => {
+          api.delLike(id)
+          .then(res => {
+              like.classList.toggle('element__like_active');
+              count.textContent = res.likes.length;
+          })
+          .catch((err) => console.log(err));
+        },
+        handleDelCard: (id, card) => {
+          api.deleteCard(id)
+          .then((data) => {
+              card.remove();
+          })
+          .catch((err) => console.log(err));  
+        }
+      },
+      cardTemplateSelector
+      );
+      const cardElement = newCard.createCard(userId); 
+      card.setItem(cardElement);
+    }
+    },
+    cardContainer
+    );
+    card.rendererItems();
 })
     .catch((err) => console.log('ошибКа' + err));
 
