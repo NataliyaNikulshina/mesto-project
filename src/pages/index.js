@@ -1,9 +1,9 @@
 import './index.css'; 
-import {loadingForm, addElement, assignUserInfo, createUserInfo, addAllElements} from '../components/utils.js'; 
-import {openPopup, closePopup} from '../components/modal.js';
+import {loadingForm, addElement, assignUserInfo, createUserInfo, addAllElements} from '../components/utils.js';
 import {createElement} from '../components/card.js';  
 import {enableValidation,validationConfig, handleErrorOpenForm, addButtonDisabled} from '../components/validate.js'; 
-import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
+import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js';
+import Popup from '../components/Popup.js';
 
 const editButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
@@ -30,6 +30,12 @@ const imageInPopup = popupImage.querySelector('.popup__image');
 const altImage = popupImage.querySelector('.popup__caption');
 
 
+//constants of Popup Class
+const editPopup = new Popup(popupEditProfile);
+const addPopup = new Popup(popupAddCard);
+const avatarPopup = new Popup(popupEditAvatar);
+
+
 
 
 function handleProfileFormSubmit(evt){
@@ -37,9 +43,8 @@ function handleProfileFormSubmit(evt){
     loadingForm(true, popupEditProfile);
     editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
-        //console.log(data);
         assignUserInfo(data.name, data.about);
-        closePopup(popupEditProfile);
+        editPopup.close();
       })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -52,10 +57,9 @@ function handleAddCardsFormSubmit(evt){
     loadingForm(true, popupAddCard);
     postNewCards(image.value, caption.value)
     .then((data) => {
-        // console.log(data);
          const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner, openPopupImage);
          addElement(cardInProfile);
-         closePopup(popupAddCard);
+         addPopup.close();
        })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -63,14 +67,15 @@ function handleAddCardsFormSubmit(evt){
     });
 }
 
+
+
 function handleAvatarFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupEditAvatar);
     editUserAvatar(avatarNew.value)
     .then((data) => {
-         //console.log(data);
          avatar.src = data.avatar;
-         closePopup(popupEditAvatar); 
+         editPopup.close();
        })
          .catch((err) => console.log(err))
          .finally(() => {
@@ -97,9 +102,11 @@ Promise.all([getUserInfo(), getAllCards()])
 })
     .catch((err) => console.log('ошибКа' + err));
 
+
+
 //открыть формы
-editButton.addEventListener('click', function() { 
-    openPopup(popupEditProfile);
+editButton.addEventListener('click', function() {
+    editPopup.open();
     nameInput.value = newName.textContent;
     aboutMeInput.value = newAboutMe.textContent;
     addButtonDisabled(buttonSaveProfile);
@@ -107,14 +114,14 @@ editButton.addEventListener('click', function() {
 });
 
 addButton.addEventListener('click', () => {
-    openPopup(popupAddCard);
+    addPopup.open();
     formAddCards.reset();
     addButtonDisabled(buttonSaveCard);
     handleErrorOpenForm(popupAddCard);
 });
 
 avatarButton.addEventListener('click', () => {
-    openPopup(popupEditAvatar);
+    avatarPopup.open();
     formEditAvatar.reset();
     addButtonDisabled(buttonSaveAvatar);
     handleErrorOpenForm(popupEditAvatar);
@@ -133,3 +140,7 @@ formAddCards.addEventListener('submit', handleAddCardsFormSubmit);
 //валидация полей ввода
 enableValidation(validationConfig); 
 
+//eventListeners of Popup Class' constants
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+avatarPopup.setEventListeners();
