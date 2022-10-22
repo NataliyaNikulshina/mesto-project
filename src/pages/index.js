@@ -15,42 +15,9 @@ import {
 } from "../components/validate.js";
 import Api from "../components/api.js";
 import Popup from "../components/Popup.js";
-
-const editButton = document.querySelector(".profile__edit-button");
-const popupEditProfile = document.querySelector(".popup_type_edit");
-const popupAddCard = document.querySelector(".popup_type_add");
-const addButton = document.querySelector(".profile__add-button");
-const formEditProfile = document.querySelector(
-  ".popup__container_type_edit-profile"
-);
-const formAddCards = document.querySelector(".popup__container_type_add-cards");
-const nameInput = document.querySelector(".popup__item_type_name");
-const aboutMeInput = document.querySelector(".popup__item_type_about-me");
-const newName = document.querySelector(".profile__nickname");
-const newAboutMe = document.querySelector(".profile__about-me");
-const image = popupAddCard.querySelector(".popup__item_type_link");
-const caption = popupAddCard.querySelector(".popup__item_type_caption");
-const avatar = document.querySelector(".profile__avatar");
-const popupEditAvatar = document.querySelector(".popup_type_avatar");
-const formEditAvatar = document.querySelector(
-  ".popup__container_type_edit-avatar"
-);
-const avatarButton = document.querySelector(".profile__edit-avatar-button");
-const buttonSaveCard = document.querySelector(
-  ".popup__button-save_type_add-cards"
-);
-const buttonSaveAvatar = document.querySelector(
-  ".popup__button-save_type_edit-avatar"
-);
-const buttonSaveProfile = document.querySelector(
-  ".popup__button-save_type_edit-profile"
-);
-const avatarNew = popupEditAvatar.querySelector(".popup__item_type_avatar");
-const popupImage = document.querySelector(".popup_type_image");
-const imageInPopup = popupImage.querySelector(".popup__image");
-const altImage = popupImage.querySelector(".popup__caption");
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
+
 const editButton = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector('.popup_type_edit');
 const popupAddCard = document.querySelector('.popup_type_add');
@@ -89,6 +56,7 @@ const api = new Api({
 const editPopup = new Popup(popupEditProfile);
 const addPopup = new Popup(popupAddCard);
 const avatarPopup = new Popup(popupEditAvatar);
+const imagePopup = new Popup(popupImage);
 
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
@@ -171,7 +139,7 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
             .catch((err) => console.log(err));
         },
         openPopupImage: (img) =>{
-          openPopup(popupImage);
+          imagePopup.open(popupImage);
           imageInPopup.src = img.src;
           imageInPopup.alt = img.alt;
           altImage.textContent = img.alt;
