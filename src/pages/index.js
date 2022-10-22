@@ -14,6 +14,7 @@ import {
   addButtonDisabled,
 } from "../components/validate.js";
 import Api from "../components/api.js";
+import Popup from "../components/Popup.js";
 
 const editButton = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_type_edit");
