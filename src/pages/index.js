@@ -6,7 +6,6 @@ import {
   createUserInfo,
   addAllElements,
 } from "../components/utils.js";
-import { openPopup, closePopup } from "../components/modal.js";
 //import { createElement } from "../components/card.js";
 import {
   enableValidation,
@@ -15,6 +14,41 @@ import {
   addButtonDisabled,
 } from "../components/validate.js";
 import Api from "../components/api.js";
+import Popup from "../components/Popup.js";
+
+const editButton = document.querySelector(".profile__edit-button");
+const popupEditProfile = document.querySelector(".popup_type_edit");
+const popupAddCard = document.querySelector(".popup_type_add");
+const addButton = document.querySelector(".profile__add-button");
+const formEditProfile = document.querySelector(
+  ".popup__container_type_edit-profile"
+);
+const formAddCards = document.querySelector(".popup__container_type_add-cards");
+const nameInput = document.querySelector(".popup__item_type_name");
+const aboutMeInput = document.querySelector(".popup__item_type_about-me");
+const newName = document.querySelector(".profile__nickname");
+const newAboutMe = document.querySelector(".profile__about-me");
+const image = popupAddCard.querySelector(".popup__item_type_link");
+const caption = popupAddCard.querySelector(".popup__item_type_caption");
+const avatar = document.querySelector(".profile__avatar");
+const popupEditAvatar = document.querySelector(".popup_type_avatar");
+const formEditAvatar = document.querySelector(
+  ".popup__container_type_edit-avatar"
+);
+const avatarButton = document.querySelector(".profile__edit-avatar-button");
+const buttonSaveCard = document.querySelector(
+  ".popup__button-save_type_add-cards"
+);
+const buttonSaveAvatar = document.querySelector(
+  ".popup__button-save_type_edit-avatar"
+);
+const buttonSaveProfile = document.querySelector(
+  ".popup__button-save_type_edit-profile"
+);
+const avatarNew = popupEditAvatar.querySelector(".popup__item_type_avatar");
+const popupImage = document.querySelector(".popup_type_image");
+const imageInPopup = popupImage.querySelector(".popup__image");
+const altImage = popupImage.querySelector(".popup__caption");
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
 const editButton = document.querySelector('.profile__edit-button');
@@ -38,7 +72,7 @@ const buttonSaveAvatar = document.querySelector('.popup__button-save_type_edit-a
 const buttonSaveProfile = document.querySelector('.popup__button-save_type_edit-profile');
 const avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');
 const popupImage = document.querySelector('.popup_type_image');
-const imageInPopup = popupImage.querySelector('.popup__image'); 
+const imageInPopup = popupImage.querySelector('.popup__image');
 const altImage = popupImage.querySelector('.popup__caption');
 const cardTemplateSelector = document.querySelector('#element-template');
 const cardContainer = document.querySelector('.elements');
@@ -51,6 +85,11 @@ const api = new Api({
   }
 });
 
+//constants of Popup Class
+const editPopup = new Popup(popupEditProfile);
+const addPopup = new Popup(popupAddCard);
+const avatarPopup = new Popup(popupEditAvatar);
+
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupEditProfile);
@@ -58,11 +97,11 @@ function handleProfileFormSubmit(evt){
     .then((data) => {
         //console.log(data);
         assignUserInfo(data.name, data.about);
-        closePopup(popupEditProfile);
+        editPopup.close();
       })
         .catch((err) => console.log(err))
         .finally(() => {
-          loadingForm(false, popupEditProfile);  
+          loadingForm(false, popupEditProfile);
         });
 }
 
@@ -74,11 +113,11 @@ function handleAddCardsFormSubmit(evt){
          console.log('123' + data);
          console.log(cardInProfile);
          addElement(cardInProfile);
-         closePopup(popupAddCard);
+         addPopup.close();
        })
     .catch((err) => console.log(err))
     .finally(() => {
-        loadingForm(false, popupAddCard);  
+        loadingForm(false, popupAddCard);
     });
 }
 
@@ -89,7 +128,7 @@ function handleAvatarFormSubmit(evt) {
     .then((data) => {
       //console.log(data);
       avatar.src = data.avatar;
-      closePopup(popupEditAvatar);
+      editPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -100,8 +139,8 @@ function handleAvatarFormSubmit(evt) {
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
     .then(([profileData, cardsData]) => {
-      createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
-     
+      createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id);
+
       const userId = profileData._id;
       const card = new Section ({
         data: cardsData,
@@ -129,7 +168,7 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
             .then((data) => {
               card.remove();
             })
-            .catch((err) => console.log(err));  
+            .catch((err) => console.log(err));
         },
         openPopupImage: (img) =>{
           openPopup(popupImage);
@@ -140,7 +179,7 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
       },
       cardTemplateSelector
       );
-      const cardElement = newCard.createCard(userId); 
+      const cardElement = newCard.createCard(userId);
       card.setItem(cardElement);
     }
     },
@@ -151,9 +190,11 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
     .catch((err) => console.log('ошибКа' + err));
 
 
+
+
 //открыть формы
 editButton.addEventListener("click", function () {
-  openPopup(popupEditProfile);
+  editPopup.open();
   nameInput.value = newName.textContent;
   aboutMeInput.value = newAboutMe.textContent;
   addButtonDisabled(buttonSaveProfile);
@@ -161,14 +202,14 @@ editButton.addEventListener("click", function () {
 });
 
 addButton.addEventListener("click", () => {
-  openPopup(popupAddCard);
+  addPopup.open();
   formAddCards.reset();
   addButtonDisabled(buttonSaveCard);
   handleErrorOpenForm(popupAddCard);
 });
 
 avatarButton.addEventListener("click", () => {
-  openPopup(popupEditAvatar);
+  avatarPopup.open();
   formEditAvatar.reset();
   addButtonDisabled(buttonSaveAvatar);
   handleErrorOpenForm(popupEditAvatar);
@@ -185,3 +226,8 @@ formAddCards.addEventListener("submit", handleAddCardsFormSubmit);
 
 //валидация полей ввода
 enableValidation(validationConfig);
+
+//eventListeners of Popup Class' constants
+editPopup.setEventListeners();
+addPopup.setEventListeners();
+avatarPopup.setEventListeners();
