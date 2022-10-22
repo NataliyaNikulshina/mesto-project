@@ -97,14 +97,6 @@ function handleAvatarFormSubmit(evt) {
     });
 }
 
-//открытие формы с картинкой
-function openPopupImage(img) {
-  openPopup(popupImage);
-  imageInPopup.src = img.src;
-  imageInPopup.alt = img.alt;
-  altImage.textContent = img.alt;
-}
-
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
     .then(([profileData, cardsData]) => {
@@ -138,6 +130,12 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
               card.remove();
             })
             .catch((err) => console.log(err));  
+        },
+        openPopupImage: (img) =>{
+          openPopup(popupImage);
+          imageInPopup.src = img.src;
+          imageInPopup.alt = img.alt;
+          altImage.textContent = img.alt;
         }
       },
       cardTemplateSelector

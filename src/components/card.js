@@ -1,5 +1,5 @@
 export default class Card {
-    constructor({data, handleAddLike, handleDelLike, handleDelCard}, cardTemplateSelector) {
+    constructor({data, handleAddLike, handleDelLike, handleDelCard, openPopupImage}, cardTemplateSelector) {
         this._likes = data.likes;
         this._name = data.name;
         this._link = data.link;
@@ -8,6 +8,7 @@ export default class Card {
         this._handleAddLike = handleAddLike;
         this._handleDelLike = handleDelLike;
         this._handleDelCard = handleDelCard;
+        this._openPopupImage = openPopupImage;
         this._template = cardTemplateSelector;
     }
 
@@ -38,10 +39,10 @@ export default class Card {
         this._buttonLike
             .addEventListener('click', () => this._pressButtonsLike());
         
-      //  this._imageElement
-      //      .addEventListener('click', () => {
-      //          openPopupImage(imageElement)
-      //  });
+        this._imageElement
+            .addEventListener('click', () => {
+                this._openPopupImage(this._imageElement)
+        });
    }
 
    _pressButtonsLike() {
