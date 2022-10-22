@@ -1,9 +1,3 @@
-
-
-//import {Id_user} from './utils.js'; 
-//import {addLikes, deleteLikes, deleteCard} from './api.js'; 
-
-
 export default class Card {
     constructor({data, handleAddLike, handleDelLike, handleDelCard}, cardTemplateSelector) {
         this._likes = data.likes;
@@ -35,7 +29,6 @@ export default class Card {
     this._setButtonTrashState(userId);
     this._setButtonLikeState(userId);
     this._setEventListeners();
-   // console.log(this._card);
     return this._card;
    }
 
@@ -64,19 +57,12 @@ export default class Card {
   }
 
    _setButtonTrashState(id) {
-   // if (ownerValue._id === this.Id_user) {
-   //   this._buttonTrash.classList.add('element__trash_active');
-   // }
    if (id === this._id) {
     this._buttonTrash.classList.add('element__trash_active');
   }
   }
 
    _setButtonLikeState(id) {
-   // likesValue.forEach((el) => {
-   //     if (el._id === this.Id_user) {
-   //         this._buttonLike.classList.add('element__like_active');
-   //     }});
    this._likes.forEach((like) => {
     if (like._id === id) {
       this._buttonLike.classList.add('element__like_active');

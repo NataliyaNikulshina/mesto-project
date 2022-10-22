@@ -82,67 +82,6 @@ function handleAddCardsFormSubmit(evt){
     });
 }
 
-/*const card = new Section ({
-  data: cardsData,
-  renderer: (item) => {
-    const newCard = new Card ({
-      data:item,
-      handleAddLike: (id, count, like) => {
-      api.addLikes(id)
-      .then(res => {
-          like.classList.toggle('element__like_active');
-          count.textContent = res.likes.length;
-      })
-      .catch((err) => console.log(err));
-    },
-      handleDelLike: (id, count, like) => {
-        api.deleteLikes(id)
-        .then(res => {
-            like.classList.toggle('element__like_active');
-            count.textContent = res.likes.length;
-        })
-        .catch((err) => console.log(err));
-      },
-      handleDelCard: (id, card) => {
-        api.deleteCard(id)
-        .then((data) => {
-            console.log('remove' + data);
-            card.remove();
-        })
-        .catch((err) => console.log(err));  
-      },
-      cardTemplateSelector
-    })
-    const cardElement = newCard.createCard(userId);
-    card.setItem(cardElement);
-  }
-  });*/
-
-
-/*function handleAddCardsFormSubmit(evt) {
-  evt.preventDefault();
-  loadingForm(true, popupAddCard);
-  api.postNewCard(caption.value, image.value)
-    .then((data) => {
-      console.log(data);
-      const cardInProfile = createElement(
-        data.link,
-        data.name,
-        data._id,
-        data.likes,
-        data.owner,
-        openPopupImage
-      );
-      addElement(cardInProfile);
-      closePopup(popupAddCard);
-    })
-    .catch((err) => console.log(err))
-    .finally(() => {
-      loadingForm(false, popupAddCard);
-    });
-}
-*/
-
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
   loadingForm(true, popupEditAvatar);
@@ -170,42 +109,35 @@ function openPopupImage(img) {
 Promise.all([api.getUserInfo(), api.getStartCards()])
     .then(([profileData, cardsData]) => {
       createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); 
-      //  cardsData.forEach((cards) => {
-          //  const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner, openPopupImage);
-          
-           // console.log(cardsData, profileData._id);
-          const userId = profileData._id;
-         // console.log(userId);
-        //  addAllElements(cardsData);    
-         // console.log(cards); 
-   // });
-   const card = new Section ({
-    data: cardsData,
-    renderer: (item) => {
-      const newCard = new Card ({
+     
+      const userId = profileData._id;
+      const card = new Section ({
+        data: cardsData,
+        renderer: (item) => {
+        const newCard = new Card ({
         data:item,
         handleAddLike: (id, count, like) => {
-        api.addLike(id)
-        .then(res => {
-            like.classList.toggle('element__like_active');
-            count.textContent = res.likes.length;
-        })
-        .catch((err) => console.log(err));
-      },
-        handleDelLike: (id, count, like) => {
-          api.delLike(id)
-          .then(res => {
+          api.addLike(id)
+            .then(res => {
               like.classList.toggle('element__like_active');
               count.textContent = res.likes.length;
-          })
-          .catch((err) => console.log(err));
+            })
+            .catch((err) => console.log(err));
+        },
+        handleDelLike: (id, count, like) => {
+          api.delLike(id)
+            .then(res => {
+              like.classList.toggle('element__like_active');
+              count.textContent = res.likes.length;
+            })
+            .catch((err) => console.log(err));
         },
         handleDelCard: (id, card) => {
           api.deleteCard(id)
-          .then((data) => {
+            .then((data) => {
               card.remove();
-          })
-          .catch((err) => console.log(err));  
+            })
+            .catch((err) => console.log(err));  
         }
       },
       cardTemplateSelector
