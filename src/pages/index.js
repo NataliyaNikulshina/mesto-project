@@ -59,11 +59,10 @@ const info = new UserInfo ({
   avatarSelector: '.profile__avatar',
 },
 {
-  editUserInfo: (name, about) => {
-    return api.editUser(name, about);
+  setUserInfo: (name, about) => {
+    return api.editUserInfo(name, about);
   },
 });
-
 
 //constants of Popup Class
 const editPopup = new Popup(popupEditProfile);
@@ -77,7 +76,7 @@ function handleProfileFormSubmit(evt){
     api.editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
         //console.log(data);
-        assignUserInfo(data.name, data.about);
+        info.setUserInfo(data.name, data.about);
         editPopup.close();
       })
         .catch((err) => console.log(err))
@@ -108,7 +107,7 @@ function handleAvatarFormSubmit(evt) {
   api.editUserAvatar(avatarNew.value)
     .then((data) => {
       //console.log(data);
-      avatar.src = data.avatar;
+      info.createUserAvatar(data.avatar);
       editPopup.close();
     })
     .catch((err) => console.log(err))
