@@ -122,7 +122,7 @@ function handleAvatarFormSubmit(evt) {
   api.editUserAvatar(avatarNew.value)
     .then((data) => {
       //console.log(data);
-      info.createUserAvatar(data.avatar);
+      info.getUserAvatar(data.avatar);
       editPopup.close();
     })
     .catch((err) => console.log(err))
@@ -135,7 +135,7 @@ function handleAvatarFormSubmit(evt) {
 Promise.all([api.getUserInfo(), api.getStartCards()])
     .then(([profileData, cardsData]) => {
       //createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id);
-      info.createUserInfo(profileData);
+      info.getUserInfo(profileData);
 
       const userId = profileData._id;
       const card = new Section ({
