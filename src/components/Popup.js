@@ -1,6 +1,5 @@
 const popup = document.querySelectorAll('.popup');
 
-
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
@@ -36,6 +35,9 @@ export default class Popup {
     })
   }
 }
+
+
+
 
 
 
