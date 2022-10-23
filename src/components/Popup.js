@@ -1,6 +1,5 @@
 const popup = document.querySelectorAll('.popup');
 
-
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
@@ -23,7 +22,6 @@ export default class Popup {
   }
 
   setEventListeners() {
-    console.log(popup);
     popup.forEach((popup) => {
       popup.addEventListener("mousedown", (evt) => {
         if (
@@ -36,6 +34,9 @@ export default class Popup {
     })
   }
 }
+
+
+
 
 
 

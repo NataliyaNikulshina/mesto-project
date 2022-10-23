@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="fix: add Popup import after develop merge loss" />
+    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="feat: add files" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +20,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feat/popupClasses" />
+        <entry key="$PROJECT_DIR$" value="develop" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -87,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666439170613</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: added PopupWithImage Class">
+      <created>1666488960816</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1666488960816</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -109,6 +116,7 @@
     <MESSAGE value="feat: add Popup Class constants and eventListeners + refactoring of open/close in several functions" />
     <MESSAGE value="fix: add forEach in setEventListeners()" />
     <MESSAGE value="fix: add Popup import after develop merge loss" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: add Popup import after develop merge loss" />
+    <MESSAGE value="feat: added PopupWithImage Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: added PopupWithImage Class" />
   </component>
 </project>
