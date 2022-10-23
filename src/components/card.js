@@ -1,5 +1,7 @@
+import PopupWithImage, {popupImage} from "./PopupWithImage";
+
 export default class Card {
-    constructor({data, handleAddLike, handleDelLike, handleDelCard, openPopupImage}, cardTemplateSelector) {
+    constructor({data, handleAddLike, handleDelLike, handleDelCard, openPopupImage }, cardTemplateSelector) {
         this._likes = data.likes;
         this._name = data.name;
         this._link = data.link;
@@ -8,7 +10,6 @@ export default class Card {
         this._handleAddLike = handleAddLike;
         this._handleDelLike = handleDelLike;
         this._handleDelCard = handleDelCard;
-        this._openPopupImage = openPopupImage;
         this._template = cardTemplateSelector;
     }
 
@@ -33,15 +34,18 @@ export default class Card {
     return this._card;
    }
 
+
+
    _setEventListeners() {
+        const imgPopup = new PopupWithImage(popupImage);
+
         this._buttonTrash
             .addEventListener('click', () => this._pressButtonDelete());
         this._buttonLike
             .addEventListener('click', () => this._pressButtonsLike());
-        
         this._imageElement
-            .addEventListener('click', () => {
-                this._openPopupImage(this._imageElement)
+            .addEventListener('click', (evt) => {
+               imgPopup.open(evt);
         });
    }
 
