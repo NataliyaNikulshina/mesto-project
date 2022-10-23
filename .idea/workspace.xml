@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="feat: add files" />
+    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="feat: PopupWithForm Class draft ver.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Popup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/modal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +99,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666488960816</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix: deleted console.log">
+      <created>1666489382099</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666489382099</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +129,8 @@
     <MESSAGE value="fix: add forEach in setEventListeners()" />
     <MESSAGE value="fix: add Popup import after develop merge loss" />
     <MESSAGE value="feat: added PopupWithImage Class" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: added PopupWithImage Class" />
+    <MESSAGE value="fix: deleted console.log" />
+    <MESSAGE value="feat: PopupWithForm Class draft ver." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: PopupWithForm Class draft ver." />
   </component>
 </project>

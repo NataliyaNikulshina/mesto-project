@@ -1,4 +1,4 @@
-const popup = document.querySelectorAll('.popup');
+export const popup = document.querySelectorAll('.popup');
 
 export default class Popup {
   constructor(popupSelector) {

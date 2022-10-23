@@ -3,10 +3,9 @@ import {
   loadingForm,
   addElement,
   assignUserInfo,
-  createUserInfo,
-  addAllElements,
+  createUserInfo
 } from "../components/utils.js";
-//import { createElement } from "../components/card.js";
+
 import {
   enableValidation,
   validationConfig,
@@ -18,6 +17,7 @@ import Popup from "../components/Popup.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage";
+import PopupWithForm from "../components/PopupWithForm";
 
 const editButton = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_type_edit");
@@ -59,26 +59,28 @@ const api = new Api({
   }
 });
 
-import {
-  popupImage
-} from "../components/PopupWithImage.js";
+import { popupImage } from "../components/PopupWithImage.js";
 
 //constants of Popup Class
 const editPopup = new Popup(popupEditProfile);
 const addPopup = new Popup(popupAddCard);
 const avatarPopup = new Popup(popupEditAvatar);
-const imgPopup = new PopupWithImage(popupImage)
+const imgPopup = new PopupWithImage(popupImage);
+const editForm = new PopupWithForm(popupEditProfile, handleProfileFormSubmit);
+const addForm = new PopupWithForm(popupAddCard, handleAddCardsFormSubmit);
+const avatarForm = new PopupWithForm(popupEditAvatar, handleAvatarFormSubmit);
 
 
 
+//forms' handlers
 function handleProfileFormSubmit(evt){
     evt.preventDefault();
     loadingForm(true, popupEditProfile);
     api.editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
-        //console.log(data);
         assignUserInfo(data.name, data.about);
-        editPopup.close();
+        console.log(editForm)
+        editForm.close();
       })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -94,7 +96,7 @@ function handleAddCardsFormSubmit(evt){
          console.log('123' + data);
          console.log(cardInProfile);
          addElement(cardInProfile);
-         addPopup.close();
+         addForm.close();
        })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -107,15 +109,17 @@ function handleAvatarFormSubmit(evt) {
   loadingForm(true, popupEditAvatar);
   api.editUserAvatar(avatarNew.value)
     .then((data) => {
-      //console.log(data);
       avatar.src = data.avatar;
-      editPopup.close();
+      avatarForm.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       loadingForm(false, popupEditAvatar);
     });
 }
+
+
+
 
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
@@ -175,38 +179,39 @@ editButton.addEventListener("click", function () {
   editPopup.open();
   nameInput.value = newName.textContent;
   aboutMeInput.value = newAboutMe.textContent;
+  editForm.setEventListeners();
   addButtonDisabled(buttonSaveProfile);
   handleErrorOpenForm(popupEditProfile);
 });
 
 addButton.addEventListener("click", () => {
   addPopup.open();
-  formAddCards.reset();
+  addForm.setEventListeners();
   addButtonDisabled(buttonSaveCard);
   handleErrorOpenForm(popupAddCard);
 });
 
 avatarButton.addEventListener("click", () => {
   avatarPopup.open();
-  formEditAvatar.reset();
+  avatarForm.setEventListeners();
   addButtonDisabled(buttonSaveAvatar);
   handleErrorOpenForm(popupEditAvatar);
 });
 
-//редактировать профиль
-formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 
-//редактировать аватар
-formEditAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
-//добавление новой карточки
-formAddCards.addEventListener("submit", handleAddCardsFormSubmit);
+
 
 //валидация полей ввода
 enableValidation(validationConfig);
+
+
+
+
 
 //eventListeners of Popup Class' constants
 editPopup.setEventListeners();
 addPopup.setEventListeners();
 avatarPopup.setEventListeners();
 imgPopup.setEventListeners();
+
