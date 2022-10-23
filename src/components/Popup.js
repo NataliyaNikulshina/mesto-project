@@ -22,7 +22,6 @@ export default class Popup {
   }
 
   setEventListeners() {
-    console.log(popup);
     popup.forEach((popup) => {
       popup.addEventListener("mousedown", (evt) => {
         if (
