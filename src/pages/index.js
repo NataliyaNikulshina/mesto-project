@@ -97,7 +97,6 @@ function handleProfileFormSubmit(evt){
     .then((data) => {
         //console.log(data);
         info.setUserInfo(data.name, data.about);
-        editPopup.close();
       })
         .catch((err) => console.log(err))
         .finally(() => {
