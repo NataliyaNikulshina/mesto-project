@@ -1,0 +1,174 @@
+Index: src/components/modal.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>const closeButtons = document.querySelectorAll('.popup__button-close');\nconst popups = document.querySelectorAll(\".popup\");\n\n//открытие формы\nfunction openPopup(popup){\n    popup.classList.add('popup_opened');\n    document.addEventListener('keydown', handlePopupEsc);\n}\n\n//закрытие формы\nfunction closePopup(popup){\n    popup.classList.remove('popup_opened');\n    document.removeEventListener('keydown', handlePopupEsc);\n}\n\n//закрытие формы, нажимая на Esc\nfunction handlePopupEsc(evt) {\n    if (evt.key === 'Escape') {\n        // console.log(document.querySelector('.popup_opened'));\n         closePopup(document.querySelector('.popup_opened'));}\n}\n\n//закрытие форм по кнопке \"Закрыть\" \ncloseButtons.forEach((btn) =>  \n    btn.addEventListener('click', (evt) =>  \nclosePopup(evt.target.closest('.popup')) \n)); \n\n//закрытие формы по клику на оверлей\npopups.forEach(function(popup) {\n    popup.addEventListener('mouseup', function(evt){\n    if(evt.target.classList.contains('popup')){\n       // console.log(evt.target);\n       // console.log(evt.target.closest('.popup'));\n        closePopup(evt.target.closest('.popup'));}\n    });\n});\n\n\nexport {openPopup, closePopup};
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/modal.js b/src/components/modal.js
+--- a/src/components/modal.js	(revision 8c406c6a246d3b45813d6075cc04864f3ed98ff7)
++++ b/src/components/modal.js	(date 1666300611761)
+@@ -1,30 +1,40 @@
+-const closeButtons = document.querySelectorAll('.popup__button-close');
++//const closeButtons = document.querySelectorAll('.popup__button-close');
+ const popups = document.querySelectorAll(".popup");
++import Popup from '../components/Popup.js';
+ 
+-//открытие формы
++/*//открытие формы
+ function openPopup(popup){
+     popup.classList.add('popup_opened');
+     document.addEventListener('keydown', handlePopupEsc);
+-}
++}*/
+ 
++/*
+ //закрытие формы
+ function closePopup(popup){
+     popup.classList.remove('popup_opened');
+     document.removeEventListener('keydown', handlePopupEsc);
+ }
++*/
+ 
+ //закрытие формы, нажимая на Esc
+-function handlePopupEsc(evt) {
++/*function handlePopupEsc(evt) {
+     if (evt.key === 'Escape') {
+         // console.log(document.querySelector('.popup_opened'));
+          closePopup(document.querySelector('.popup_opened'));}
+ }
++*/
+ 
++
++/*
+ //закрытие форм по кнопке "Закрыть" 
+ closeButtons.forEach((btn) =>  
+     btn.addEventListener('click', (evt) =>  
+ closePopup(evt.target.closest('.popup')) 
+-)); 
++));
++*/
++
++
++
+ 
+ //закрытие формы по клику на оверлей
+ popups.forEach(function(popup) {
+@@ -37,4 +47,4 @@
+ });
+ 
+ 
+-export {openPopup, closePopup};
+\ No newline at end of file
++export {/*openPopup,*/ /*closePopup*/};
+\ No newline at end of file
+Index: src/pages/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import './index.css'; \nimport {loadingForm, addElement, assignUserInfo, createUserInfo, addAllElements} from '../components/utils.js'; \nimport {openPopup, closePopup} from '../components/modal.js';\nimport {createElement} from '../components/card.js';  \nimport {enableValidation,validationConfig, handleErrorOpenForm, addButtonDisabled} from '../components/validate.js'; \nimport {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; \n\nconst editButton = document.querySelector('.profile__edit-button');\nconst popupEditProfile = document.querySelector('.popup_type_edit');\nconst popupAddCard = document.querySelector('.popup_type_add');\nconst addButton = document.querySelector('.profile__add-button');\nconst formEditProfile = document.querySelector('.popup__container_type_edit-profile');\nconst formAddCards = document.querySelector('.popup__container_type_add-cards');\nconst nameInput = document.querySelector('.popup__item_type_name');\nconst aboutMeInput = document.querySelector('.popup__item_type_about-me');\nconst newName = document.querySelector('.profile__nickname');\nconst newAboutMe = document.querySelector('.profile__about-me');\nconst image = popupAddCard.querySelector('.popup__item_type_link');\nconst caption = popupAddCard.querySelector('.popup__item_type_caption');\nconst avatar = document.querySelector('.profile__avatar');\nconst popupEditAvatar = document.querySelector('.popup_type_avatar');\nconst formEditAvatar = document.querySelector('.popup__container_type_edit-avatar');\nconst avatarButton = document.querySelector('.profile__edit-avatar-button');\nconst buttonSaveCard = document.querySelector('.popup__button-save_type_add-cards');\nconst buttonSaveAvatar = document.querySelector('.popup__button-save_type_edit-avatar');\nconst buttonSaveProfile = document.querySelector('.popup__button-save_type_edit-profile');\nconst avatarNew = popupEditAvatar.querySelector('.popup__item_type_avatar');\nconst popupImage = document.querySelector('.popup_type_image');\nconst imageInPopup = popupImage.querySelector('.popup__image'); \nconst altImage = popupImage.querySelector('.popup__caption');\n\n\n\n\nfunction handleProfileFormSubmit(evt){\n    evt.preventDefault();\n    loadingForm(true, popupEditProfile);\n    editUserInfo(nameInput.value, aboutMeInput.value)\n    .then((data) => {\n        //console.log(data);\n        assignUserInfo(data.name, data.about);\n        closePopup(popupEditProfile);\n      })\n        .catch((err) => console.log(err))\n        .finally(() => {\n          loadingForm(false, popupEditProfile);  \n        });\n}\n\nfunction handleAddCardsFormSubmit(evt){\n    evt.preventDefault();\n    loadingForm(true, popupAddCard);\n    postNewCards(image.value, caption.value)\n    .then((data) => {\n        // console.log(data);\n         const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner, openPopupImage);\n         addElement(cardInProfile);\n         closePopup(popupAddCard);\n       })\n    .catch((err) => console.log(err))\n    .finally(() => {\n        loadingForm(false, popupAddCard);  \n    });\n}\n\nfunction handleAvatarFormSubmit(evt){\n    evt.preventDefault();\n    loadingForm(true, popupEditAvatar);\n    editUserAvatar(avatarNew.value)\n    .then((data) => {\n         //console.log(data);\n         avatar.src = data.avatar;\n         closePopup(popupEditAvatar); \n       })\n         .catch((err) => console.log(err))\n         .finally(() => {\n           loadingForm(false, popupEditAvatar);  \n         });\n}\n\n//открытие формы с картинкой\nfunction openPopupImage(img){\n    openPopup(popupImage);\n    imageInPopup.src = img.src;\n    imageInPopup.alt = img.alt;\n    altImage.textContent = img.alt;\n}\n\n//отрисовка страницы\nPromise.all([getUserInfo(), getAllCards()])\n    .then(([profileData, cardsData]) => {\n        createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id); \n        cardsData.forEach((cards) => {\n            const cardInProfile = createElement(cards.link, cards.name, cards._id, cards.likes, cards.owner, openPopupImage);\n            addAllElements(cardInProfile);     \n    });\n})\n    .catch((err) => console.log('ошибКа' + err));\n\n//открыть формы\neditButton.addEventListener('click', function() { \n    openPopup(popupEditProfile);\n    nameInput.value = newName.textContent;\n    aboutMeInput.value = newAboutMe.textContent;\n    addButtonDisabled(buttonSaveProfile);\n    handleErrorOpenForm(popupEditProfile);\n});\n\naddButton.addEventListener('click', () => {\n    openPopup(popupAddCard);\n    formAddCards.reset();\n    addButtonDisabled(buttonSaveCard);\n    handleErrorOpenForm(popupAddCard);\n});\n\navatarButton.addEventListener('click', () => {\n    openPopup(popupEditAvatar);\n    formEditAvatar.reset();\n    addButtonDisabled(buttonSaveAvatar);\n    handleErrorOpenForm(popupEditAvatar);\n});\n\n\n//редактировать профиль \nformEditProfile.addEventListener('submit', handleProfileFormSubmit);\n\n//редактировать аватар\nformEditAvatar.addEventListener('submit', handleAvatarFormSubmit);\n\n//добавление новой карточки\nformAddCards.addEventListener('submit', handleAddCardsFormSubmit);\n\n//валидация полей ввода\nenableValidation(validationConfig); \n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/pages/index.js b/src/pages/index.js
+--- a/src/pages/index.js	(revision 8c406c6a246d3b45813d6075cc04864f3ed98ff7)
++++ b/src/pages/index.js	(date 1666299532345)
+@@ -1,9 +1,10 @@
+ import './index.css'; 
+ import {loadingForm, addElement, assignUserInfo, createUserInfo, addAllElements} from '../components/utils.js'; 
+-import {openPopup, closePopup} from '../components/modal.js';
++import {/*openPopup*/ /*closePopup*/} from '../components/modal.js';
+ import {createElement} from '../components/card.js';  
+ import {enableValidation,validationConfig, handleErrorOpenForm, addButtonDisabled} from '../components/validate.js'; 
+-import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js'; 
++import {getAllCards, getUserInfo, postNewCards, editUserInfo, editUserAvatar} from '../components/api.js';
++import Popup from '../components/Popup.js';
+ 
+ const editButton = document.querySelector('.profile__edit-button');
+ const popupEditProfile = document.querySelector('.popup_type_edit');
+@@ -39,7 +40,7 @@
+     .then((data) => {
+         //console.log(data);
+         assignUserInfo(data.name, data.about);
+-        closePopup(popupEditProfile);
++        Popup(popupEditProfile).close();
+       })
+         .catch((err) => console.log(err))
+         .finally(() => {
+@@ -55,7 +56,7 @@
+         // console.log(data);
+          const cardInProfile = createElement(data.link, data.name, data._id, data.likes, data.owner, openPopupImage);
+          addElement(cardInProfile);
+-         closePopup(popupAddCard);
++         Popup.close(popupAddCard);
+        })
+     .catch((err) => console.log(err))
+     .finally(() => {
+@@ -97,15 +98,25 @@
+ })
+     .catch((err) => console.log('ошибКа' + err));
+ 
++
++const edit = new Popup(popupEditProfile);
++
++
+ //открыть формы
+ editButton.addEventListener('click', function() { 
+-    openPopup(popupEditProfile);
++ //   openPopup(popupEditProfile);
++    edit.open();
+     nameInput.value = newName.textContent;
+     aboutMeInput.value = newAboutMe.textContent;
+     addButtonDisabled(buttonSaveProfile);
+     handleErrorOpenForm(popupEditProfile);
+ });
+ 
++
++edit.setEventListeners()
++
++
++
+ addButton.addEventListener('click', () => {
+     openPopup(popupAddCard);
+     formAddCards.reset();
+Index: src/components/Popup.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/components/Popup.js b/src/components/Popup.js
+new file mode 100644
+--- /dev/null	(date 1666300478407)
++++ b/src/components/Popup.js	(date 1666300478407)
+@@ -0,0 +1,31 @@
++const closeButtons = document.querySelectorAll('.popup__button-close');
++
++export default class Popup {
++  constructor(popupSelector) {
++    this._popupSelector = popupSelector;
++  }
++
++  open(){
++      this._popupSelector.classList.add('popup_opened');
++      console.log(this._popupSelector);
++      document.addEventListener('keydown', () => this._handleEscClose());
++  }
++
++  close(){
++      this._popupSelector.classList.remove('popup_opened');
++      document.removeEventListener('keydown', () => this._handleEscClose());
++  }
++
++  _handleEscClose(evt) {
++    if (evt.key === 'Escape') {
++      this.close();}
++  }
++
++  setEventListeners() {
++    closeButtons.forEach((btn) =>
++      btn.addEventListener('click', () =>
++        this.close())
++      );
++  }
++
++}
+\ No newline at end of file
