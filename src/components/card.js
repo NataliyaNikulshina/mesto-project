@@ -1,7 +1,7 @@
 import PopupWithImage, {popupImage} from "./PopupWithImage";
 
 export default class Card {
-    constructor({data, handleAddLike, handleDelLike, handleDelCard, openPopupImage }, cardTemplateSelector) {
+    constructor({data, handleAddLike, handleDelLike, handleDelCard}, cardTemplateSelector) {
         this._likes = data.likes;
         this._name = data.name;
         this._link = data.link;

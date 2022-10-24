@@ -3,9 +3,10 @@ import {
   loadingForm,
   addElement,
   assignUserInfo,
-  createUserInfo
+  createUserInfo,
+  addAllElements,
 } from "../components/utils.js";
-
+//import { createElement } from "../components/card.js";
 import {
   enableValidation,
   validationConfig,
@@ -16,8 +17,13 @@ import Api from "../components/api.js";
 import Popup from "../components/Popup.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo";
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
+
+import {
+  popupImage
+} from "../components/PopupWithImage.js";
 
 const editButton = document.querySelector(".profile__edit-button");
 const popupEditProfile = document.querySelector(".popup_type_edit");
@@ -59,7 +65,18 @@ const api = new Api({
   }
 });
 
-import { popupImage } from "../components/PopupWithImage.js";
+
+const info = new UserInfo ({
+  nameSelector: '.profile__nickname',
+  aboutSelector: '.profile__about-me',
+  avatarSelector: '.profile__avatar',
+},
+{
+  setUserInfo: (name, about) => {
+    return api.editUserInfo(name, about);
+  },
+});
+
 
 //constants of Popup Class
 const editPopup = new Popup(popupEditProfile);
@@ -78,8 +95,9 @@ function handleProfileFormSubmit(evt){
     loadingForm(true, popupEditProfile);
     api.editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
-        assignUserInfo(data.name, data.about);
-        console.log(editForm);
+        //console.log(data);
+        info.setUserInfo(data.name, data.about);
+        editPopup.close();
       })
         .catch((err) => console.log(err))
         .finally(() => {
@@ -109,7 +127,8 @@ function handleAvatarFormSubmit(evt) {
   loadingForm(true, popupEditAvatar);
   api.editUserAvatar(avatarNew.value)
     .then((data) => {
-      avatar.src = data.avatar;
+      //console.log(data);
+      info.getUserAvatar(data.avatar);
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -124,7 +143,8 @@ function handleAvatarFormSubmit(evt) {
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
     .then(([profileData, cardsData]) => {
-      createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id);
+      //createUserInfo(profileData.name, profileData.about, profileData.avatar, profileData._id);
+      info.getUserInfo(profileData);
 
       const userId = profileData._id;
       const card = new Section ({
@@ -154,9 +174,6 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
               card.remove();
             })
             .catch((err) => console.log(err));
-        },
-        openPopupImage: () =>{
-          imgPopup.open()
         }
       },
       cardTemplateSelector
