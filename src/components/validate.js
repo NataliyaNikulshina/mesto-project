@@ -17,8 +17,6 @@ export class Validator {
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
     this._form = form;
-    this._checkInput = this._checkInputValidity.bind(this);
-    this._toggleButton = this._toggleButtonState.bind(this);
   }
 
   enableValidation() {
@@ -61,7 +59,6 @@ export class Validator {
   }
   
   _checkInputValidity(inputElement) {
-    console.log(inputElement)
     if (inputElement.validity.patternMismatch) {
       inputElement.setCustomValidity(inputElement.dataset.errorMessage);
     } else {
