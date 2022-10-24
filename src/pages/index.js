@@ -79,12 +79,12 @@ function handleProfileFormSubmit(evt){
     api.editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
         assignUserInfo(data.name, data.about);
-        console.log(editForm)
-        editForm.close();
+        console.log(editForm);
       })
         .catch((err) => console.log(err))
         .finally(() => {
           loadingForm(false, popupEditProfile);
+          editForm.close();
         });
 }
 
@@ -96,11 +96,11 @@ function handleAddCardsFormSubmit(evt){
          console.log('123' + data);
          console.log(cardInProfile);
          addElement(cardInProfile);
-         addForm.close();
        })
     .catch((err) => console.log(err))
     .finally(() => {
         loadingForm(false, popupAddCard);
+        addForm.close();
     });
 }
 
@@ -110,11 +110,11 @@ function handleAvatarFormSubmit(evt) {
   api.editUserAvatar(avatarNew.value)
     .then((data) => {
       avatar.src = data.avatar;
-      avatarForm.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
       loadingForm(false, popupEditAvatar);
+      avatarForm.close();
     });
 }
 
