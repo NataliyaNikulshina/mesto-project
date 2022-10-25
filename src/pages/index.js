@@ -50,18 +50,6 @@ const api = new Api({
   },
 });
 
-
-//constants of Popup Class
-const editPopup = new Popup(popupEditProfile);
-const addPopup = new Popup(popupAddCard);
-const avatarPopup = new Popup(popupEditAvatar);
-const imgPopup = new PopupWithImage(popupImage);
-const editForm = new PopupWithForm(popupEditProfile, handleProfileFormSubmit);
-const addForm = new PopupWithForm(popupAddCard, handleAddCardsFormSubmit);
-const avatarForm = new PopupWithForm(popupEditAvatar, handleAvatarFormSubmit);
-
-
-
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   loadingForm(true, popupEditProfile);
@@ -74,7 +62,6 @@ function handleProfileFormSubmit(evt) {
     .catch((err) => console.log(err))
     .finally(() => {
       loadingForm(false, popupEditProfile);
-      editForm.setEventListeners();
     });
 }
 
@@ -91,8 +78,7 @@ function handleAddCardsFormSubmit(evt) {
     })
     .catch((err) => console.log(err))
     .finally(() => {
-        loadingForm(false, popupAddCard);
-        addForm.close();
+      loadingForm(false, popupAddCard);
     });
 }
 
@@ -108,12 +94,8 @@ function handleAvatarFormSubmit(evt) {
     .catch((err) => console.log(err))
     .finally(() => {
       loadingForm(false, popupEditAvatar);
-      avatarForm.close();
     });
 }
-
-
-
 
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
@@ -183,7 +165,6 @@ buttonEditProfile.addEventListener("click", function () {
   popup.open();
   nameInput.value = newName.textContent;
   aboutMeInput.value = newAboutMe.textContent;
-  editForm.setEventListeners();
   // addButtonDisabled(buttonSaveProfile);
   // handleErrorOpenForm(popupEditProfile);
 });
@@ -194,7 +175,6 @@ buttonAddCard.addEventListener("click", () => {
   const popup = new Popup(".popup_type_add");
   popup.open();
   formAddCards.reset();
-  addForm.setEventListeners();
   // addButtonDisabled(buttonSaveCard);
   // handleErrorOpenForm(popupAddCard);
 });
@@ -205,20 +185,15 @@ buttonAvatar.addEventListener("click", () => {
   const popup = new Popup(".popup_type_avatar");
   popup.open();
   formEditAvatar.reset();
-  avatarForm.setEventListeners();
   // addButtonDisabled(buttonSaveAvatar);
   // handleErrorOpenForm(popupEditAvatar);
 });
 
+//редактировать профиль
+formEditProfile.addEventListener("submit", handleProfileFormSubmit);
 
+//редактировать аватар
+formEditAvatar.addEventListener("submit", handleAvatarFormSubmit);
 
-
-
-
-
-//eventListeners of Popup Class' constants
-editPopup.setEventListeners();
-addPopup.setEventListeners();
-avatarPopup.setEventListeners();
-imgPopup.setEventListeners();
-
+//добавление новой карточки
+formAddCards.addEventListener("submit", handleAddCardsFormSubmit);
