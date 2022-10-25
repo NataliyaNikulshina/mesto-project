@@ -64,14 +64,19 @@ const info = new UserInfo ({
   },
 });
 
+const avatarPopup = new Popup(".popup_type_avatar");
+const addCardPopup = new Popup(".popup_type_add");
+const editInfoPopup = new Popup(".popup_type_edit");
+
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   loadingForm(true, popupEditProfile);
   api
     .editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
-      assignUserInfo(data.name, data.about);
-      editPopup.close();
+      info.setUserInfo(data.name, data.about);
+      editInfoPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -88,7 +93,7 @@ function handleAddCardsFormSubmit(evt) {
       console.log("123" + data);
       console.log(cardInProfile);
       addElement(cardInProfile);
-      addPopup.close();
+      addCardPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -102,8 +107,8 @@ function handleAvatarFormSubmit(evt) {
   api
     .editUserAvatar(avatarNew.value)
     .then((data) => {
-      avatar.src = data.avatar;
-      editPopup.close();
+      info.setUserAvatar(data.avatar);
+      avatarPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -171,10 +176,9 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
 buttonEditProfile.addEventListener("click", function () {
   const valid = new Validator(validationConfig, popupEditProfile);
   valid.enableValidation();
-  const popup = new Popup(".popup_type_edit");
-  popup.open();
-  nameInput.value = newName.textContent;
-  aboutMeInput.value = newAboutMe.textContent;
+  editInfoPopup.open();
+  nameInput.value = name.textContent;
+  aboutMeInput.value = about.textContent;
   // addButtonDisabled(buttonSaveProfile);
   // handleErrorOpenForm(popupEditProfile);
 });
@@ -182,8 +186,7 @@ buttonEditProfile.addEventListener("click", function () {
 buttonAddCard.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupAddCard);
   valid.enableValidation();
-  const popup = new Popup(".popup_type_add");
-  popup.open();
+  addCardPopup.open();
   formAddCards.reset();
   // addButtonDisabled(buttonSaveCard);
   // handleErrorOpenForm(popupAddCard);
@@ -192,8 +195,7 @@ buttonAddCard.addEventListener("click", () => {
 buttonAvatar.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupEditAvatar);
   valid.enableValidation();
-  const popup = new Popup(".popup_type_avatar");
-  popup.open();
+  avatarPopup.open();
   formEditAvatar.reset();
   // addButtonDisabled(buttonSaveAvatar);
   // handleErrorOpenForm(popupEditAvatar);
