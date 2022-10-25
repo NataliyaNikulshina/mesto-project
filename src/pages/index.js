@@ -27,19 +27,13 @@ import {
   avatar
 } from "../components/variables.js";
 
-const formEditProfile = document.querySelector(
-  ".popup__container_type_edit-profile"
-);
-const formAddCards = document.querySelector(".popup__container_type_add-cards");
+
 const nameInput = document.querySelector(".popup__item_type_name");
 const aboutMeInput = document.querySelector(".popup__item_type_about-me");
 
 const image = popupAddCard.querySelector(".popup__item_type_link");
 const caption = popupAddCard.querySelector(".popup__item_type_caption");
 
-const formEditAvatar = document.querySelector(
-  ".popup__container_type_edit-avatar"
-);
 const avatarNew = popupEditAvatar.querySelector(".popup__item_type_avatar");
 const cardTemplateSelector = document.querySelector("#element-template");
 const cardContainer = document.querySelector(".elements");
