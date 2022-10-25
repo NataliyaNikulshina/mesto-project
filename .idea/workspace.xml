@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="feat: add changes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="feat: added PopupWithForm usage in index.js, deleted instances of Popup">
+      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +117,14 @@
       <option name="project" value="LOCAL" />
       <updated>1666641061158</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: added PopupWithForm usage in index.js, deleted instances of Popup">
+      <created>1666730182032</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1666730182032</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,6 +150,7 @@
     <MESSAGE value="fix: deleted console.log" />
     <MESSAGE value="feat: PopupWithForm Class draft ver." />
     <MESSAGE value="feat: add changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: add changes" />
+    <MESSAGE value="feat: added PopupWithForm usage in index.js, deleted instances of Popup" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: added PopupWithForm usage in index.js, deleted instances of Popup" />
   </component>
 </project>
