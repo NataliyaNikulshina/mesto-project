@@ -1,15 +1,11 @@
 import "./index.css";
 import {
   loadingForm,
-  addElement,
-  assignUserInfo,
-  createUserInfo,
+  addElement
 } from "../components/utils.js";
 import { Validator } from "../components/validate.js";
-import Api from "../components/api.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
-import UserInfo from "../components/UserInfo.js"
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 import { validationConfig } from "../components/variables.js";
@@ -21,43 +17,21 @@ import {
   buttonEditProfile,
   buttonAddCard,
   buttonAvatar,
-  profile,
   name,
   about,
-  avatar
+  nameInput,
+  aboutMeInput,
+  image,
+  caption,
+  avatarNew,
+  cardTemplateSelector,
+  cardContainer,
+  api,
+  info
 } from "../components/variables.js";
 
 
-const nameInput = document.querySelector(".popup__item_type_name");
-const aboutMeInput = document.querySelector(".popup__item_type_about-me");
-
-const image = popupAddCard.querySelector(".popup__item_type_link");
-const caption = popupAddCard.querySelector(".popup__item_type_caption");
-
-const avatarNew = popupEditAvatar.querySelector(".popup__item_type_avatar");
-const cardTemplateSelector = document.querySelector("#element-template");
-const cardContainer = document.querySelector(".elements");
-
-const api = new Api({
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-15/",
-  headers: {
-    authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
-    "Content-Type": "application/json",
-  },
-});
-
-const info = new UserInfo ({
-  nameSelector: '.profile__nickname',
-  aboutSelector: '.profile__about-me',
-  avatarSelector: '.profile__avatar',
-},
-{
-  setUserInfo: (name, about) => {
-    return api.editUserInfo(name, about);
-  },
-});
-
-
+//submit handlers
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   loadingForm(true, popupEditProfile);
@@ -73,7 +47,6 @@ function handleProfileFormSubmit(evt) {
       popup.close();
     });
 }
-
 
 function handleAddCardsFormSubmit(evt) {
   evt.preventDefault();
@@ -92,7 +65,6 @@ function handleAddCardsFormSubmit(evt) {
       popup.close();
     });
 }
-
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
