@@ -9,6 +9,7 @@ import { Validator } from "../components/validate.js";
 import Api from "../components/api.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js"
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage";
 import { validationConfig } from "../components/variables.js";
@@ -20,6 +21,10 @@ import {
   buttonEditProfile,
   buttonAddCard,
   buttonAvatar,
+  profile,
+  name,
+  about,
+  avatar
 } from "../components/variables.js";
 
 const formEditProfile = document.querySelector(
@@ -28,11 +33,10 @@ const formEditProfile = document.querySelector(
 const formAddCards = document.querySelector(".popup__container_type_add-cards");
 const nameInput = document.querySelector(".popup__item_type_name");
 const aboutMeInput = document.querySelector(".popup__item_type_about-me");
-const newName = document.querySelector(".profile__nickname");
-const newAboutMe = document.querySelector(".profile__about-me");
+
 const image = popupAddCard.querySelector(".popup__item_type_link");
 const caption = popupAddCard.querySelector(".popup__item_type_caption");
-const avatar = document.querySelector(".profile__avatar");
+
 
 const formEditAvatar = document.querySelector(
   ".popup__container_type_edit-avatar"
@@ -49,14 +53,30 @@ const api = new Api({
   },
 });
 
+const info = new UserInfo ({
+  nameSelector: '.profile__nickname',
+  aboutSelector: '.profile__about-me',
+  avatarSelector: '.profile__avatar',
+},
+{
+  setUserInfo: (name, about) => {
+    return api.editUserInfo(name, about);
+  },
+});
+
+const avatarPopup = new Popup(".popup_type_avatar");
+const addCardPopup = new Popup(".popup_type_add");
+const editInfoPopup = new Popup(".popup_type_edit");
+
+
 function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   loadingForm(true, popupEditProfile);
   api
     .editUserInfo(nameInput.value, aboutMeInput.value)
     .then((data) => {
-      assignUserInfo(data.name, data.about);
-      editPopup.close();
+      info.setUserInfo(data.name, data.about);
+      editInfoPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -73,7 +93,7 @@ function handleAddCardsFormSubmit(evt) {
       console.log("123" + data);
       console.log(cardInProfile);
       addElement(cardInProfile);
-      addPopup.close();
+      addCardPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -87,8 +107,8 @@ function handleAvatarFormSubmit(evt) {
   api
     .editUserAvatar(avatarNew.value)
     .then((data) => {
-      avatar.src = data.avatar;
-      editPopup.close();
+      info.setUserAvatar(data.avatar);
+      avatarPopup.close();
     })
     .catch((err) => console.log(err))
     .finally(() => {
@@ -99,12 +119,8 @@ function handleAvatarFormSubmit(evt) {
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
-    createUserInfo(
-      profileData.name,
-      profileData.about,
-      profileData.avatar,
-      profileData._id
-    );
+    info.getUserInfo(profileData);
+
     const userId = profileData._id;
     const card = new Section(
       {
@@ -160,10 +176,9 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
 buttonEditProfile.addEventListener("click", function () {
   const valid = new Validator(validationConfig, popupEditProfile);
   valid.enableValidation();
-  const popup = new Popup(".popup_type_edit");
-  popup.open();
-  nameInput.value = newName.textContent;
-  aboutMeInput.value = newAboutMe.textContent;
+  editInfoPopup.open();
+  nameInput.value = name.textContent;
+  aboutMeInput.value = about.textContent;
   // addButtonDisabled(buttonSaveProfile);
   // handleErrorOpenForm(popupEditProfile);
 });
@@ -171,8 +186,7 @@ buttonEditProfile.addEventListener("click", function () {
 buttonAddCard.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupAddCard);
   valid.enableValidation();
-  const popup = new Popup(".popup_type_add");
-  popup.open();
+  addCardPopup.open();
   formAddCards.reset();
   // addButtonDisabled(buttonSaveCard);
   // handleErrorOpenForm(popupAddCard);
@@ -181,8 +195,7 @@ buttonAddCard.addEventListener("click", () => {
 buttonAvatar.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupEditAvatar);
   valid.enableValidation();
-  const popup = new Popup(".popup_type_avatar");
-  popup.open();
+  avatarPopup.open();
   formEditAvatar.reset();
   // addButtonDisabled(buttonSaveAvatar);
   // handleErrorOpenForm(popupEditAvatar);
