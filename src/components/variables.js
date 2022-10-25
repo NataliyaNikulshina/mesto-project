@@ -17,6 +17,7 @@ export const validationConfig = {
   export const buttonEditProfile = document.querySelector(".profile__edit-button")
   export const buttonAvatar = document.querySelector(".profile__edit-avatar-button")
 
+  export const avatar = document.querySelector(".profile__avatar")
 
   export const popupImageCaption = document.querySelector(".popup__caption");
   export const popupImage = document.querySelector(".popup__image");

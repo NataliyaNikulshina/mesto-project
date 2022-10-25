@@ -9,6 +9,7 @@ import { Validator } from "../components/validate.js";
 import Api from "../components/api.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js"
 import Popup from "../components/Popup.js";
 import PopupWithImage from "../components/PopupWithImage";
 import { validationConfig } from "../components/variables.js";
@@ -20,6 +21,10 @@ import {
   buttonEditProfile,
   buttonAddCard,
   buttonAvatar,
+  profile,
+  name,
+  about,
+  avatar
 } from "../components/variables.js";
 
 const formEditProfile = document.querySelector(
@@ -28,11 +33,10 @@ const formEditProfile = document.querySelector(
 const formAddCards = document.querySelector(".popup__container_type_add-cards");
 const nameInput = document.querySelector(".popup__item_type_name");
 const aboutMeInput = document.querySelector(".popup__item_type_about-me");
-const newName = document.querySelector(".profile__nickname");
-const newAboutMe = document.querySelector(".profile__about-me");
+
 const image = popupAddCard.querySelector(".popup__item_type_link");
 const caption = popupAddCard.querySelector(".popup__item_type_caption");
-const avatar = document.querySelector(".profile__avatar");
+
 
 const formEditAvatar = document.querySelector(
   ".popup__container_type_edit-avatar"
@@ -46,6 +50,17 @@ const api = new Api({
   headers: {
     authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
     "Content-Type": "application/json",
+  },
+});
+
+const info = new UserInfo ({
+  nameSelector: '.profile__nickname',
+  aboutSelector: '.profile__about-me',
+  avatarSelector: '.profile__avatar',
+},
+{
+  setUserInfo: (name, about) => {
+    return api.editUserInfo(name, about);
   },
 });
 
@@ -99,12 +114,8 @@ function handleAvatarFormSubmit(evt) {
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
-    createUserInfo(
-      profileData.name,
-      profileData.about,
-      profileData.avatar,
-      profileData._id
-    );
+    info.getUserInfo(profileData);
+
     const userId = profileData._id;
     const card = new Section(
       {
