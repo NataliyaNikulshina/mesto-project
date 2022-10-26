@@ -1,6 +1,3 @@
-import Api from "./api";
-import UserInfo from "./UserInfo";
-
 //validation
 export const validationConfig = {
     formSelector: ".popup__container",
@@ -43,24 +40,3 @@ export const avatarNew = popupEditAvatar.querySelector(".popup__item_type_avatar
 //card template
 export const cardTemplateSelector = document.querySelector("#element-template");
 export const cardContainer = document.querySelector(".elements");
-
-
-//classes' instances
-export const api = new Api({
-  baseUrl: "https://nomoreparties.co/v1/plus-cohort-15/",
-  headers: {
-    authorization: "6ee9b7c2-d5d1-459a-bd50-5fb4d3293905",
-    "Content-Type": "application/json",
-  },
-});
-
-export const info = new UserInfo ({
-    nameSelector: '.profile__nickname',
-    aboutSelector: '.profile__about-me',
-    avatarSelector: '.profile__avatar',
-  },
-  {
-    setUserInfo: (name, about) => {
-      return api.editUserInfo(name, about);
-    },
-  });
