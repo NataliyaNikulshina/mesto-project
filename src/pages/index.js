@@ -136,7 +136,6 @@ buttonEditProfile.addEventListener("click", () => {
     ".popup_type_edit"
   );
   formToSubmit.open();
-  formToSubmit.setEventListeners();
 });
 
 //форма Добавления новой кароточки
@@ -203,7 +202,6 @@ buttonAddCard.addEventListener("click", () => {
     ".popup_type_add"
   );
   formToSubmit.open();
-  formToSubmit.setEventListeners();
 });
 
 // форма изменения аватара
@@ -228,5 +226,4 @@ buttonAvatar.addEventListener("click", () => {
     ".popup_type_avatar"
   );
   formToSubmit.open();
-  formToSubmit.setEventListeners();
 });
