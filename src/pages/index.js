@@ -1,5 +1,5 @@
 import "./index.css";
-import { loadingForm } from "../components/utils.js";
+import loadingForm from "../components/utils.js";
 import Validator from "../components/validate.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
@@ -7,19 +7,17 @@ import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
 import Api from "../components/api.js";
 import UserInfo from "../components/UserInfo.js";
-import { validationConfig } from "../components/variables.js";
 
 import {
+  validationConfig,
   popupEditProfile,
   popupAddCard,
   popupEditAvatar,
   buttonEditProfile,
   buttonAddCard,
   buttonAvatar,
-  name,
-  about,
-  nameInput,
-  aboutMeInput,
+  inputName,
+  inputAbout,
   cardTemplateSelector,
   cardContainer,
 } from "../components/variables.js";
@@ -32,31 +30,17 @@ export const api = new Api({
   },
 });
 
-export const info = new UserInfo(
-  {
-    nameSelector: ".profile__nickname",
-    aboutSelector: ".profile__about-me",
-    avatarSelector: ".profile__avatar",
-  },
-  {
-    setUserInfo: (name, about) => {
-      return api.editUserInfo(name, about);
-    },
-  }
-);
+const user = new UserInfo({
+  name: ".profile__nickname",
+  about: ".profile__about-me",
+  avatar: ".profile__avatar"
+});
 
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
-    const userInfo = new UserInfo({
-      name: ".profile__nickname",
-      about: ".profile__about-me",
-      dataApi: profileData,
-    });
-    // userInfo.getUserInfo(profileData);
-
-    info.getUserInfo(profileData);
-
+    user.setUserInfo(profileData);
+    user.setUserAvatar(profileData);
     const userId = profileData._id;
     const card = new Section(
       {
@@ -113,18 +97,15 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
 buttonEditProfile.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupEditProfile);
   valid.enableValidation();
-  nameInput.value = name.textContent;
-  aboutMeInput.value = about.textContent;
+  inputName.value = user.getUserInfo().name.textContent;
+  inputAbout.value = user.getUserInfo().about.textContent;
   const formToSubmit = new PopupWithForm(
     {
       submitForm: (inputs) => {
-        const profileInfo = new UserInfo(
-
-        )
         api
           .editUserInfo(inputs["user-name"], inputs["about-me-input"])
           .then((data) => {
-            info.setUserInfo(data.name, data.about);
+            user.setUserInfo(data);
             formToSubmit.close();
           })
           .catch((err) => console.log(err))
@@ -214,7 +195,7 @@ buttonAvatar.addEventListener("click", () => {
         api
           .editUserAvatar(inputs["avatar-link"])
           .then((data) => {
-            info.setUserAvatar(data.avatar);
+            user.setUserAvatar(data);
             formToSubmit.close();
           })
           .catch((err) => console.log(err))

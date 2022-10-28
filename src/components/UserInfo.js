@@ -1,22 +1,24 @@
-import { data } from "autoprefixer";
-
 export default class UserInfo {
-  constructor({nameSelector, aboutSelector, dataApi}) {
-      this._userName = document.querySelector(nameSelector);
-      this._aboutUser = document.querySelector(aboutSelector);
-      this._data = dataApi;
-    }
+  constructor({ name, about, avatar }) {
+    this._userName = document.querySelector(name);
+    this._userAbout = document.querySelector(about);
+    this._userAvatar = document.querySelector(avatar);
+  }
 
   getUserInfo() {
-      return this._userInfo;
+    this._userInfo = {
+      name: this._userName,
+      about: this._userAbout,
     }
+    return this._userInfo;
+  }
 
-  setUserAvatar() {
-      this._avatarUser.src = this.getUserInfo().avatar;
-    }
+  setUserAvatar(data) {
+    this._userAvatar.src = data.avatar;
+  }
 
-  setUserInfo(){
-      this._userName.textContent = this._data.name;
-      this._aboutUser.textContent = this._data.about;
+  setUserInfo(data) {
+    this._userName.textContent = data.name;
+    this._userAbout.textContent = data.about;
   }
 }

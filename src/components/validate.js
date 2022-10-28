@@ -92,18 +92,3 @@ export default class Validator {
     buttonElement.setAttribute("disabled", true);
   };
 }
-
-//удаление ошибок при открытии формы///////// Пока не понимаю для чего это. Антон
-const handleErrorOpenForm = (popup) => {
-  const errorElements = Array.from(
-    popup.querySelectorAll(".popup__input-error")
-  );
-  errorElements.forEach((errEl) => {
-    errEl.textContent = "";
-  });
-  const inputElements = Array.from(popup.querySelectorAll(".popup__item"));
-  inputElements.forEach((inpEl) => {
-    inpEl.setCustomValidity("");
-    inpEl.classList.remove(validationConfig.inputErrorClass);
-  });
-};
