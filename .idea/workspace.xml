@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="refactor: relocated all constants to variables.js and deleted unused ones from index.js">
+    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="fix: changes to PopupWithForm">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes2/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PopupWithForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Popup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +150,21 @@
       <option name="project" value="LOCAL" />
       <updated>1666731435237</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="fix: changes to PopupWithForm">
+      <created>1666879669410</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1666879669410</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: changes to PopupWithForm">
+      <created>1666879711276</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1666879711276</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,6 +194,7 @@
     <MESSAGE value="fix: change close method of PopupWithForm" />
     <MESSAGE value="refactor: deleted unused constants" />
     <MESSAGE value="refactor: relocated all constants to variables.js and deleted unused ones from index.js" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: relocated all constants to variables.js and deleted unused ones from index.js" />
+    <MESSAGE value="fix: changes to PopupWithForm" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: changes to PopupWithForm" />
   </component>
 </project>

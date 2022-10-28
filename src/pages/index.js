@@ -165,7 +165,6 @@ buttonEditProfile.addEventListener("click", function () {
     ".popup_type_edit"
   );
   formToSubmit.open();
-  formToSubmit.setEventListeners();
 });
 
 //add a card
@@ -229,7 +228,6 @@ buttonAddCard.addEventListener("click", () => {
     ".popup_type_add"
   );
   formToSubmit.open();
-  formToSubmit.setEventListeners();
 });
 
 //change avatar
@@ -253,7 +251,6 @@ buttonAvatar.addEventListener("click", () => {
     },
     ".popup_type_avatar"
   );
-  formToSubmit.setEventListeners();
   formToSubmit.open();
 });
 
