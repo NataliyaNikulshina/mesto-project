@@ -27,9 +27,6 @@ export const inputAbout = document.querySelector(".popup__item_type_about-me");
 export const popupImageCaption = document.querySelector(".popup__caption");
 export const popupImage = document.querySelector(".popup__image");
 
-//avatar
-export const avatarNew = popupEditAvatar.querySelector(".popup__item_type_avatar");
-
 //card template
 export const cardTemplateSelector = document.querySelector("#element-template");
 export const cardContainer = document.querySelector(".elements");
