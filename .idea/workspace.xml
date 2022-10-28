@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="refactor: deleted unused constants">
+    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="fix: changes to PopupWithForm">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Changes2/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/variables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Popup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Popup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,19 +40,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -140,7 +143,28 @@
       <option name="project" value="LOCAL" />
       <updated>1666730766265</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="refactor: relocated all constants to variables.js and deleted unused ones from index.js">
+      <created>1666731435237</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1666731435237</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: changes to PopupWithForm">
+      <created>1666879669410</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1666879669410</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: changes to PopupWithForm">
+      <created>1666879711276</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1666879711276</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -169,6 +193,8 @@
     <MESSAGE value="feat: added PopupWithForm usage in index.js, deleted instances of Popup" />
     <MESSAGE value="fix: change close method of PopupWithForm" />
     <MESSAGE value="refactor: deleted unused constants" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: deleted unused constants" />
+    <MESSAGE value="refactor: relocated all constants to variables.js and deleted unused ones from index.js" />
+    <MESSAGE value="fix: changes to PopupWithForm" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: changes to PopupWithForm" />
   </component>
 </project>
