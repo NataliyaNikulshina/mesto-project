@@ -12,8 +12,6 @@ function addAllElements(element){
     elementsContainer.append(element);
 }
 
-
-
 function createUserInfo(name, description, url, myId) {
     userName.textContent = name;
     userAboutMe.textContent = description;
