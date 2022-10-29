@@ -1,19 +1,13 @@
 import "./index.css";
-import Validator from "../components/validate.js";
-import Card from "../components/card.js";
-import Section from "../components/Section.js";
-import PopupWithImage from "../components/PopupWithImage";
 import Popup from "../components/Popup";
 import Api from "../components/api.js";
 import UserInfo from "../components/UserInfo.js";
-import { loadingForm } from "../components/utils.js";
+import {loadingForm,  addElement,  addAllElements } from "../components/utils.js";
 import { Validator } from "../components/validate.js";
 import Card from "../components/card.js";
 import Section from "../components/Section.js";
 import PopupWithImage from "../components/PopupWithImage";
 import PopupWithForm from "../components/PopupWithForm";
-import UserInfo from "../components/UserInfo.js";
-
 import {
   validationConfig,
   popupEditProfile,
@@ -22,15 +16,11 @@ import {
   buttonEditProfile,
   buttonAddCard,
   buttonAvatar,
-  name,
-  about,
   nameInput,
   aboutMeInput,
   avatarNew,
   cardTemplateSelector,
-  cardContainer,
-  api,
-  info
+  cardContainer
 } from "../components/variables.js";
 
 
@@ -42,7 +32,7 @@ export const api = new Api({
   },
 });
 
-const info = new UserInfo(
+const user = new UserInfo(
   {
     name: ".profile__nickname",
     about: ".profile__about-me",
@@ -52,7 +42,7 @@ const info = new UserInfo(
 
 
 //submit handlers
-function handleProfileFormSubmit(evt) {
+/*function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   loadingForm(true, popupEditProfile);
   api
@@ -82,7 +72,7 @@ function handleAvatarFormSubmit(evt) {
       const popup = new PopupWithForm(".popup_type_avatar");
       popup.close();
     });
-}
+}*/
 
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
@@ -132,7 +122,7 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
             cardTemplateSelector
           );
           const cardElement = newCard.createCard(userId);
-          card.setItemAppend(cardElement);
+          card.setItem(cardElement);
         },
       },
       cardContainer
@@ -242,7 +232,7 @@ buttonAddCard.addEventListener("click", () => {
               cardTemplateSelector
             );
             const cardElement = newCard.createCard(userId);
-            card.setItemPrepend(cardElement);
+            card.setItem(cardElement);
             formToSubmit.close();
           })
           .catch((err) => console.log(err))
