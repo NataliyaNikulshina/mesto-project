@@ -6,10 +6,14 @@ import PopupWithImage from "../components/PopupWithImage";
 import Popup from "../components/Popup";
 import Api from "../components/api.js";
 import UserInfo from "../components/UserInfo.js";
-import {
-  loadingForm,
-  addElement
-} from "../components/utils.js";
+import { loadingForm } from "../components/utils.js";
+import { Validator } from "../components/validate.js";
+import Card from "../components/card.js";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage";
+import PopupWithForm from "../components/PopupWithForm";
+import UserInfo from "../components/UserInfo.js";
+
 import {
   validationConfig,
   popupEditProfile,
@@ -45,10 +49,6 @@ const info = new UserInfo(
     avatar: ".profile__avatar"
   }
 );
-
-const avatarPopup = new Popup(".popup_type_avatar");
-const addCardPopup = new Popup(".popup_type_add");
-const editInfoPopup = new Popup(".popup_type_edit");
 
 
 //submit handlers
@@ -141,30 +141,56 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
   })
   .catch((err) => console.log(err));
 
-//открыть формы
+//change profile info
 buttonEditProfile.addEventListener("click", function () {
   const valid = new Validator(validationConfig, popupEditProfile);
   valid.enableValidation();
-
-  nameInput.value = name.textContent;
-  aboutMeInput.value = about.textContent;
-
-  const formToSubmit = new PopupWithForm(".popup_type_edit", handleProfileFormSubmit);
+  inputName.value = user.getUserInfo().name.textContent;
+  inputAbout.value = user.getUserInfo().about.textContent;
+  const formToSubmit = new PopupWithForm(
+    { submitForm: (inputs) => {
+      api
+          .editUserInfo(inputs["user-name"], inputs["about-me-input"])
+          .then((data) => {
+            info.setUserInfo(data);
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            loadingForm(false, popupEditProfile);
+            formToSubmit.close();
+          });
+      },
+    },
+    ".popup_type_edit"
+  );
   formToSubmit.open();
-  formToSubmit.setEventListeners();
 });
 
-
+//change avatar
 buttonAvatar.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupEditAvatar);
   valid.enableValidation();
 
-  const formToSubmit = new PopupWithForm(".popup_type_avatar", handleAvatarFormSubmit);
-  formToSubmit.setEventListeners();
+  const formToSubmit = new PopupWithForm(
+    { submitForm: (inputs) => {
+        api
+          .editUserAvatar(inputs["avatar-link"])
+          .then((data) => {
+            info.setUserAvatar(data.avatar);
+          })
+          .catch((err) => console.log(err))
+          .finally(() => {
+            loadingForm(false, popupEditProfile);
+            formToSubmit.close();
+          });
+      },
+    },
+    ".popup_type_avatar"
+  );
   formToSubmit.open();
 });
 
-//форма Добавления новой кароточки
+//added new card
 buttonAddCard.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupAddCard);
   valid.enableValidation();
