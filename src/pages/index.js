@@ -162,7 +162,7 @@ buttonAddCard.addEventListener("click", () => {
                 },
                 handlePopupImage: () => {
                   const imgPopup = new PopupWithImage(
-                    item,
+                    data,
                     ".popup_type_image"
                   );
                   imgPopup.open();
