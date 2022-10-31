@@ -1,5 +1,3 @@
-
-
 //validation
 export const validationConfig = {
     formSelector: ".popup__container",
@@ -22,24 +20,13 @@ export const buttonEditProfile = document.querySelector(".profile__edit-button")
 export const buttonAvatar = document.querySelector(".profile__edit-avatar-button");
 
 //profile
-export const name = document.querySelector(".profile__nickname");
-export const about = document.querySelector(".profile__about-me");
-export const avatar = document.querySelector(".profile__avatar");
-export const nameInput = document.querySelector(".popup__item_type_name");
-export const aboutMeInput = document.querySelector(".popup__item_type_about-me");
+export const inputName = document.querySelector(".popup__item_type_name");
+export const inputAbout = document.querySelector(".popup__item_type_about-me");
 
 //images
 export const popupImageCaption = document.querySelector(".popup__caption");
 export const popupImage = document.querySelector(".popup__image");
 
-//add cards
-export const image = popupAddCard.querySelector(".popup__item_type_link");
-export const caption = popupAddCard.querySelector(".popup__item_type_caption");
-
-//avatar
-export const avatarNew = popupEditAvatar.querySelector(".popup__item_type_avatar");
-
 //card template
 export const cardTemplateSelector = document.querySelector("#element-template");
 export const cardContainer = document.querySelector(".elements");
-
