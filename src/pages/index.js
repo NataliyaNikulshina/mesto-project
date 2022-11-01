@@ -36,6 +36,16 @@ const user = new UserInfo({
   avatar: ".profile__avatar",
 });
 
+const card = new Section(
+  {
+    renderer: (item, userId) => {
+      const cardElement = newCard(item, userId);
+      card.setItemAppend(cardElement);
+    },
+  },
+  cardContainer
+);
+
 function newCard(item, userId) {
   const newCard = new Card(
     {
@@ -76,23 +86,15 @@ function newCard(item, userId) {
   return newCard.createCard(userId);
 }
 
+
+
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
     user.setUserInfo(profileData);
     user.setUserAvatar(profileData);
     const userId = profileData._id;
-    const card = new Section(
-      {
-        data: cardsData,
-        renderer: (item) => {
-          const cardElement = newCard(item, userId);
-          card.setItemAppend(cardElement);
-        },
-      },
-      cardContainer
-    );
-    card.rendererItems();
+    card.rendererItems(cardsData);
   })
   .catch((err) => console.log(err));
 
@@ -134,7 +136,6 @@ buttonAddCard.addEventListener("click", () => {
           .postNewCard(inputs["place-caption"], inputs["place-link"])
           .then((data) => {
             const userId = data.owner._id;
-            const card = new Section({}, cardContainer);
             const cardElement = newCard(data, userId);
             card.setItemPrepend(cardElement);
             formToSubmit.close();
