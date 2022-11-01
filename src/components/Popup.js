@@ -15,7 +15,9 @@ export default class Popup {
 
   _handleEscClose(evt) {
     if (evt.key === "Escape") {
-      this.close();
+      evt.target
+        .querySelector(".popup_opened")
+        .classList.remove("popup_opened");
     }
   }
 
