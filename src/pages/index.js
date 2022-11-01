@@ -20,8 +20,9 @@ import {
   inputAbout,
   cardTemplateSelector,
   cardContainer,
-  userId,
+ // userId,
 } from "../components/variables.js";
+
 
 export const api = new Api({
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-15/",
@@ -37,17 +38,23 @@ const user = new UserInfo({
   avatar: ".profile__avatar",
 });
 
-const card = new Section(
-  {
+/*const card = new Section(
+  { 
     renderer: (item, userId) => {
+      console.log(item+ 'kz');
       const cardElement = newCard(item, userId);
       card.setItemAppend(cardElement);
     },
   },
   cardContainer
-);
+);*/
 
-function newCard(item, userId) {
+function newCards(cardsData, userId) {
+ // console.log(cardsData, userId);
+  const card = new Section(
+    {
+      data: cardsData,
+      renderer: (item) => {
   const newCard = new Card(
     {
       data: item,
@@ -84,16 +91,31 @@ function newCard(item, userId) {
     },
     cardTemplateSelector
   );
-  return newCard.createCard(userId);
+ // console.log(item, userId+ '123');
+ // newCard.createCard(userId);
+ const cardElement = newCard.createCard(userId);
+  card.setItemAppend(cardElement);
+    },
+  },
+  cardContainer
+);
+//const cardElement = newCard(item, userId);
+//card.setItemAppend(cardElement);
+//const cardElement = newCard(item);
+   //   card.setItemAppend(newCard);
+card.rendererItems();
 }
 
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
     user.setUserInfo(profileData);
-    userId = profileData._id;
-    card.rendererItems(cardsData);
-
+    user.setUserAvatar(profileData);
+    const userId = profileData._id;
+  //  console.log(cardsData, userId);
+    newCards(cardsData, userId);
+    card.rendererItems();
+    //card.rendererItems(cardsData);
   })
   .catch((err) => console.log(err));
 
@@ -135,8 +157,9 @@ buttonAddCard.addEventListener("click", () => {
           .postNewCard(inputs["place-caption"], inputs["place-link"])
           .then((data) => {
             const userId = data.owner._id;
-            const cardElement = newCard(data, userId);
-            card.setItemPrepend(cardElement);
+           // const cardElement = newCard(data, userId);
+           // card.setItemPrepend(data);
+           newCards(data, userId);
             formToSubmit.close();
           })
           .catch((err) => console.log(err))

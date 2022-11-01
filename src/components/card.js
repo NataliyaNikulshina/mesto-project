@@ -60,6 +60,7 @@ export default class Card {
   }
 
   _setButtonTrashState(id) {
+    console.log(id);
     if (id === this._id) {
       this._buttonTrash.classList.add("element__trash_active");
     }
