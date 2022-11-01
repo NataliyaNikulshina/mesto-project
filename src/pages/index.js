@@ -20,6 +20,7 @@ import {
   inputAbout,
   cardTemplateSelector,
   cardContainer,
+  userId,
 } from "../components/variables.js";
 
 export const api = new Api({
@@ -93,7 +94,7 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
     user.setUserInfo(profileData);
     user.setUserAvatar(profileData);
-    const userId = profileData._id;
+    userId = profileData._id;
     card.rendererItems(cardsData);
   })
   .catch((err) => console.log(err));
