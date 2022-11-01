@@ -36,6 +36,46 @@ const user = new UserInfo({
   avatar: ".profile__avatar"
 });
 
+function createNewCard(item, userId) {
+const newCard = new Card(
+  {
+    data: item,
+    handleAddLike: (id, count, like) => {
+      api
+        .addLike(id)
+        .then((res) => {
+          like.classList.toggle("element__like_active");
+          count.textContent = res.likes.length;
+        })
+        .catch((err) => console.log(err));
+    },
+    handleDelLike: (id, count, like) => {
+      api
+        .delLike(id)
+        .then((res) => {
+          like.classList.toggle("element__like_active");
+          count.textContent = res.likes.length;
+        })
+        .catch((err) => console.log(err));
+    },
+    handleDelCard: (id, card) => {
+      api
+        .deleteCard(id)
+        .then(() => {
+          card.remove();
+        })
+        .catch((err) => console.log(err));
+    },
+    handlePopupImage: () => {
+      const imgPopup = new PopupWithImage(item, ".popup_type_image");
+      imgPopup.open();
+    },
+  },
+  cardTemplateSelector
+);
+return newCard.createCard(userId);
+}
+
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
@@ -45,44 +85,8 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
     const card = new Section(
       {
         data: cardsData,
-        renderer: (item) => {
-          const newCard = new Card(
-            {
-              data: item,
-              handleAddLike: (id, count, like) => {
-                api
-                  .addLike(id)
-                  .then((res) => {
-                    like.classList.toggle("element__like_active");
-                    count.textContent = res.likes.length;
-                  })
-                  .catch((err) => console.log(err));
-              },
-              handleDelLike: (id, count, like) => {
-                api
-                  .delLike(id)
-                  .then((res) => {
-                    like.classList.toggle("element__like_active");
-                    count.textContent = res.likes.length;
-                  })
-                  .catch((err) => console.log(err));
-              },
-              handleDelCard: (id, card) => {
-                api
-                  .deleteCard(id)
-                  .then(() => {
-                    card.remove();
-                  })
-                  .catch((err) => console.log(err));
-              },
-              handlePopupImage: () => {
-                const imgPopup = new PopupWithImage(item, ".popup_type_image");
-                imgPopup.open();
-              },
-            },
-            cardTemplateSelector
-          );
-          const cardElement = newCard.createCard(userId);
+        renderer: (item, userId) => {
+          const cardElement = newCard.createNewCard(item, userId); 
           card.setItemAppend(cardElement);
         },
       },
