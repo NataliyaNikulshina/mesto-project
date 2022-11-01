@@ -33,8 +33,48 @@ export const api = new Api({
 const user = new UserInfo({
   name: ".profile__nickname",
   about: ".profile__about-me",
-  avatar: ".profile__avatar"
+  avatar: ".profile__avatar",
 });
+
+function newCard(item, userId) {
+  const newCard = new Card(
+    {
+      data: item,
+      handleAddLike: (id, count, like) => {
+        api
+          .addLike(id)
+          .then((res) => {
+            like.classList.toggle("element__like_active");
+            count.textContent = res.likes.length;
+          })
+          .catch((err) => console.log(err));
+      },
+      handleDelLike: (id, count, like) => {
+        api
+          .delLike(id)
+          .then((res) => {
+            like.classList.toggle("element__like_active");
+            count.textContent = res.likes.length;
+          })
+          .catch((err) => console.log(err));
+      },
+      handleDelCard: (id, card) => {
+        api
+          .deleteCard(id)
+          .then(() => {
+            card.remove();
+          })
+          .catch((err) => console.log(err));
+      },
+      handlePopupImage: () => {
+        const imgPopup = new PopupWithImage(item, ".popup_type_image");
+        imgPopup.open();
+      },
+    },
+    cardTemplateSelector
+  );
+  return newCard.createCard(userId);
+}
 
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
@@ -46,43 +86,7 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
       {
         data: cardsData,
         renderer: (item) => {
-          const newCard = new Card(
-            {
-              data: item,
-              handleAddLike: (id, count, like) => {
-                api
-                  .addLike(id)
-                  .then((res) => {
-                    like.classList.toggle("element__like_active");
-                    count.textContent = res.likes.length;
-                  })
-                  .catch((err) => console.log(err));
-              },
-              handleDelLike: (id, count, like) => {
-                api
-                  .delLike(id)
-                  .then((res) => {
-                    like.classList.toggle("element__like_active");
-                    count.textContent = res.likes.length;
-                  })
-                  .catch((err) => console.log(err));
-              },
-              handleDelCard: (id, card) => {
-                api
-                  .deleteCard(id)
-                  .then(() => {
-                    card.remove();
-                  })
-                  .catch((err) => console.log(err));
-              },
-              handlePopupImage: () => {
-                const imgPopup = new PopupWithImage(item, ".popup_type_image");
-                imgPopup.open();
-              },
-            },
-            cardTemplateSelector
-          );
-          const cardElement = newCard.createCard(userId);
+          const cardElement = newCard(item, userId);
           card.setItemAppend(cardElement);
         },
       },
@@ -131,46 +135,7 @@ buttonAddCard.addEventListener("click", () => {
           .then((data) => {
             const userId = data.owner._id;
             const card = new Section({}, cardContainer);
-            const newCard = new Card(
-              {
-                data: data,
-                handleAddLike: (id, count, like) => {
-                  api
-                    .addLike(id)
-                    .then((res) => {
-                      like.classList.toggle("element__like_active");
-                      count.textContent = res.likes.length;
-                    })
-                    .catch((err) => console.log(err));
-                },
-                handleDelLike: (id, count, like) => {
-                  api
-                    .delLike(id)
-                    .then((res) => {
-                      like.classList.toggle("element__like_active");
-                      count.textContent = res.likes.length;
-                    })
-                    .catch((err) => console.log(err));
-                },
-                handleDelCard: (id, card) => {
-                  api
-                    .deleteCard(id)
-                    .then(() => {
-                      card.remove();
-                    })
-                    .catch((err) => console.log(err));
-                },
-                handlePopupImage: () => {
-                  const imgPopup = new PopupWithImage(
-                    data,
-                    ".popup_type_image"
-                  );
-                  imgPopup.open();
-                },
-              },
-              cardTemplateSelector
-            );
-            const cardElement = newCard.createCard(userId);
+            const cardElement = newCard(data, userId);
             card.setItemPrepend(cardElement);
             formToSubmit.close();
           })
