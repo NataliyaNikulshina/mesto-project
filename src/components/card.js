@@ -20,7 +20,6 @@ export default class Card {
   }
 
   createCard(userId) {
-    console.log(userId);
     this._card = this._getElement();
     this._imageElement = this._card.querySelector(".element__image");
     this._countLike = this._card.querySelector(".element__like-count");
@@ -61,7 +60,6 @@ export default class Card {
   }
 
   _setButtonTrashState(id) {
-    console.log(id);
     if (id === this._id) {
       this._buttonTrash.classList.add("element__trash_active");
     }

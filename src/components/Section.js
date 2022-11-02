@@ -17,8 +17,8 @@ export default class Section {
     if (item) {
       this._renderer(item) ;
     } else {
-      data.forEach((it) => {
-        this._renderer(it);
+      data.forEach((item) => {
+        this._renderer(item);
       });
     }
   }
