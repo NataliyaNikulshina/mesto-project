@@ -49,15 +49,15 @@ const user = new UserInfo({
   cardContainer
 );*/
 
-function newCards(cardsData, userId) {
+//function newCards(cardsData, userId) {
  // console.log(cardsData, userId);
+ 
   const card = new Section(
     {
-      data: cardsData,
       renderer: (item) => {
+        console.log(item);
   const newCard = new Card(
-    {
-      data: item,
+    item, {
       handleAddLike: (id, count, like) => {
         api
           .addLike(id)
@@ -90,11 +90,11 @@ function newCards(cardsData, userId) {
       },
     },
     cardTemplateSelector
-  );
- // console.log(item, userId+ '123');
- // newCard.createCard(userId);
- const cardElement = newCard.createCard(userId);
-  card.setItemAppend(cardElement);
+      );
+      const userId = user.getUserId();
+  console.log(item, userId+ '123');
+ //newCard.createCard(userId);
+ //card.setItemAppend(cardElement);
     },
   },
   cardContainer
@@ -103,8 +103,8 @@ function newCards(cardsData, userId) {
 //card.setItemAppend(cardElement);
 //const cardElement = newCard(item);
    //   card.setItemAppend(newCard);
-card.rendererItems();
-}
+//card.rendererItems();
+//}
 
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
@@ -112,10 +112,10 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
     user.setUserInfo(profileData);
     user.setUserAvatar(profileData);
     const userId = profileData._id;
-  //  console.log(cardsData, userId);
-    newCards(cardsData, userId);
-    card.rendererItems();
-    //card.rendererItems(cardsData);
+  //console.log(cardsData, userId);
+    //newCards(cardsData, userId);
+    //card.rendererItems();
+   card.rendererItems(cardsData);
   })
   .catch((err) => console.log(err));
 
@@ -159,7 +159,7 @@ buttonAddCard.addEventListener("click", () => {
             const userId = data.owner._id;
            // const cardElement = newCard(data, userId);
            // card.setItemPrepend(data);
-           newCards(data, userId);
+          // newCards(data, userId);
             formToSubmit.close();
           })
           .catch((err) => console.log(err))

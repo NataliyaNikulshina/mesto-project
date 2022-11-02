@@ -20,6 +20,7 @@ export default class Card {
   }
 
   createCard(userId) {
+    console.log(userId);
     this._card = this._getElement();
     this._imageElement = this._card.querySelector(".element__image");
     this._countLike = this._card.querySelector(".element__like-count");

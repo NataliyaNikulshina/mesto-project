@@ -21,4 +21,8 @@ export default class UserInfo {
     this._userName.textContent = data.name;
     this._userAbout.textContent = data.about;
   }
+
+  getUserId() {
+    return this._userId;
+  }
 }
