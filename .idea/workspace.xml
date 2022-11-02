@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="fix: draft changes to popups">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupWithImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithImage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,7 +63,7 @@
       <workItem from="1666032234268" duration="35937000" />
       <workItem from="1666301062470" duration="1631000" />
       <workItem from="1666434731259" duration="5680000" />
-      <workItem from="1667326817275" duration="7694000" />
+      <workItem from="1667326817275" duration="10688000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add Popup Class and clear modal.js">
       <created>1666437722380</created>
@@ -176,7 +177,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667335568874</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="fix: draft changes to popups">
+      <created>1667336492336</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667336492336</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -209,16 +217,5 @@
     <MESSAGE value="fix: changes to PopupWithForm" />
     <MESSAGE value="fix: draft changes to popups" />
     <option name="LAST_COMMIT_MESSAGE" value="fix: draft changes to popups" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/components/PopupWithImage.js</url>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

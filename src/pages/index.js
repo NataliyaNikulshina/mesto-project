@@ -26,6 +26,11 @@ import {
 
 const imgPopup = new PopupWithImage(".popup_type_image");
 
+
+
+
+
+
 const popupEdit = new PopupWithForm(
 {
   submitForm: (inputs) => {
@@ -136,8 +141,8 @@ function newCard(item, userId) {
           })
           .catch((err) => console.log(err));
       },
-      handlePopupImage: (evt) => {
-        imgPopup.open();
+      handlePopupImage: () => {
+        imgPopup.open(item);
       },
     },
     cardTemplateSelector
