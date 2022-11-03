@@ -53,29 +53,27 @@ function newCard(item, userId) {
     {
       data: item,
       id: userId,
-      handleAddLike: (id, count, like) => {
+      handleAddLike: (id) => {
         api
           .addLike(id)
           .then((res) => {
-            like.classList.toggle("element__like_active");
-            count.textContent = res.likes.length;
+            newCard.toggleLike(res);
           })
           .catch((err) => console.log(err));
       },
-      handleDelLike: (id, count, like) => {
+      handleDelLike: (id) => {
         api
           .delLike(id)
           .then((res) => {
-            like.classList.toggle("element__like_active");
-            count.textContent = res.likes.length;
+            newCard.toggleLike(res);
           })
           .catch((err) => console.log(err));
       },
-      handleDelCard: (id, card) => {
+      handleDelCard: (id) => {
         api
           .deleteCard(id)
           .then(() => {
-            card.remove();
+            newCard.deleteCard();
           })
           .catch((err) => console.log(err));
       },

@@ -57,7 +57,16 @@ export default class Card {
   }
 
   _pressButtonDelete() {
-    this._handleDelCard(this._cardId, this._card);
+    this._handleDelCard(this._cardId);
+  }
+
+  deleteCard(){
+    this._card.remove(); 
+  } 
+
+  toggleLike(res){
+    this._buttonLike.classList.toggle("element__like_active");
+    this._countLike.textContent = res.likes.length;
   }
 
   _setButtonTrashState() {
