@@ -20,7 +20,6 @@ import {
   inputAbout,
   cardTemplateSelector,
   cardContainer,
-  userId,
 } from "../components/variables.js";
 
 export const api = new Api({
@@ -39,7 +38,9 @@ const user = new UserInfo({
 
 const card = new Section(
   {
-    renderer: (item, userId) => {
+    renderer: (item) => {
+const userId = user.getUserId();
+console.log(userId);
       const cardElement = newCard(item, userId);
       card.setItemAppend(cardElement);
     },
@@ -51,29 +52,28 @@ function newCard(item, userId) {
   const newCard = new Card(
     {
       data: item,
-      handleAddLike: (id, count, like) => {
+      id: userId,
+      handleAddLike: (id) => {
         api
           .addLike(id)
           .then((res) => {
-            like.classList.toggle("element__like_active");
-            count.textContent = res.likes.length;
+            newCard.toggleLike(res);
           })
           .catch((err) => console.log(err));
       },
-      handleDelLike: (id, count, like) => {
+      handleDelLike: (id) => {
         api
           .delLike(id)
           .then((res) => {
-            like.classList.toggle("element__like_active");
-            count.textContent = res.likes.length;
+            newCard.toggleLike(res);
           })
           .catch((err) => console.log(err));
       },
-      handleDelCard: (id, card) => {
+      handleDelCard: (id) => {
         api
           .deleteCard(id)
           .then(() => {
-            card.remove();
+            newCard.deleteCard();
           })
           .catch((err) => console.log(err));
       },
@@ -84,9 +84,8 @@ function newCard(item, userId) {
     },
     cardTemplateSelector
   );
-  return newCard.createCard(userId);
+  return newCard.createCard();
 }
-
 
 
 //отрисовка страницы
@@ -94,7 +93,6 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
     user.setUserInfo(profileData);
     user.setUserAvatar(profileData);
-    userId = profileData._id;
     card.rendererItems(cardsData);
   })
   .catch((err) => console.log(err));
