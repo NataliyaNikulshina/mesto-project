@@ -20,7 +20,6 @@ import {
   inputAbout,
   cardTemplateSelector,
   cardContainer,
-  userId,
 } from "../components/variables.js";
 
 export const api = new Api({
@@ -53,6 +52,7 @@ function newCard(item, userId) {
   const newCard = new Card(
     {
       data: item,
+      id: userId,
       handleAddLike: (id, count, like) => {
         api
           .addLike(id)
@@ -86,7 +86,7 @@ function newCard(item, userId) {
     },
     cardTemplateSelector
   );
-  return newCard.createCard(userId);
+  return newCard.createCard();
 }
 
 
@@ -95,7 +95,6 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
     user.setUserInfo(profileData);
     user.setUserAvatar(profileData);
-    const userId = profileData._id;
     card.rendererItems(cardsData);
   })
   .catch((err) => console.log(err));
