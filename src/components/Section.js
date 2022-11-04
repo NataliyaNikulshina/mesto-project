@@ -13,8 +13,9 @@ export default class Section {
   }
 
   rendererItems(data, item) {
+    console.log(data, item);
     if (item) {
-      this._renderer(item) 
+      this._renderer(item) ;
     } else {
       data.forEach((item) => {
         this._renderer(item);

@@ -31,4 +31,4 @@ export const popupImage = document.querySelector(".popup__image");
 export const cardTemplateSelector = document.querySelector("#element-template");
 export const cardContainer = document.querySelector(".elements");
 
-export const userId = '';
+//export const userId = '';
