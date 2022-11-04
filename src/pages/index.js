@@ -22,6 +22,65 @@ import {
   cardContainer,
 } from "../components/variables.js";
 
+
+const imgPopup = new PopupWithImage(".popup_type_image");
+
+const popupEdit = new PopupWithForm(
+{
+  submitForm: (inputs) => {
+    api
+      .editUserInfo(inputs["user-name"], inputs["about-me-input"])
+      .then((data) => {
+        user.setUserInfo(data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => {
+        loadingForm(false, popupEditProfile);
+        popupEdit.close();
+      });
+  },
+},
+".popup_type_edit"
+);
+
+const popupAdd = new PopupWithForm(
+  {
+    submitForm: (inputs) => {
+      api
+        .postNewCard(inputs["place-caption"], inputs["place-link"])
+        .then((data) => {
+          const userId = data.owner._id;
+          const cardElement = newCard(data, userId);
+          card.setItemPrepend(cardElement);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          loadingForm(false, popupAddCard);
+          popupAdd.close();
+        });
+    },
+  },
+  ".popup_type_add"
+);
+
+const popupAvatar = new PopupWithForm(
+  {
+    submitForm: (inputs) => {
+      api
+        .editUserAvatar(inputs["avatar-link"])
+        .then((data) => {
+          user.setUserAvatar(data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          loadingForm(false, popupEditAvatar);
+          popupAvatar.close();
+        });
+    },
+  },
+  ".popup_type_avatar"
+);
+
 export const api = new Api({
   baseUrl: "https://nomoreparties.co/v1/plus-cohort-15/",
   headers: {
@@ -40,7 +99,7 @@ const card = new Section(
   {
     renderer: (item) => {
 const userId = user.getUserId();
-console.log(userId);
+
       const cardElement = newCard(item, userId);
       card.setItemAppend(cardElement);
     },
@@ -78,8 +137,7 @@ function newCard(item, userId) {
           .catch((err) => console.log(err));
       },
       handlePopupImage: () => {
-        const imgPopup = new PopupWithImage(item, ".popup_type_image");
-        imgPopup.open();
+        imgPopup.open(item);
       },
     },
     cardTemplateSelector
@@ -105,72 +163,30 @@ buttonEditProfile.addEventListener("click", () => {
   const userInfo = user.getUserInfo();
   inputName.value = userInfo.name.textContent;
   inputAbout.value = userInfo.about.textContent;
-  const formToSubmit = new PopupWithForm(
-    {
-      submitForm: (inputs) => {
-        api
-          .editUserInfo(inputs["user-name"], inputs["about-me-input"])
-          .then((data) => {
-            user.setUserInfo(data);
-            formToSubmit.close();
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            loadingForm(false, popupEditProfile);
-          });
-      },
-    },
-    ".popup_type_edit"
-  );
-  formToSubmit.open();
+
+  popupEdit.open();
 });
+
 
 //форма Добавления новой кароточки
 buttonAddCard.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupAddCard);
   valid.enableValidation();
-  const formToSubmit = new PopupWithForm(
-    {
-      submitForm: (inputs) => {
-        api
-          .postNewCard(inputs["place-caption"], inputs["place-link"])
-          .then((data) => {
-            const userId = data.owner._id;
-            const cardElement = newCard(data, userId);
-            card.setItemPrepend(cardElement);
-            formToSubmit.close();
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            loadingForm(false, popupEditProfile);
-          });
-      },
-    },
-    ".popup_type_add"
-  );
-  formToSubmit.open();
+
+  popupAdd.open();
 });
+
 
 // форма изменения аватара
 buttonAvatar.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupEditAvatar);
   valid.enableValidation();
-  const formToSubmit = new PopupWithForm(
-    {
-      submitForm: (inputs) => {
-        api
-          .editUserAvatar(inputs["avatar-link"])
-          .then((data) => {
-            user.setUserAvatar(data);
-            formToSubmit.close();
-          })
-          .catch((err) => console.log(err))
-          .finally(() => {
-            loadingForm(false, popupEditProfile);
-          });
-      },
-    },
-    ".popup_type_avatar"
-  );
-  formToSubmit.open();
+
+  popupAvatar.open();
 });
+
+//add eventListeners globally
+popupEdit.setEventListeners();
+popupAdd.setEventListeners();
+popupAvatar.setEventListeners();
+imgPopup.setEventListeners();
