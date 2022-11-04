@@ -102,8 +102,9 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
 buttonEditProfile.addEventListener("click", () => {
   const valid = new Validator(validationConfig, popupEditProfile);
   valid.enableValidation();
-  inputName.value = user.getUserInfo().name.textContent;
-  inputAbout.value = user.getUserInfo().about.textContent;
+  const userInfo = user.getUserInfo();
+  inputName.value = userInfo.name.textContent;
+  inputAbout.value = userInfo.about.textContent;
   const formToSubmit = new PopupWithForm(
     {
       submitForm: (inputs) => {
