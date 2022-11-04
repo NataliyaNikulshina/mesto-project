@@ -99,7 +99,7 @@ const card = new Section(
   {
     renderer: (item) => {
 const userId = user.getUserId();
-console.log(userId);
+
       const cardElement = newCard(item, userId);
       card.setItemAppend(cardElement);
     },
