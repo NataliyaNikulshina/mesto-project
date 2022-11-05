@@ -20,7 +20,6 @@ export default class Validator {
 
   enableValidation(form) {
     this._form = form;
-    console.log(this._form)
     this._deleteErrors()
     this._setEventListeners()
   }
