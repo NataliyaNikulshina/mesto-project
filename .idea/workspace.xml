@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="feat: add files" />
+    <list default="true" id="f9315ea6-d907-4390-a00d-9bacb0c83687" name="Changes" comment="fix: draft changes to popups">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PopupWithImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PopupWithImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -20,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="feat/popupClasses" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -36,6 +40,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
@@ -58,6 +63,7 @@
       <workItem from="1666032234268" duration="35937000" />
       <workItem from="1666301062470" duration="1631000" />
       <workItem from="1666434731259" duration="5680000" />
+      <workItem from="1667326817275" duration="10688000" />
     </task>
     <task id="LOCAL-00001" summary="feat: add Popup Class and clear modal.js">
       <created>1666437722380</created>
@@ -94,7 +100,91 @@
       <option name="project" value="LOCAL" />
       <updated>1666488960816</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fix: deleted console.log">
+      <created>1666489382099</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1666489382099</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat: add changes">
+      <created>1666640965336</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1666640965336</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: add changes">
+      <created>1666641061158</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1666641061158</updated>
+    </task>
+    <task id="LOCAL-00009" summary="feat: added PopupWithForm usage in index.js, deleted instances of Popup">
+      <created>1666730182032</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1666730182032</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix: change close method of PopupWithForm">
+      <created>1666730695511</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1666730695511</updated>
+    </task>
+    <task id="LOCAL-00011" summary="refactor: deleted unused constants">
+      <created>1666730766265</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1666730766265</updated>
+    </task>
+    <task id="LOCAL-00012" summary="refactor: relocated all constants to variables.js and deleted unused ones from index.js">
+      <created>1666731435237</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1666731435237</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fix: changes to PopupWithForm">
+      <created>1666879669410</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1666879669410</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix: changes to PopupWithForm">
+      <created>1666879711276</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1666879711276</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix: changes to PopupWithForm">
+      <created>1666955576647</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1666955576647</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix: draft changes to popups">
+      <created>1667335568874</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667335568874</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix: draft changes to popups">
+      <created>1667336492336</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667336492336</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +207,15 @@
     <MESSAGE value="fix: add forEach in setEventListeners()" />
     <MESSAGE value="fix: add Popup import after develop merge loss" />
     <MESSAGE value="feat: added PopupWithImage Class" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: added PopupWithImage Class" />
+    <MESSAGE value="fix: deleted console.log" />
+    <MESSAGE value="feat: PopupWithForm Class draft ver." />
+    <MESSAGE value="feat: add changes" />
+    <MESSAGE value="feat: added PopupWithForm usage in index.js, deleted instances of Popup" />
+    <MESSAGE value="fix: change close method of PopupWithForm" />
+    <MESSAGE value="refactor: deleted unused constants" />
+    <MESSAGE value="refactor: relocated all constants to variables.js and deleted unused ones from index.js" />
+    <MESSAGE value="fix: changes to PopupWithForm" />
+    <MESSAGE value="fix: draft changes to popups" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: draft changes to popups" />
   </component>
 </project>

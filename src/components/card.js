@@ -1,6 +1,6 @@
 export default class Card {
   constructor(
-    { data, handleAddLike, handleDelLike, handleDelCard, handlePopupImage },
+    { data, id, handleAddLike, handleDelLike, handleDelCard, handlePopupImage },
     cardTemplateSelector
   ) {
     this._likes = data.likes;
@@ -8,6 +8,7 @@ export default class Card {
     this._link = data.link;
     this._id = data.owner._id;
     this._cardId = data._id;
+    this._userId = id;
     this._handleAddLike = handleAddLike;
     this._handleDelLike = handleDelLike;
     this._handleDelCard = handleDelCard;
@@ -19,7 +20,7 @@ export default class Card {
     return this._template.content.querySelector(".element").cloneNode(true);
   }
 
-  createCard(userId) {
+  createCard() {
     this._card = this._getElement();
     this._imageElement = this._card.querySelector(".element__image");
     this._countLike = this._card.querySelector(".element__like-count");
@@ -30,8 +31,8 @@ export default class Card {
     this._imageElement.alt = this._name;
     this._countLike.textContent = this._likes.length;
     this._cardHeading.textContent = this._name;
-    this._setButtonTrashState(userId);
-    this._setButtonLikeState(userId);
+    this._setButtonTrashState();
+    this._setButtonLikeState();
     this._setEventListeners();
     
     return this._card;
@@ -56,18 +57,27 @@ export default class Card {
   }
 
   _pressButtonDelete() {
-    this._handleDelCard(this._cardId, this._card);
+    this._handleDelCard(this._cardId);
   }
 
-  _setButtonTrashState(id) {
-    if (id === this._id) {
+  deleteCard(){
+    this._card.remove(); 
+  } 
+
+  toggleLike(res){
+    this._buttonLike.classList.toggle("element__like_active");
+    this._countLike.textContent = res.likes.length;
+  }
+
+  _setButtonTrashState() {
+    if (this._userId === this._id) {
       this._buttonTrash.classList.add("element__trash_active");
     }
   }
 
-  _setButtonLikeState(id) {
+  _setButtonLikeState() {
     this._likes.forEach((like) => {
-      if (like._id === id) {
+      if (like._id === this._userId) {
         this._buttonLike.classList.add("element__like_active");
         return true;
       } else {
