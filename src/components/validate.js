@@ -16,10 +16,11 @@ export class Validator {
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
-    this._form = form;
   }
 
-  enableValidation() {
+  enableValidation(form) {
+    this._form = form;
+    this._deleteErrors()
     this._setEventListeners()
   }
 
@@ -91,19 +92,18 @@ export class Validator {
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
   };
-}
 
-//удаление ошибок при открытии формы///////// Пока не понимаю для чего это. Антон
-const handleErrorOpenForm = (popup) => {
-  const errorElements = Array.from(
-    popup.querySelectorAll(".popup__input-error")
-  );
-  errorElements.forEach((errEl) => {
-    errEl.textContent = "";
-  });
-  const inputElements = Array.from(popup.querySelectorAll(".popup__item"));
-  inputElements.forEach((inpEl) => {
-    inpEl.setCustomValidity("");
-    inpEl.classList.remove(validationConfig.inputErrorClass);
-  });
-};
+  _deleteErrors = () => {
+    const errorElements = Array.from(
+      this._form.querySelectorAll(".popup__input-error")
+    );
+    errorElements.forEach((errEl) => {
+      errEl.textContent = "";
+    });
+    const inputElements = Array.from(this._form.querySelectorAll(this._inputSelector));
+    inputElements.forEach((inpEl) => {
+      inpEl.setCustomValidity("");
+      inpEl.classList.remove(this._inputErrorClass);
+    });
+  };
+}

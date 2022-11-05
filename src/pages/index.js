@@ -156,36 +156,29 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
   })
   .catch((err) => console.log("ошибКа" + err));
 
+  const valid = new Validator(validationConfig)
+
 //открыть формы
 buttonEditProfile.addEventListener("click", function () {
-  const valid = new Validator(validationConfig, popupEditProfile);
-  valid.enableValidation();
+  valid.enableValidation(popupEditProfile);
   const popup = new Popup(".popup_type_edit");
   popup.open();
   nameInput.value = newName.textContent;
   aboutMeInput.value = newAboutMe.textContent;
-  // addButtonDisabled(buttonSaveProfile);
-  // handleErrorOpenForm(popupEditProfile);
 });
 
 buttonAddCard.addEventListener("click", () => {
-  const valid = new Validator(validationConfig, popupAddCard);
-  valid.enableValidation();
+  valid.enableValidation(popupAddCard);
   const popup = new Popup(".popup_type_add");
   popup.open();
   formAddCards.reset();
-  // addButtonDisabled(buttonSaveCard);
-  // handleErrorOpenForm(popupAddCard);
 });
 
 buttonAvatar.addEventListener("click", () => {
-  const valid = new Validator(validationConfig, popupEditAvatar);
-  valid.enableValidation();
+  valid.enableValidation(popupEditAvatar);
   const popup = new Popup(".popup_type_avatar");
   popup.open();
   formEditAvatar.reset();
-  // addButtonDisabled(buttonSaveAvatar);
-  // handleErrorOpenForm(popupEditAvatar);
 });
 
 //редактировать профиль
