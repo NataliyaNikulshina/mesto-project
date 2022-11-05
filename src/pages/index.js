@@ -160,30 +160,24 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
 //открыть формы
 //форма изменения профиля
 buttonEditProfile.addEventListener("click", () => {
-  const valid = new Validator(validationConfig, popupEditProfile);
-  valid.enableValidation();
+  valid.enableValidation(popupEditProfile);
   const userInfo = user.getUserInfo();
   inputName.value = userInfo.name.textContent;
   inputAbout.value = userInfo.about.textContent;
-
   popupEdit.open();
 });
 
 
 //форма Добавления новой кароточки
 buttonAddCard.addEventListener("click", () => {
-  const valid = new Validator(validationConfig, popupAddCard);
-  valid.enableValidation();
-
+  valid.enableValidation(popupAddCard);
   popupAdd.open();
 });
 
 
 // форма изменения аватара
 buttonAvatar.addEventListener("click", () => {
-  const valid = new Validator(validationConfig, popupEditAvatar);
-  valid.enableValidation();
-
+  valid.enableValidation(popupEditAvatar);
   popupAvatar.open();
 });
 
