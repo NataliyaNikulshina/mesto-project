@@ -155,6 +155,8 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
   })
   .catch((err) => console.log(err));
 
+  const valid = new Validator(validationConfig)
+
 //открыть формы
 //форма изменения профиля
 buttonEditProfile.addEventListener("click", () => {

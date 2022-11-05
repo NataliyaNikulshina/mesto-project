@@ -16,10 +16,11 @@ export default class Validator {
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
-    this._form = form;
   }
 
-  enableValidation() {
+  enableValidation(form) {
+    this._form = form;
+    this._deleteErrors()
     this._setEventListeners()
   }
 
@@ -90,5 +91,19 @@ export default class Validator {
   _addButtonDisabled (buttonElement) {
     buttonElement.classList.add(this._inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
+  };
+
+  _deleteErrors = () => {
+    const errorElements = Array.from(
+      this._form.querySelectorAll(".popup__input-error")
+    );
+    errorElements.forEach((errEl) => {
+      errEl.textContent = "";
+    });
+    const inputElements = Array.from(this._form.querySelectorAll(this._inputSelector));
+    inputElements.forEach((inpEl) => {
+      inpEl.setCustomValidity("");
+      inpEl.classList.remove(this._inputErrorClass);
+    });
   };
 }
