@@ -7,9 +7,7 @@ export default class Validator {
       inactiveButtonClass,
       inputErrorClass,
       errorClass,
-    },
-    form
-  ) {
+    }) {
     this._formSelector = formSelector;
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
@@ -20,8 +18,8 @@ export default class Validator {
 
   enableValidation(form) {
     this._form = form;
-    this._deleteErrors()
-    this._setEventListeners()
+    this._deleteErrors();
+    this._setEventListeners();
   }
 
   _setEventListeners() {
