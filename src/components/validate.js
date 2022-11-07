@@ -7,18 +7,19 @@ export default class Validator {
       inactiveButtonClass,
       inputErrorClass,
       errorClass,
-    }) {
+    },
+    form
+    ) {
     this._formSelector = formSelector;
     this._inputSelector = inputSelector;
     this._submitButtonSelector = submitButtonSelector;
     this._inactiveButtonClass = inactiveButtonClass;
     this._inputErrorClass = inputErrorClass;
     this._errorClass = errorClass;
+    this._form = form;
   }
 
-  enableValidation(form) {
-    this._form = form;
-    this._deleteErrors();
+  enableValidation() {
     this._setEventListeners();
   }
 
@@ -91,7 +92,7 @@ export default class Validator {
     buttonElement.setAttribute("disabled", true);
   };
 
-  _deleteErrors = () => {
+  deleteErrors = () => {
     const errorElements = Array.from(
       this._form.querySelectorAll(".popup__input-error")
     );
