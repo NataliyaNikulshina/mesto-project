@@ -22,25 +22,24 @@ import {
   cardContainer,
 } from "../components/variables.js";
 
-
 const imgPopup = new PopupWithImage(".popup_type_image");
 
 const popupEdit = new PopupWithForm(
-{
-  submitForm: (inputs) => {
-    api
-      .editUserInfo(inputs["user-name"], inputs["about-me-input"])
-      .then((data) => {
-        user.setUserInfo(data);
-      })
-      .catch((err) => console.log(err))
-      .finally(() => {
-        loadingForm(false, popupEditProfile);
-        popupEdit.close();
-      });
+  {
+    submitForm: (inputs) => {
+      api
+        .editUserInfo(inputs["user-name"], inputs["about-me-input"])
+        .then((data) => {
+          user.setUserInfo(data);
+        })
+        .catch((err) => console.log(err))
+        .finally(() => {
+          loadingForm(false, popupEditProfile);
+          popupEdit.close();
+        });
+    },
   },
-},
-".popup_type_edit"
+  ".popup_type_edit"
 );
 
 const popupAdd = new PopupWithForm(
@@ -98,7 +97,7 @@ const user = new UserInfo({
 const card = new Section(
   {
     renderer: (item) => {
-const userId = user.getUserId();
+      const userId = user.getUserId();
 
       const cardElement = newCard(item, userId);
       card.setItemAppend(cardElement);
@@ -145,7 +144,6 @@ function newCard(item, userId) {
   return newCard.createCard();
 }
 
-
 //отрисовка страницы
 Promise.all([api.getUserInfo(), api.getStartCards()])
   .then(([profileData, cardsData]) => {
@@ -155,30 +153,34 @@ Promise.all([api.getUserInfo(), api.getStartCards()])
   })
   .catch((err) => console.log(err));
 
-  const valid = new Validator(validationConfig);
+const validEditProfile = new Validator(validationConfig, popupEditProfile);
+const validAddCard = new Validator(validationConfig, popupAddCard);
+const validEditAvatar = new Validator(validationConfig, popupEditAvatar);
+
+validEditProfile.enableValidation();
+validAddCard.enableValidation();
+validEditAvatar.enableValidation();
 
 //открыть формы
 //форма изменения профиля
 buttonEditProfile.addEventListener("click", () => {
-  valid.enableValidation(popupEditProfile);
   const userInfo = user.getUserInfo();
   inputName.value = userInfo.name.textContent;
   inputAbout.value = userInfo.about.textContent;
   popupEdit.open();
+  validEditProfile.deleteErrors();
 });
-
 
 //форма Добавления новой кароточки
 buttonAddCard.addEventListener("click", () => {
-  valid.enableValidation(popupAddCard);
   popupAdd.open();
+  validAddCard.deleteErrors();
 });
-
 
 // форма изменения аватара
 buttonAvatar.addEventListener("click", () => {
-  valid.enableValidation(popupEditAvatar);
   popupAvatar.open();
+  validEditAvatar.deleteErrors();
 });
 
 //add eventListeners globally
