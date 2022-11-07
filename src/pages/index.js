@@ -31,11 +31,11 @@ const popupEdit = new PopupWithForm(
         .editUserInfo(inputs["user-name"], inputs["about-me-input"])
         .then((data) => {
           user.setUserInfo(data);
+          popupEdit.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
           loadingForm(false, popupEditProfile);
-          popupEdit.close();
         });
     },
   },
@@ -51,11 +51,11 @@ const popupAdd = new PopupWithForm(
           const userId = data.owner._id;
           const cardElement = newCard(data, userId);
           card.setItemPrepend(cardElement);
+          popupAdd.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
           loadingForm(false, popupAddCard);
-          popupAdd.close();
         });
     },
   },
@@ -69,11 +69,11 @@ const popupAvatar = new PopupWithForm(
         .editUserAvatar(inputs["avatar-link"])
         .then((data) => {
           user.setUserAvatar(data);
+          popupAvatar.close();
         })
         .catch((err) => console.log(err))
         .finally(() => {
           loadingForm(false, popupEditAvatar);
-          popupAvatar.close();
         });
     },
   },
