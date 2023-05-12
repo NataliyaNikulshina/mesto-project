@@ -23,6 +23,10 @@ JavaScript | HTML5 | CSS3 | БЭМ / файловая структура в со
 * [Ссылка на макет в Figma-3](https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1)
 * [Ссылка на макет в Figma-4](https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9)
 
+**Планы по доработке проекта**
+
+Добавить тестирование проекта, чтобы обезопасить пользовательские сценарии.
+
 
 
 
